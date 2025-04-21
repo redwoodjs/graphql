@@ -37,7 +37,7 @@ const projectPath = path.dirname(
 )
 console.log(
   'Redwood Framework Tools Path:',
-  TerminalLink(absRwFwPath, absRwFwPath),
+  terminalLink(absRwFwPath, absRwFwPath),
 )
 
 let command = process.argv.slice(2)
