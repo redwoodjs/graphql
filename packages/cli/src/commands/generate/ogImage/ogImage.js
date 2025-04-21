@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import fg from 'fast-glob'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { ensurePosixPath } from '@redwoodjs/project-config'

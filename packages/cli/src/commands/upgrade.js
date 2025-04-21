@@ -5,7 +5,7 @@ import execa from 'execa'
 import fs from 'fs-extra'
 import latestVersion from 'latest-version'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { getConfig } from '@redwoodjs/project-config'

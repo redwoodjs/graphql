@@ -2,7 +2,7 @@ import path from 'path'
 
 import camelcase from 'camelcase'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { errorTelemetry } from '@redwoodjs/telemetry'

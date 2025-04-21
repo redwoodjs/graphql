@@ -43,7 +43,7 @@
     "klaw-sync": "6.0.0",
     "semver": "7.6.3",
     "systeminformation": "5.23.8",
-    "terminal-link": "2.1.1",
+    "termi-link": "1.1.0",
     "tsx": "4.19.2",
     "untildify": "4.0.0",
     "uuid": "10.0.0",

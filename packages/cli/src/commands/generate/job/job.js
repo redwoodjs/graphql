@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url'
 import * as changeCase from 'change-case'
 import execa from 'execa'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { errorTelemetry } from '@redwoodjs/telemetry'

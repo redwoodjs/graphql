@@ -7,7 +7,7 @@ import fs from 'fs-extra'
 import humanize from 'humanize-string'
 import { Listr } from 'listr2'
 import pascalcase from 'pascalcase'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { generate as generateTypes } from '@redwoodjs/internal/dist/generate/generate'

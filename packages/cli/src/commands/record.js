@@ -1,7 +1,7 @@
 export const command = 'record <command>'
 export const description =
   'Setup RedwoodRecord for your project. Caches a JSON version of your data model and adds api/src/models/index.js with some config.'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 export const builder = (yargs) =>
   yargs

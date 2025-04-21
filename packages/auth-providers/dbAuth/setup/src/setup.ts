@@ -1,4 +1,4 @@
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import type yargs from 'yargs'
 
 export const command = 'dbAuth'

@@ -5,7 +5,7 @@ import fs from 'fs-extra'
 import { Listr } from 'listr2'
 import * as toml from 'smol-toml'
 import { env as envInterpolation } from 'string-env-interpolation'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import { titleCase } from 'title-case'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'

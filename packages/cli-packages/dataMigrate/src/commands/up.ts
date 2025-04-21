@@ -1,4 +1,4 @@
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import type { Argv } from 'yargs'
 
 import { getPaths } from '@redwoodjs/project-config'

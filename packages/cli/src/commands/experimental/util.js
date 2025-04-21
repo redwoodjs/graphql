@@ -2,7 +2,7 @@ import path from 'path'
 
 import chalk from 'chalk'
 import fs from 'fs-extra'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { getPaths } from '../../lib'
 import { isTypeScriptProject, serverFileExists } from '../../lib/project'

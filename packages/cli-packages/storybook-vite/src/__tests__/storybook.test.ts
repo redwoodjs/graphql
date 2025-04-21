@@ -1,4 +1,4 @@
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import { vi, describe, it, expect } from 'vitest'
 import type { Argv } from 'yargs'
 

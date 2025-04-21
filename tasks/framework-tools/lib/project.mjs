@@ -6,7 +6,7 @@ import execa from 'execa'
 import fs from 'fs-extra'
 import ora from 'ora'
 import { rimraf } from 'rimraf'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import {
   getFrameworkDependencies,

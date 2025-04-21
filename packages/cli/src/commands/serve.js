@@ -1,7 +1,7 @@
 import path from 'path'
 
 import fs from 'fs-extra'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import * as apiServerCLIConfig from '@redwoodjs/api-server/dist/apiCLIConfig'
 import * as bothServerCLIConfig from '@redwoodjs/api-server/dist/bothCLIConfig'

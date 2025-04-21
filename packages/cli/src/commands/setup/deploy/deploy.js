@@ -1,6 +1,6 @@
 export const command = 'deploy <target>'
 export const description = 'Setup deployment to various targets'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 export const builder = (yargs) =>
   yargs

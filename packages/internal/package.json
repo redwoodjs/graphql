@@ -110,7 +110,7 @@
     "source-map": "0.7.4",
     "string-env-interpolation": "1.0.1",
     "systeminformation": "5.23.8",
-    "terminal-link": "2.1.1",
+    "termi-link": "1.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.6.2"
   },

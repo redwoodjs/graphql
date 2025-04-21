@@ -5,7 +5,7 @@ import { camelCase } from 'camel-case'
 import execa from 'execa'
 import fs from 'fs-extra'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import { titleCase } from 'title-case'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
