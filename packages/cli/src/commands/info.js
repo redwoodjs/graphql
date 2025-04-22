@@ -3,7 +3,7 @@
 import fs from 'node:fs'
 
 import envinfo from 'envinfo'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { getPaths } from '@redwoodjs/project-config'

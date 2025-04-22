@@ -5,7 +5,7 @@ import path from 'path'
 import Configstore from 'configstore/index'
 import execa from 'execa'
 import fs from 'fs-extra'
-import TerminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { getConfigPath } from '@redwoodjs/project-config'
 
@@ -37,7 +37,7 @@ const projectPath = path.dirname(
 )
 console.log(
   'Redwood Framework Tools Path:',
-  TerminalLink(absRwFwPath, absRwFwPath),
+  terminalLink(absRwFwPath, absRwFwPath),
 )
 
 let command = process.argv.slice(2)

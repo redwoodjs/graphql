@@ -3,7 +3,7 @@ import path from 'path'
 import { paramCase } from 'change-case'
 import fs from 'fs-extra'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 

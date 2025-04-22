@@ -10,7 +10,7 @@ import { getSchema } from '@prisma/internals'
 import chalk from 'chalk'
 import type { DocumentNode } from 'graphql'
 import { print } from 'graphql'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { rootSchema } from '@redwoodjs/graphql-server'
 import type { ScalarSchemaKeys } from '@redwoodjs/graphql-server/src/rootSchema'

@@ -4,7 +4,7 @@ import boxen from 'boxen'
 import camelcase from 'camelcase'
 import chalk from 'chalk'
 import { Listr } from 'listr2'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 import { generate as generateTypes } from '@redwoodjs/internal/dist/generate/generate'

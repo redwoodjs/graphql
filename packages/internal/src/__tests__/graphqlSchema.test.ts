@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 import chalk from 'chalk'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import { vi, beforeAll, afterAll, afterEach, test, expect } from 'vitest'
 
 import { generateGraphQLSchema } from '../generate/graphqlSchema'

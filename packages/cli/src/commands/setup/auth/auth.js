@@ -2,7 +2,7 @@ import path from 'path'
 
 import execa from 'execa'
 import fs from 'fs-extra'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import {
   recordTelemetryAttributes,

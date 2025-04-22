@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 import { v4 as uuidv4 } from 'uuid'
 
 import {

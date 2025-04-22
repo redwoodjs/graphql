@@ -34,7 +34,7 @@ Options:
          [string] [default: "/Users/dom/projects/redwood/test-project/api/dist"]
 
 Also see the Redwood CLI Reference
-(​https://redwoodjs.com/docs/cli-commands#datamigrate-up​)`
+(https://redwoodjs.com/docs/cli-commands#datamigrate-up)`
 
 const expectedBinNoPendingDataMigrations = `\
 
@@ -51,7 +51,7 @@ Options:
   --version  Show version number                                       [boolean]
 
 Also see the Redwood CLI Reference
-(​https://redwoodjs.com/docs/cli-commands#datamigrate-install​)`
+(https://redwoodjs.com/docs/cli-commands#datamigrate-install)`
 
 // ─── Tests ───────────────────────────────────────────────────────────────────
 

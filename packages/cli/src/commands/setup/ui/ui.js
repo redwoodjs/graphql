@@ -1,4 +1,4 @@
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 export const command = 'ui <library>'
 export const description = 'Set up a UI design or style library'

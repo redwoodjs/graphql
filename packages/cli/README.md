@@ -301,7 +301,7 @@ Files for entry-point commands typically aren't too complicated. Here's the cont
 export const command = 'generate <type>'
 export const aliases = ['g']
 export const description = 'Save time by generating boilerplate code'
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 export const builder = (yargs) =>
   yargs

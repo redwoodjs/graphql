@@ -1,4 +1,4 @@
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 export const command = 'exec [name]'
 export const description = 'Run scripts generated with yarn generate script'

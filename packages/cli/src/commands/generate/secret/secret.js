@@ -1,6 +1,6 @@
 import crypto from 'node:crypto'
 
-import terminalLink from 'terminal-link'
+import { terminalLink } from 'termi-link'
 
 import { recordTelemetryAttributes } from '@redwoodjs/cli-helpers'
 

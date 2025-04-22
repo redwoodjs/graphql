@@ -30,7 +30,7 @@
     "semver": "7.6.3",
     "storybook": "7.6.20",
     "storybook-framework-redwoodjs-vite": "workspace:*",
-    "terminal-link": "2.1.1",
+    "termi-link": "1.1.0",
     "vitest": "2.1.9",
     "yargs": "17.7.2"
   },
