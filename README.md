@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://avatars2.githubusercontent.com/u/45050444?v=4" width="200" />
-  <h1 align="center">Redwood</h1>
+  <h1 align="center">RedwoodGraphQL</h1>
 </p>
 
 _by Tom Preston-Werner, Peter Pistorius, Rob Cameron, David Price, and more than
