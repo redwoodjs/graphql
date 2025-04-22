@@ -42,7 +42,7 @@ describe('rw serve', () => {
         -h, --help                                Show help                  [boolean]
 
       Also see the Redwood CLI Reference
-      (​https://redwoodjs.com/docs/cli-commands#serve​)
+      (https://redwoodjs.com/docs/cli-commands#serve)
       "
     `)
   })
@@ -90,7 +90,7 @@ describe('rw serve', () => {
           -h, --help                                Show help                  [boolean]
 
         Also see the Redwood CLI Reference
-        (​https://redwoodjs.com/docs/cli-commands#serve​)
+        (https://redwoodjs.com/docs/cli-commands#serve)
 
         Unknown arguments: foo, bar, baz
         "
