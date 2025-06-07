@@ -1,10 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 
-import type { FastifyInstance, FastifyServerOptions } from 'fastify'
-import Fastify from 'fastify'
+import type { FastifyInstance, FastifyServerOptions } from 'fastify/fastify'
+import Fastify from 'fastify/fastify'
 
-import type { GlobalContext } from '@redwoodjs/context'
+import type { GlobalContext } from '@redwoodjs/context/dist/'
 import { getAsyncStoreInstance } from '@redwoodjs/context/dist/store'
 import { getPaths, getConfig } from '@redwoodjs/project-config'
 

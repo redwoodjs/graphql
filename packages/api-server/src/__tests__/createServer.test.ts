@@ -1,6 +1,6 @@
 import path from 'path'
 
-import pino from 'pino'
+import pino from 'pino/pino'
 import build from 'pino-abstract-transport'
 import {
   vi,
@@ -160,7 +160,6 @@ describe('createServer', () => {
       level: 30,
       msg: 'incoming request',
       req: {
-        hostname: 'localhost:80',
         method: 'GET',
         remoteAddress: '127.0.0.1',
         url: '/hello',

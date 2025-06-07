@@ -4,7 +4,7 @@ import type {
   FastifyListenOptions,
   FastifyServerOptions,
   FastifyInstance,
-} from 'fastify'
+} from 'fastify/fastify'
 
 import { coerceRootPath } from '@redwoodjs/fastify-web/dist/helpers'
 
@@ -89,7 +89,6 @@ export function resolveOptions(
     fastifyServerOptions: options.fastifyServerOptions ?? {
       requestTimeout:
         DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout,
-      logger: options.logger ?? DEFAULT_CREATE_SERVER_OPTIONS.logger,
       bodyLimit: DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.bodyLimit,
     },
     configureApiServer:
@@ -102,7 +101,20 @@ export function resolveOptions(
   // Merge fastifyServerOptions.
   resolvedOptions.fastifyServerOptions.requestTimeout ??=
     DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout
-  resolvedOptions.fastifyServerOptions.logger = options.logger
+
+  // Fastify v5: Custom logger instances use 'loggerInstance', config uses 'logger'
+  const isCustomLoggerInstance =
+    options.logger &&
+    typeof options.logger === 'object' &&
+    'info' in options.logger
+
+  if (isCustomLoggerInstance) {
+    ;(resolvedOptions.fastifyServerOptions as any).loggerInstance =
+      options.logger
+  } else {
+    resolvedOptions.fastifyServerOptions.logger =
+      options.logger ?? DEFAULT_CREATE_SERVER_OPTIONS.logger
+  }
 
   if (options.parseArgs) {
     const { values } = parseArgs({
