@@ -29,8 +29,8 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@fastify/multipart": "8.3.1",
-    "@fastify/url-data": "5.4.0",
+    "@fastify/multipart": "9.0.3",
+    "@fastify/url-data": "6.0.3",
     "@redwoodjs/context": "workspace:*",
     "@redwoodjs/fastify-web": "workspace:*",
     "@redwoodjs/internal": "workspace:*",
@@ -41,8 +41,8 @@
     "dotenv-defaults": "5.0.2",
     "fast-glob": "3.3.2",
     "fast-json-parse": "1.0.3",
-    "fastify": "4.28.1",
-    "fastify-raw-body": "4.3.0",
+    "fastify": "5.3.3",
+    "fastify-raw-body": "5.0.0",
     "lodash": "4.17.21",
     "pretty-bytes": "5.6.0",
     "pretty-ms": "7.0.1",
