@@ -4,7 +4,7 @@ Deployment URL: https://redwoodjs.com/docs
 
 ## Getting started
 
-Checkout this repo [(redwoodjs/redwood)](https://github.com/redwoodjs/redwood), `cd` into this directory (`docs`)
+Checkout this repo [(redwoodjs/redwood)](https://github.com/redwoodjs/graphql), `cd` into this directory (`docs`)
 
 ```
 yarn install
@@ -40,4 +40,4 @@ To update any images in the doc, first upload your screenshot into a comment tex
 
 ## Contributors
 
-Redwood is amazing thanks to a wonderful [community of contributors](https://github.com/redwoodjs/redwood/blob/main/README.md#contributors).
+Redwood is amazing thanks to a wonderful [community of contributors](https://github.com/redwoodjs/graphql/blob/main/README.md#contributors).

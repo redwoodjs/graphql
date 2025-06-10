@@ -49,7 +49,7 @@ const config: Config = {
       logo: {
         alt: 'RedwoodJS pinecone logo',
         src: 'https://d33wubrfki0l68.cloudfront.net/72b0d56596a981835c18946d6c4f8a968b08e694/82254/images/logo.svg',
-        href: 'https://docs.redwoodjs.com/',
+        href: '/docs/',
         target: '_self',
       },
       items: [
@@ -58,7 +58,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/redwoodjs/redwood',
+          href: 'https://github.com/redwoodjs/graphql',
           position: 'right',
           className: 'github-logo',
           'aria-label': 'GitHub repository',
@@ -106,7 +106,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/redwoodjs/redwood',
+              href: 'https://github.com/redwoodjs/graphql',
             },
           ],
         },
@@ -121,7 +121,7 @@ const config: Config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // ? — blob? tree?
-          editUrl: 'https://github.com/redwoodjs/redwood/blob/main/docs', // base path for repo edit pages
+          editUrl: 'https://github.com/redwoodjs/graphql/blob/main/docs', // base path for repo edit pages
           editCurrentVersion: true,
           remarkPlugins: [autoImportTabs, fileExtSwitcher],
           versions: {
@@ -150,6 +150,11 @@ const config: Config = {
     'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap',
   ],
+
+  future: {
+    v4: true, // enables future v4 features
+    experimental_faster: true, // enables faster builds
+  },
 }
 
 export default config
