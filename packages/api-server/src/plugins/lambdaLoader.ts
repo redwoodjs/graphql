@@ -66,11 +66,12 @@ export const loadFunctionsFromDist = async (
   )
 
   // Place `GraphQL` serverless function at the start.
-  const i = serverFunctions.findIndex((x) => x.includes('graphql'))
+  const i = serverFunctions.findIndex((x) => x.endsWith('graphql.js'))
   if (i >= 0) {
     const graphQLFn = serverFunctions.splice(i, 1)[0]
     serverFunctions.unshift(graphQLFn)
   }
+
   await setLambdaFunctions(serverFunctions)
 }
 
