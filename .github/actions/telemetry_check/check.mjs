@@ -51,7 +51,7 @@ try {
         process.exit(1)
       }
       exitCode = await exec(
-        `yarn --cwd ../project-for-telemetry node ../redwood/packages/cli/dist/index.js info`,
+        `yarn --cwd ../project-for-telemetry node ../graphql/packages/cli/dist/index.js info`,
       )
       if (exitCode) {
         process.exit(1)
