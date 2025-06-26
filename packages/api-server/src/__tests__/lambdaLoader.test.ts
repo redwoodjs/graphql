@@ -16,7 +16,7 @@ import {
 } from '../plugins/lambdaLoader'
 
 // Suppress terminal logging.
-// console.log = vi.fn()
+console.log = vi.fn()
 console.warn = vi.fn()
 
 // Set up RWJS_CWD.
@@ -60,8 +60,6 @@ describe('loadFunctionsFromDist', () => {
     expect(LAMBDA_FUNCTIONS).toEqual({})
 
     await loadFunctionsFromDist()
-
-    console.log('LAMBDA_FUNCTIONS', LAMBDA_FUNCTIONS)
 
     expect(Object.keys(LAMBDA_FUNCTIONS)[0]).toEqual('graphql')
   })
