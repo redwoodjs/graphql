@@ -16,7 +16,7 @@ import {
 } from '../plugins/lambdaLoader'
 
 // Suppress terminal logging.
-console.log = vi.fn()
+// console.log = vi.fn()
 console.warn = vi.fn()
 
 // Set up RWJS_CWD.
@@ -56,10 +56,12 @@ describe('loadFunctionsFromDist', () => {
   // We have logic that specifically puts the graphql function at the front.
   // Though it's not clear why or if this is actually respected by how JS objects work.
   // See the complementary lambdaLoaderNumberFunctions test.
-  it('puts the graphql function first', async () => {
+  it.only('puts the graphql function first', async () => {
     expect(LAMBDA_FUNCTIONS).toEqual({})
 
     await loadFunctionsFromDist()
+
+    console.log('LAMBDA_FUNCTIONS', LAMBDA_FUNCTIONS)
 
     expect(Object.keys(LAMBDA_FUNCTIONS)[0]).toEqual('graphql')
   })

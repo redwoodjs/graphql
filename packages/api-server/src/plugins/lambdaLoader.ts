@@ -65,6 +65,8 @@ export const loadFunctionsFromDist = async (
     options?.fastGlobOptions,
   )
 
+  console.log('serverFunctions', serverFunctions)
+
   // Place `GraphQL` serverless function at the start.
   const i = serverFunctions.findIndex((x) => x.includes('graphql'))
   if (i >= 0) {
