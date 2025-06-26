@@ -171,6 +171,11 @@ export const handler = async ({ force, install }) => {
                     ['workspace', 'web', 'add', '-D', ...webWorkspacePackages],
                     {
                       cwd: rwPaths.base,
+                      env: {
+                        // See https://github.com/cedarjs/cedar/pull/152 for
+                        // context
+                        YARN_TS_ENABLE_AUTO_TYPES: 'false',
+                      },
                     },
                   )
                 },
