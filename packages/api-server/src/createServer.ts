@@ -4,9 +4,9 @@ import path from 'path'
 import chalk from 'chalk'
 import { config } from 'dotenv-defaults'
 import fg from 'fast-glob'
-import fastify from 'fastify'
+import fastify from 'fastify/fastify'
 
-import type { GlobalContext } from '@redwoodjs/context'
+import type { GlobalContext } from '@redwoodjs/context/dist'
 import { getAsyncStoreInstance } from '@redwoodjs/context/dist/store'
 import { getConfig, getPaths } from '@redwoodjs/project-config'
 
