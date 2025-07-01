@@ -25232,16 +25232,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-plugin-curly@npm:0.3.1":
-  version: 0.3.1
-  resolution: "prettier-plugin-curly@npm:0.3.1"
+"prettier-plugin-curly@npm:0.3.2":
+  version: 0.3.2
+  resolution: "prettier-plugin-curly@npm:0.3.2"
   dependencies:
     "@babel/generator": "npm:^7.25.7"
     "@babel/parser": "npm:^7.25.8"
     "@babel/traverse": "npm:^7.25.7"
   peerDependencies:
     prettier: ^2 || ^3
-  checksum: 10c0/06241f2f0c4280ed867433ec22b0b5fa21b73de199e818b510633652c74fa4bda889f354dff95d459cba16b59002e2880105dbfd75b09654471822f303792e08
+  checksum: 10c0/4f81eca62d71bd616bdd832b240743a86c8720ddef0422bb958c677a48dec956c59124bdf8f079280160e862961d060b3e7506140ba59f70d571b8270e074121
   languageName: node
   linkType: hard
 
@@ -26967,7 +26967,7 @@ __metadata:
     nx: "npm:20.3.2"
     ora: "npm:8.1.1"
     prettier: "npm:3.4.2"
-    prettier-plugin-curly: "npm:0.3.1"
+    prettier-plugin-curly: "npm:0.3.2"
     prettier-plugin-packagejson: "npm:2.5.6"
     prettier-plugin-sh: "npm:0.14.0"
     prompts: "npm:2.4.2"
