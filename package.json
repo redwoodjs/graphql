@@ -122,7 +122,7 @@
     "nx": "20.3.2",
     "ora": "8.1.1",
     "prettier": "3.4.2",
-    "prettier-plugin-curly": "0.3.1",
+    "prettier-plugin-curly": "0.3.2",
     "prettier-plugin-packagejson": "2.5.6",
     "prettier-plugin-sh": "0.14.0",
     "prompts": "2.4.2",
