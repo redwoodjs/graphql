@@ -54,16 +54,18 @@ export const setLambdaFunctions = async (foundFunctions: string[]) => {
 
 type LoadFunctionsFromDistOptions = {
   fastGlobOptions?: FastGlobOptions
+  discoverfunctionsGlob?: string | string[]
 }
 
 // TODO: Use v8 caching to load these crazy fast.
 export const loadFunctionsFromDist = async (
   options: LoadFunctionsFromDistOptions = {},
 ) => {
-  const serverFunctions = findApiDistFunctions(
-    getPaths().api.base,
-    options?.fastGlobOptions,
-  )
+  const serverFunctions = findApiDistFunctions({
+    cwd: getPaths().api.base,
+    options: options?.fastGlobOptions,
+    discoverfunctionsGlob: options?.discoverfunctionsGlob,
+  })
 
   // Place `GraphQL` serverless function at the start.
   const i = serverFunctions.findIndex((x) => x.endsWith('graphql.js'))
@@ -77,11 +79,17 @@ export const loadFunctionsFromDist = async (
 
 // NOTE: Copied from @redwoodjs/internal/dist/files to avoid depending on @redwoodjs/internal.
 // import { findApiDistFunctions } from '@redwoodjs/internal/dist/files'
-function findApiDistFunctions(
-  cwd: string = getPaths().api.base,
-  options: FastGlobOptions = {},
-) {
-  return fg.sync('dist/functions/**/*.{ts,js}', {
+const findApiDistFunctions = (params: {
+  cwd: string
+  options?: FastGlobOptions
+  discoverfunctionsGlob?: string | string[]
+}) => {
+  const {
+    cwd = getPaths().api.base,
+    options = {},
+    discoverfunctionsGlob = 'dist/functions/**/*.{ts,js}',
+  } = params
+  return fg.sync(discoverfunctionsGlob, {
     cwd,
     deep: 2, // We don't support deeply nested api functions, to maximise compatibility with deployment providers
     absolute: true,

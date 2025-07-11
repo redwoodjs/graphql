@@ -1,6 +1,6 @@
 import path from 'path'
 
-import fg from 'fast-glob'
+import fg, { type Options as FastGlobOptions } from 'fast-glob'
 
 import { getPaths } from '@redwoodjs/project-config'
 
@@ -99,11 +99,25 @@ export const findApiServerFunctions = (
   return files.filter((f) => isApiFunction(f, cwd))
 }
 
-export const findApiDistFunctions = (cwd: string = getPaths().api.base) => {
-  return fg.sync('dist/functions/**/*.{ts,js}', {
+/*
+ * There is a copy of this function in packages/api-server/src/plugins/lambdaLoader.ts
+ * This is done to avoid to avoid @redwoodjs/api-server depending on @redwoodjs/internal
+ */
+export const findApiDistFunctions = (params: {
+  cwd: string
+  options?: FastGlobOptions
+  discoverfunctionsGlob?: string | string[]
+}) => {
+  const {
+    cwd = getPaths().api.base,
+    options = {},
+    discoverfunctionsGlob = 'dist/functions/**/*.{ts,js}',
+  } = params
+  return fg.sync(discoverfunctionsGlob, {
     cwd,
     deep: 2, // We don't support deeply nested api functions, to maximise compatibility with deployment providers
     absolute: true,
+    ...options,
   })
 }
 
