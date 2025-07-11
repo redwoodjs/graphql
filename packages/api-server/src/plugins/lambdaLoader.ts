@@ -28,7 +28,23 @@ export const setLambdaFunctions = async (foundFunctions: string[]) => {
     const ts = Date.now()
     const routeName = path.basename(fnPath).replace('.js', '')
 
-    const { handler } = await import(`file://${fnPath}`)
+    const fnImport = await import(`file://${fnPath}`)
+    const handler: Handler = (() => {
+      if ('handler' in fnImport) {
+        // ESModule export of handler - when using `export const handler = ...` - most common case
+        return fnImport.handler
+      }
+      if ('default' in fnImport) {
+        if ('handler' in fnImport.default) {
+          // CommonJS export of handler - when using `module.exports.handler = ...` or `export default { handler: ... }`
+          // This is less common, but required for bundling tools that export a default object, like esbuild or rollup
+          return fnImport.default.handler
+        }
+        // Default export is not expected, so skip it
+      }
+      // If no handler is found, return undefined - we do not want to throw an error
+    })()
+
     LAMBDA_FUNCTIONS[routeName] = handler
     if (!handler) {
       console.warn(
