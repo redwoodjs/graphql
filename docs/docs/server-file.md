@@ -69,7 +69,7 @@ Not updating the command will not completely configure the GraphQL Server and no
 
 ### Configuring the server
 
-There are three ways you may wish to configure the server.
+There are four ways you may wish to configure the server.
 
 #### Underlying Fastify server
 
@@ -162,6 +162,28 @@ The regular expression (`/^image\/.*/`) above allows all image content or MIME t
 Now, when you POST those content types to a function served by the api server, you can access the file content on `event.body`.
 
 Note that for the GraphQL endpoint, using Redwood's built-in [Uploads](uploads.md), multipart requests are already configured.
+
+#### discoverFunctionsGlob
+
+Third, you can configure the discovery of the Redwood function files with `discoverFunctionsGlob` when the default value (`dist/functions/**/*.{ts,js}`) is not suitable.
+
+The 3rd party library [fast-glob](https://github.com/mrmlnc/fast-glob) is used, which uses `https://github.com/micromatch/micromatch` under the covers. This allows configuring a single or multiple positive and negative matches.
+
+##### Example
+
+Example usage after using a bundler that changes the directory structure, and generates extra support files when converting from ES modules to CJS:
+
+```ts
+const server = await createServer({
+  logger,
+  fastifyServerOptions: { /*...*/ },
+  discoverfunctionsGlob: [
+    'app/functions/**/*.js',
+    // exclude all *.2.js files, e.g: exclude `app/functions/graphql/graphql2.js`, but keep `app/functions/graphql/graphql.js`
+    '!app/functions/**/*2.js',
+  ]
+})
+```
 
 #### Additional Fastify plugins
 
