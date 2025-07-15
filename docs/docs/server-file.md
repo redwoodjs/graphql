@@ -176,12 +176,14 @@ Example usage after using a bundler that changes the directory structure, and ge
 ```ts
 const server = await createServer({
   logger,
-  fastifyServerOptions: { /*...*/ },
+  fastifyServerOptions: {
+    /*...*/
+  },
   discoverfunctionsGlob: [
     'app/functions/**/*.js',
     // exclude all *.2.js files, e.g: exclude `app/functions/graphql/graphql2.js`, but keep `app/functions/graphql/graphql.js`
     '!app/functions/**/*2.js',
-  ]
+  ],
 })
 ```
 
