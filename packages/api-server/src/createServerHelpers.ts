@@ -37,7 +37,7 @@ export interface CreateServerOptions {
    * Override the glob used to discover functions.
    * Defaults to: "dist/functions/**\/*.{ts,js}"
    */
-  discoverfunctionsGlob?: string | string[]
+  discoverFunctionsGlob?: string | string[]
 
   /**
    * Customise the API server fastify plugin before it is registered
@@ -67,7 +67,7 @@ export const DEFAULT_CREATE_SERVER_OPTIONS: DefaultCreateServerOptions = {
     requestTimeout: 15_000,
     bodyLimit: 1024 * 1024 * 100, // 100MB
   },
-  discoverfunctionsGlob: 'dist/functions/**/*.{ts,js}',
+  discoverFunctionsGlob: 'dist/functions/**/*.{ts,js}',
   configureApiServer: () => {},
   parseArgs: true,
 }
@@ -99,9 +99,9 @@ export function resolveOptions(
       logger: options.logger ?? DEFAULT_CREATE_SERVER_OPTIONS.logger,
       bodyLimit: DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.bodyLimit,
     },
-    discoverfunctionsGlob:
-      options.discoverfunctionsGlob ??
-      DEFAULT_CREATE_SERVER_OPTIONS.discoverfunctionsGlob,
+    discoverFunctionsGlob:
+      options.discoverFunctionsGlob ??
+      DEFAULT_CREATE_SERVER_OPTIONS.discoverFunctionsGlob,
     configureApiServer:
       options.configureApiServer ??
       DEFAULT_CREATE_SERVER_OPTIONS.configureApiServer,

@@ -106,14 +106,14 @@ export const findApiServerFunctions = (
 export const findApiDistFunctions = (params: {
   cwd: string
   options?: FastGlobOptions
-  discoverfunctionsGlob?: string | string[]
+  discoverFunctionsGlob?: string | string[]
 }) => {
   const {
     cwd = getPaths().api.base,
     options = {},
-    discoverfunctionsGlob = 'dist/functions/**/*.{ts,js}',
+    discoverFunctionsGlob = 'dist/functions/**/*.{ts,js}',
   } = params
-  return fg.sync(discoverfunctionsGlob, {
+  return fg.sync(discoverFunctionsGlob, {
     cwd,
     deep: 2, // We don't support deeply nested api functions, to maximise compatibility with deployment providers
     absolute: true,

@@ -83,12 +83,12 @@ describe('loadFunctionsFromDist', () => {
     )
   })
 
-  describe('when "discoverfunctionsGlob" is set', () => {
+  describe('when "discoverFunctionsGlob" is set', () => {
     it('loads the same functions as the default value', async () => {
       expect(LAMBDA_FUNCTIONS).toEqual({})
 
       await loadFunctionsFromDist({
-        discoverfunctionsGlob: ['dist/functions/**/*.{ts,js}'],
+        discoverFunctionsGlob: ['dist/functions/**/*.{ts,js}'],
       })
 
       expect(LAMBDA_FUNCTIONS).toEqual({
@@ -100,11 +100,11 @@ describe('loadFunctionsFromDist', () => {
       })
     })
 
-    it('loads functions when discoverfunctionsGlob is an array', async () => {
+    it('loads functions when discoverFunctionsGlob is an array', async () => {
       expect(LAMBDA_FUNCTIONS).toEqual({})
 
       await loadFunctionsFromDist({
-        discoverfunctionsGlob: ['dist/functions/**/*.{ts,js}'],
+        discoverFunctionsGlob: ['dist/functions/**/*.{ts,js}'],
       })
 
       expect(LAMBDA_FUNCTIONS).toEqual({
@@ -116,11 +116,11 @@ describe('loadFunctionsFromDist', () => {
       })
     })
 
-    it('loads functions when discoverfunctionsGlob has include and exclude values', async () => {
+    it('loads functions when discoverFunctionsGlob has include and exclude values', async () => {
       expect(LAMBDA_FUNCTIONS).toEqual({})
 
       await loadFunctionsFromDist({
-        discoverfunctionsGlob: [
+        discoverFunctionsGlob: [
           'dist/functions/**/*.{ts,js}',
           '!dist/functions/**/he*.{ts,js}',
         ],
