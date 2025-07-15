@@ -179,7 +179,7 @@ const server = await createServer({
   fastifyServerOptions: {
     /*...*/
   },
-  discoverfunctionsGlob: [
+  discoverFunctionsGlob: [
     'app/functions/**/*.js',
     // exclude all *.2.js files, e.g: exclude `app/functions/graphql/graphql2.js`, but keep `app/functions/graphql/graphql.js`
     '!app/functions/**/*2.js',
