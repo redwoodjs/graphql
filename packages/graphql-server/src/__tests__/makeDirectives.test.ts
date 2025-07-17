@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { describe, expect, it } from 'vitest'
 
 import type { DirectiveParams } from '..'
 import {
@@ -18,7 +19,8 @@ const bazingaSchema = gql`
 const barSchema = gql`
   directive @bar on FIELD_DEFINITION
 `
-test('Should map directives globs to defined structure correctly', async () => {
+
+it('Should map directives globs to defined structure correctly', async () => {
   // Mocking what our import-dir plugin would do
   const directiveFiles = {
     foo_directive: {
@@ -72,10 +74,12 @@ describe('Errors out with a helpful message, if the directive is not constructed
   })
 
   it('Tells you if you forgot the implementation function', () => {
+    // @ts-expect-error - Testing JS scenario
     expect(() => createValidatorDirective(fooSchema, undefined)).toThrowError(
       'Directive validation function not implemented for @foo',
     )
 
+    // @ts-expect-error - Testing JS scenario
     expect(() => createTransformerDirective(fooSchema, undefined)).toThrowError(
       'Directive transformer function not implemented for @foo',
     )
@@ -84,11 +88,11 @@ describe('Errors out with a helpful message, if the directive is not constructed
   it('Tells you if you messed up the schema', () => {
     // The messages come from the graphql libs, so no need to check the messages
     expect(() =>
-      createValidatorDirective(gql`directive @misdirective`, undefined),
+      createValidatorDirective(gql`directive @misdirective`, () => {}),
     ).toThrow()
 
     expect(() =>
-      createTransformerDirective(gql`misdirective`, undefined),
+      createTransformerDirective(gql`misdirective`, () => {}),
     ).toThrow()
   })
 })

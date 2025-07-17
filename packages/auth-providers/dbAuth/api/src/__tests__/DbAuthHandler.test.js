@@ -316,6 +316,21 @@ describe('dbAuth', () => {
       const expiresAt = new Date()
       expiresAt.setSeconds(expiresAt.getSeconds() + options.webAuthn.expires)
 
+      // The test originally just looked like this:
+      // expect(dbAuth.webAuthnExpiresDate).toEqual(expiresAt.toUTCString())
+      // But we've had some flakyness because of timing, like
+      // Expected: "Sat, 15 Mar 2025 07:30:03 GMT"
+      // Received: "Sat, 15 Mar 2025 07:30:02 GMT"
+      // This happens when the test runs right at the flip of one second to the
+      // next
+
+      // If the expiration dates don't match, try subtracting one second from
+      // the time we compare to since that time is set after the webAuthn
+      // expiration date is set in the DbAuthHandler constructor
+      if (expiresAt.toUTCString() !== dbAuth.webAuthnExpiresDate) {
+        expiresAt.setSeconds(expiresAt.getSeconds() - 1)
+      }
+
       expect(dbAuth.webAuthnExpiresDate).toEqual(expiresAt.toUTCString())
     })
   })

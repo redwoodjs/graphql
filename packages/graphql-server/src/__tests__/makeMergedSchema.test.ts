@@ -1,6 +1,7 @@
 import type { GraphQLResolveInfo } from 'graphql'
 import { parse, graphql, GraphQLError } from 'graphql'
 import gql from 'graphql-tag'
+import { vi, describe, expect, it } from 'vitest'
 
 import {
   makeDirectivesForPlugin,
@@ -14,7 +15,7 @@ import type {
   SdlGlobImports,
 } from '../types'
 
-jest.mock('@redwoodjs/project-config', () => {
+vi.mock('@redwoodjs/project-config', () => {
   return {
     getConfig: () => {
       return {

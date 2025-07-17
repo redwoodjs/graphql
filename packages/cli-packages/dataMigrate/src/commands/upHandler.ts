@@ -187,7 +187,7 @@ function sortDataMigrationsByVersion(
 }
 
 async function runDataMigration(db: PrismaClient, dataMigrationPath: string) {
-  const dataMigration = require(dataMigrationPath)
+  const dataMigration = await import(dataMigrationPath)
 
   const startedAt = new Date()
   await dataMigration.default({ db })

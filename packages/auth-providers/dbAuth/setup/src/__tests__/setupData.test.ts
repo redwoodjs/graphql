@@ -1,13 +1,22 @@
+import { vi, beforeAll, afterAll, describe, it, expect } from 'vitest'
+
 import { createUserModelTask } from '../setupData'
 
 const RWJS_CWD = process.env.RWJS_CWD
-const redwoodProjectPath = '../../../../__fixtures__/test-project'
+const { redwoodProjectPath, dbSchemaPath, libPath, functionsPath } = vi.hoisted(
+  () => {
+    const redwoodProjectPath = '../../../../__fixtures__/test-project'
 
-const dbSchemaPath = redwoodProjectPath + '/api/db/schema.prisma'
-const libPath = redwoodProjectPath + '/api/src/lib'
-const functionsPath = redwoodProjectPath + '/api/src/functions'
+    return {
+      redwoodProjectPath,
+      dbSchemaPath: redwoodProjectPath + '/api/db/schema.prisma',
+      libPath: redwoodProjectPath + '/api/src/lib',
+      functionsPath: redwoodProjectPath + '/api/src/functions',
+    }
+  },
+)
 
-jest.mock('@redwoodjs/cli-helpers', () => {
+vi.mock('@redwoodjs/cli-helpers', () => {
   return {
     getGraphqlPath: () => {
       return redwoodProjectPath + '/api/src/functions/graphql.ts'

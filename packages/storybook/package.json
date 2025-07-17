@@ -51,25 +51,26 @@
     "@joshwooding/vite-plugin-react-docgen-typescript": "0.4.2",
     "@redwoodjs/testing": "workspace:*",
     "@rollup/pluginutils": "5.1.4",
-    "@storybook/addon-essentials": "7.6.17",
-    "@storybook/builder-vite": "7.6.17",
-    "@storybook/react": "7.6.17",
+    "@storybook/addon-essentials": "7.6.20",
+    "@storybook/builder-vite": "7.6.20",
+    "@storybook/react": "7.6.20",
     "magic-string": "0.30.11",
     "react-docgen": "7.0.3",
-    "unplugin-auto-import": "0.18.3"
+    "unplugin-auto-import": "0.18.3",
+    "vite-plugin-node-polyfills": "0.23.0"
   },
   "devDependencies": {
     "@types/node": "20.17.10",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
-    "vite": "5.4.12"
+    "vite": "5.4.19"
   },
   "peerDependencies": {
     "@redwoodjs/project-config": "workspace:*",
     "@redwoodjs/router": "workspace:*",
     "react": "19.0.0-rc-f2df5694-20240916",
     "react-dom": "19.0.0-rc-f2df5694-20240916",
-    "storybook": "7.6.17"
+    "storybook": "7.6.20"
   },
   "engines": {
     "node": "=20.x"

@@ -1,7 +1,7 @@
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 
 import execa from 'execa'
-import fs from 'fs-extra'
 import { Listr } from 'listr2'
 
 import { getPaths } from '@redwoodjs/project-config'
@@ -16,7 +16,10 @@ export async function handler() {
       {
         title: 'Creating the dataMigrations directory...',
         task() {
-          fs.outputFileSync(
+          fs.mkdirSync(redwoodProjectPaths.api.dataMigrations, {
+            recursive: true,
+          })
+          fs.writeFileSync(
             path.join(redwoodProjectPaths.api.dataMigrations, '.keep'),
             '',
           )

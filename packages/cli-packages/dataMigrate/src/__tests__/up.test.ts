@@ -1,19 +1,16 @@
-import { vol } from 'memfs'
-import yargs from 'yargs/yargs'
+import { fs as memfs, vol } from 'memfs'
+import { vi, describe, expect, it } from 'vitest'
+import yargs from 'yargs'
 
 import { getPaths } from '@redwoodjs/project-config'
 
 import * as upCommand from '../commands/up'
 import { handler as dataMigrateUpHandler } from '../commands/upHandler.js'
 
-jest.mock('fs', () => require('memfs').fs)
-jest.mock(
-  '../commands/upHandler.js',
-  () => ({
-    handler: jest.fn(),
-  }),
-  { virtual: true },
-)
+vi.mock('fs', () => ({ default: memfs }))
+vi.mock('../commands/upHandler.js', () => ({
+  handler: vi.fn(),
+}))
 
 describe('up', () => {
   it('exports `command`, `description`, `builder`, and `handler`', () => {
@@ -39,14 +36,17 @@ describe('up', () => {
 
     process.env.RWJS_CWD = '/redwood-app'
 
-    const { argv } = upCommand.builder(yargs)
+    const { argv } = upCommand.builder(yargs())
 
     expect(argv).toHaveProperty('import-db-client-from-dist', false)
     expect(argv).toHaveProperty('dist-path', getPaths().api.dist)
   })
 
   it('`handler` proxies to `./upHandler.js`', async () => {
-    await upCommand.handler({})
+    await upCommand.handler({
+      importDbClientFromDist: false,
+      distPath: '',
+    })
     expect(dataMigrateUpHandler).toHaveBeenCalled()
   })
 })

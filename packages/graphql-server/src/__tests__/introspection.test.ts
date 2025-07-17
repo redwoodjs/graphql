@@ -1,3 +1,5 @@
+import { afterAll, beforeAll, describe, expect, it } from 'vitest'
+
 import { configureGraphQLIntrospection } from '../introspection'
 
 describe('configureGraphQLIntrospection', () => {

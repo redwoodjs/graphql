@@ -56,9 +56,9 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@babel/generator": "7.25.7",
-    "@babel/parser": "^7.22.16",
-    "@babel/traverse": "^7.22.20",
+    "@babel/generator": "7.26.10",
+    "@babel/parser": "7.26.10",
+    "@babel/traverse": "7.26.10",
     "@redwoodjs/auth": "workspace:*",
     "@redwoodjs/babel-config": "workspace:*",
     "@redwoodjs/cookie-jar": "workspace:*",
@@ -85,9 +85,9 @@
     "react": "19.0.0-rc-f2df5694-20240916",
     "react-server-dom-webpack": "19.0.0-rc-f2df5694-20240916",
     "rimraf": "6.0.1",
-    "vite": "5.4.12",
+    "vite": "5.4.19",
     "vite-plugin-cjs-interop": "2.1.4",
-    "vite-plugin-node-polyfills": "0.22.0",
+    "vite-plugin-node-polyfills": "0.23.0",
     "ws": "8.18.0",
     "yargs-parser": "21.1.1"
   },
@@ -107,7 +107,7 @@
     "rollup": "4.24.0",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

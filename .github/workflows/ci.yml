@@ -19,7 +19,7 @@ env:
 
 jobs:
   detect-changes:
-    if: github.repository == 'redwoodjs/redwood'
+    if: github.repository == 'redwoodjs/graphql'
     name: 🔍 Detect changes
     runs-on: ubuntu-latest
 

@@ -28,7 +28,6 @@ function createMiddlewareAuth(
 ) {
   return createAuthentication(dbAuthClient, {
     ...customProviderHooks,
-    // @MARK This is key! 👇
     useCurrentUser:
       customProviderHooks?.useCurrentUser ??
       (() => getCurrentUserFromMiddleware(dbAuthClient.getAuthUrl())),
@@ -112,6 +111,7 @@ export function createDbAuthClient({
     if (middleware) {
       return null
     }
+
     // Return the existing fetch promise, so that parallel calls
     // to getToken only cause a single fetch
     if (getTokenPromise) {
@@ -195,8 +195,9 @@ export function createDbAuthClient({
     return response.json()
   }
 
-  /*
-   * dbAuth doesn't implement the concept of userMetadata. We used to return the token (i.e. userId) as the userMetadata.
+  /**
+   * dbAuth doesn't implement the concept of userMetadata. We used to return the
+   * token (i.e. userId) as the userMetadata.
    */
   const getUserMetadata = async () => {
     return middleware ? () => {} : getToken()
@@ -213,8 +214,8 @@ export function createDbAuthClient({
     forgotPassword,
     resetPassword,
     validateResetToken,
-    // 👇 New methods for middleware auth
-    // so we can get the dbAuthUrl in getCurrentUserFromMiddleware
+    // New methods for middleware auth:
+    // This is so we can get the dbAuthUrl in getCurrentUserFromMiddleware
     getAuthUrl: getDbAuthUrl,
     // This is so that we can skip fetching getCurrentUser in reauthenticate
     middlewareAuthEnabled: middleware,

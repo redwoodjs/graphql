@@ -13,7 +13,7 @@
     "build:pack": "yarn pack -o redwoodjs-eslint-config.tgz"
   },
   "dependencies": {
-    "@babel/core": "^7.22.20",
+    "@babel/core": "^7.26.10",
     "@babel/eslint-parser": "7.25.7",
     "@babel/eslint-plugin": "7.25.7",
     "@redwoodjs/eslint-plugin": "workspace:*",
@@ -34,7 +34,7 @@
     "prettier": "3.4.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.25.7",
+    "@babel/cli": "7.26.4",
     "typescript": "5.6.2"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"

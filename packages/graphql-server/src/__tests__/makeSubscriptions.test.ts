@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { describe, expect, it } from 'vitest'
 
 import { makeSubscriptions } from '../subscriptions/makeSubscriptions'
 const countdownSchema = gql`
@@ -20,11 +21,11 @@ const newMessageSchema = gql`
 describe('Should map subscription globs to defined structure correctly', () => {
   it('Should map a subscribe correctly', async () => {
     // Mocking what our import-dir plugin would do
-    const subscriptionFiles = {
+    const subscriptionFiles: Parameters<typeof makeSubscriptions>['0'] = {
       countdown_subscription: {
         schema: countdownSchema,
         countdown: {
-          async *subscribe(_, { from, interval }) {
+          async *subscribe(_parent: unknown, { from, interval }) {
             for (let i = from; i >= 0; i--) {
               await new Promise((resolve) =>
                 setTimeout(resolve, interval ?? 1000),
@@ -46,14 +47,14 @@ describe('Should map subscription globs to defined structure correctly', () => {
 
   it('Should map a subscribe and resolve correctly', async () => {
     // Mocking what our import-dir plugin would do
-    const subscriptionFiles = {
+    const subscriptionFiles: Parameters<typeof makeSubscriptions>[0] = {
       newMessage_subscription: {
         schema: newMessageSchema,
         newMessage: {
-          subscribe: (_, { roomId }) => {
+          subscribe: (_parent: unknown, { roomId }) => {
             return roomId
           },
-          resolve: (payload) => {
+          resolve: (payload: string) => {
             return payload
           },
         },

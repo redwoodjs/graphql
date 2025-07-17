@@ -101,7 +101,7 @@
     "tsx": "4.19.2",
     "type-fest": "4.26.1",
     "typescript": "5.6.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

@@ -11,6 +11,6 @@ export default defineConfig({
       '.d.ts',
     ],
     setupFiles: ['./vite.setup.mts'],
-    pool: 'vmForks',
+    pool: 'forks',
   },
 })

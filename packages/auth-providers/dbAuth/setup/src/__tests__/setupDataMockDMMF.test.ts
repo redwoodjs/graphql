@@ -1,26 +1,43 @@
-import * as fs from 'node:fs'
-import * as path from 'node:path'
+import type fs from 'node:fs'
+import path from 'node:path'
 
-import { vol } from 'memfs'
+import { fs as memfs, vol } from 'memfs'
 import prompts from 'prompts'
+import {
+  vi,
+  beforeAll,
+  beforeEach,
+  afterAll,
+  afterEach,
+  describe,
+  it,
+  expect,
+} from 'vitest'
 
 import type { AuthHandlerArgs } from '@redwoodjs/cli-helpers'
 import type { AuthGeneratorCtx } from '@redwoodjs/cli-helpers/src/auth/authTasks'
+
+vi.mock('fs', async () => ({ ...memfs, default: memfs }))
+vi.mock('node:fs', async () => ({ ...memfs, default: memfs }))
 
 import { createUserModelTask } from '../setupData'
 import { handler } from '../setupHandler'
 
 const RWJS_CWD = process.env.RWJS_CWD
-const redwoodProjectPath = '/redwood-app'
+const { redwoodProjectPath, dbSchemaPath, libPath, functionsPath } = vi.hoisted(
+  () => {
+    const redwoodProjectPath = '/redwood-app'
 
-const dbSchemaPath = redwoodProjectPath + '/api/db/schema.prisma'
-const libPath = redwoodProjectPath + '/api/src/lib'
-const functionsPath = redwoodProjectPath + '/api/src/functions'
+    return {
+      redwoodProjectPath,
+      dbSchemaPath: redwoodProjectPath + '/api/db/schema.prisma',
+      libPath: redwoodProjectPath + '/api/src/lib',
+      functionsPath: redwoodProjectPath + '/api/src/functions',
+    }
+  },
+)
 
-jest.mock('fs', () => require('memfs').fs)
-jest.mock('node:fs', () => require('memfs').fs)
-
-jest.mock('@redwoodjs/cli-helpers', () => {
+vi.mock('@redwoodjs/cli-helpers', () => {
   return {
     getGraphqlPath: () => {
       return redwoodProjectPath + '/api/src/functions/graphql.ts'
@@ -43,7 +60,7 @@ jest.mock('@redwoodjs/cli-helpers', () => {
     },
     addEnvVarTask: () => {},
     // I wish I could have used something like
-    // jest.requireActual(@redwoodjs/cli-helpers) here, but I couldn't because
+    // vi.requireActual(@redwoodjs/cli-helpers) here, but I couldn't because
     // jest doesn't support ESM
     standardAuthHandler: async (args: AuthHandlerArgs) => {
       if (args.extraTasks) {
@@ -55,7 +72,7 @@ jest.mock('@redwoodjs/cli-helpers', () => {
 
         for (const task of args.extraTasks) {
           if (task?.task) {
-            await task.task(ctx, undefined)
+            await task.task(ctx, undefined as any)
           }
         }
       }
@@ -67,14 +84,12 @@ jest.mock('@redwoodjs/cli-helpers', () => {
   }
 })
 
-jest.mock('@prisma/internals', () => ({
+vi.mock('@prisma/internals', () => ({
   getSchema: () => {
-    const fs = require('node:fs')
-    return fs.readFileSync(dbSchemaPath, 'utf-8')
+    return memfs.readFileSync(dbSchemaPath, 'utf-8')
   },
   getDMMF: () => {
-    const fs = require('node:fs')
-    const schema: string = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema: string = memfs.readFileSync(dbSchemaPath, 'utf-8').toString()
 
     const models = schema
       .split('\n')
@@ -90,10 +105,10 @@ jest.mock('@prisma/internals', () => ({
   },
 }))
 
-jest.mock('prompts', () => {
+vi.mock('prompts', () => {
   return {
     __esModule: true,
-    default: jest.fn(async (args: any) => {
+    default: vi.fn(async (args: any) => {
       return {
         [args.name]: false,
       }
@@ -110,12 +125,12 @@ afterAll(() => {
 })
 
 beforeEach(() => {
-  jest.spyOn(console, 'log').mockImplementation(() => {})
+  vi.spyOn(console, 'log').mockImplementation(() => {})
 })
 
 afterEach(() => {
-  jest.mocked(console).log.mockRestore?.()
-  jest.mocked(prompts).mockClear?.()
+  vi.mocked(console).log.mockRestore?.()
+  vi.mocked(prompts).mockClear?.()
 })
 
 describe('setupData createUserModelTask', () => {
@@ -143,7 +158,7 @@ generator client {
       provider: 'dbAuth',
     })
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8')
     expect(schema).toMatch(/^model User {$/m)
   })
 
@@ -179,7 +194,7 @@ model UserExample {
       provider: 'dbAuth',
     })
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8')
     expect(schema).toMatch(/^model User {$/m)
   })
 
@@ -224,7 +239,7 @@ model Post {
       })
     }).rejects.toThrow('User model already exists')
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8').toString()
 
     expect(schema.match(/^model User {/gm)).toHaveLength(1)
   })
@@ -270,20 +285,21 @@ model UserExample {
       force: false,
     })
 
-    expect(jest.mocked(prompts)).not.toHaveBeenCalled()
+    expect(vi.mocked(prompts)).not.toHaveBeenCalled()
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8').toString()
     expect(schema).toMatch(/^model User {$/m)
-    expect(jest.mocked(console).log).toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).toHaveBeenCalledWith(
       expect.stringContaining('Done! But you have a little more work to do:'),
     )
-    expect(jest.mocked(console).log).not.toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).not.toHaveBeenCalledWith(
       expect.stringContaining('resetTokenExpiresAt DateTime? // <─'),
     )
   })
 
   it('automatically adds a User model given the rwjs template schema.prisma', async () => {
     const packageJsonPath = path.resolve(__dirname, '../../package.json')
+    const actualFs = await vi.importActual<typeof fs>('fs')
 
     vol.fromJSON(
       {
@@ -293,15 +309,13 @@ import { createGraphQLHandler } from "@redwoodjs/graphql-server"
 
 import { getCurrentUser } from 'src/lib/auth'
 `,
-        'api/db/schema.prisma': jest
-          .requireActual('fs')
-          .readFileSync(
-            path.resolve(
-              __dirname +
-                '/../../../../../create-redwood-app/templates/ts/api/db/schema.prisma',
-            ),
-            'utf-8',
+        'api/db/schema.prisma': actualFs.readFileSync(
+          path.resolve(
+            __dirname +
+              '/../../../../../create-redwood-app/templates/ts/api/db/schema.prisma',
           ),
+          'utf-8',
+        ),
       },
       redwoodProjectPath,
     )
@@ -313,18 +327,18 @@ import { getCurrentUser } from 'src/lib/auth'
       force: false,
     })
 
-    expect(jest.mocked(prompts)).not.toHaveBeenCalled()
+    expect(vi.mocked(prompts)).not.toHaveBeenCalled()
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8')
     // Check for UserExample just to make sure we're reading the actual
     // template file and that it looks like we expect. So we're not just
     // getting an empty file or something
     expect(schema).toMatch(/^model UserExample {$/m)
     expect(schema).toMatch(/^model User {$/m)
-    expect(jest.mocked(console).log).toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).toHaveBeenCalledWith(
       expect.stringContaining('Done! But you have a little more work to do:'),
     )
-    expect(jest.mocked(console).log).not.toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).not.toHaveBeenCalledWith(
       expect.stringContaining('resetTokenExpiresAt DateTime? // <─'),
     )
   })
@@ -368,18 +382,18 @@ model ExampleModel {
       force: false,
     })
 
-    expect(jest.mocked(prompts)).toHaveBeenCalledWith(
+    expect(vi.mocked(prompts)).toHaveBeenCalledWith(
       expect.objectContaining({
         message: expect.stringContaining('Create User model?'),
       }),
     )
 
-    const schema = fs.readFileSync(dbSchemaPath, 'utf-8')
+    const schema = memfs.readFileSync(dbSchemaPath, 'utf-8')
     expect(schema).not.toMatch(/^model User {$/m)
-    expect(jest.mocked(console).log).toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).toHaveBeenCalledWith(
       expect.stringContaining('Done! But you have a little more work to do:'),
     )
-    expect(jest.mocked(console).log).toHaveBeenCalledWith(
+    expect(vi.mocked(console).log).toHaveBeenCalledWith(
       expect.stringContaining('resetTokenExpiresAt DateTime? // <─'),
     )
   })

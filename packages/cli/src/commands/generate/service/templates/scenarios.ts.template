@@ -1,6 +1,6 @@
 import type { Prisma, ${prismaModel} } from '@prisma/client'
-import type { ScenarioData } from '@redwoodjs/testing/api'
 
+import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.${prismaModel}CreateArgs>(${stringifiedScenario})
 

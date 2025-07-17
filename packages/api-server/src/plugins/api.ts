@@ -16,6 +16,7 @@ export interface RedwoodFastifyAPIOptions {
   redwood: {
     apiRootPath?: string
     fastGlobOptions?: FastGlobOptions
+    discoverFunctionsGlob?: string | string[]
     loadUserConfig?: boolean
     configureServer?: (server: Server) => void | Promise<void>
   }
@@ -65,5 +66,6 @@ export async function redwoodFastifyAPI(
   fastify.all(`${redwoodOptions.apiRootPath}:routeName/*`, lambdaRequestHandler)
   await loadFunctionsFromDist({
     fastGlobOptions: redwoodOptions.fastGlobOptions,
+    discoverFunctionsGlob: redwoodOptions.discoverFunctionsGlob,
   })
 }

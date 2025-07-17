@@ -145,6 +145,9 @@ module.exports = {
     },
   ],
   // Ignore test directories when we're not testing
+  // Note: No matter what you try to do here, babel will still include
+  // snapshot files in the dist output.
+  // See https://github.com/babel/babel/issues/11394
   ignore:
     process.env.NODE_ENV === 'test'
       ? []

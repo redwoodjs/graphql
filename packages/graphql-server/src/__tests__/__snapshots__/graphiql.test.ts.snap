@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`configureGraphiQLPlayground when in development should configure the GraphiQL Playground when allowGraphiQL is not provided 1`] = `
+exports[`configureGraphiQLPlayground > when in development > should configure the GraphiQL Playground when allowGraphiQL is not provided 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {
@@ -13,7 +13,7 @@ exports[`configureGraphiQLPlayground when in development should configure the Gr
 }
 `;
 
-exports[`configureGraphiQLPlayground when in development should configure the GraphiQL Playground when allowGraphiQL is null 1`] = `
+exports[`configureGraphiQLPlayground > when in development > should configure the GraphiQL Playground when allowGraphiQL is null 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {
@@ -26,7 +26,7 @@ exports[`configureGraphiQLPlayground when in development should configure the Gr
 }
 `;
 
-exports[`configureGraphiQLPlayground when in development should configure the GraphiQL Playground when allowGraphiQL is true 1`] = `
+exports[`configureGraphiQLPlayground > when in development > should configure the GraphiQL Playground when allowGraphiQL is true 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {
@@ -39,7 +39,7 @@ exports[`configureGraphiQLPlayground when in development should configure the Gr
 }
 `;
 
-exports[`configureGraphiQLPlayground when in development should configure the GraphiQL Playground when allowGraphiQL is undefined 1`] = `
+exports[`configureGraphiQLPlayground > when in development > should configure the GraphiQL Playground when allowGraphiQL is undefined 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {
@@ -52,7 +52,7 @@ exports[`configureGraphiQLPlayground when in development should configure the Gr
 }
 `;
 
-exports[`configureGraphiQLPlayground when in development should configure the GraphiQL Playground when no config is provided 1`] = `
+exports[`configureGraphiQLPlayground > when in development > should configure the GraphiQL Playground when no config is provided 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {
@@ -65,7 +65,7 @@ exports[`configureGraphiQLPlayground when in development should configure the Gr
 }
 `;
 
-exports[`configureGraphiQLPlayground when not in development environment should configure the GraphiQL Playground when allowGraphiQL is true 1`] = `
+exports[`configureGraphiQLPlayground > when not in development environment > should configure the GraphiQL Playground when allowGraphiQL is true 1`] = `
 {
   "defaultQuery": "query Redwood {
   redwood {

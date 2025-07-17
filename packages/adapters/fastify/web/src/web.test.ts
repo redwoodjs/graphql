@@ -9,7 +9,7 @@ import { getPaths } from '@redwoodjs/project-config'
 
 import { redwoodFastifyWeb } from './web'
 
-let original_RWJS_CWD: string
+let original_RWJS_CWD: string | undefined
 
 beforeAll(() => {
   original_RWJS_CWD = process.env.RWJS_CWD

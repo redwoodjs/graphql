@@ -20,7 +20,7 @@ tasks:
       export REDWOOD_DISABLE_TELEMETRY=1
     init: |
       cd /workspace/redwood
-      corepack enable
+      npm i -g corepack
       yarn install
       yarn run build:test-project ../rw-test-app --typescript --link --verbose
       cd /workspace/rw-test-app && sed -i "s/\(open *= *\).*/\1false/" redwood.toml

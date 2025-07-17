@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`dbAuth setup command does not duplicate authDecoder creation 1`] = `
+exports[`dbAuth setup command > does not duplicate authDecoder creation 1`] = `
 "
 import { createGraphQLHandler } from '@redwoodjs/graphql-server'
 

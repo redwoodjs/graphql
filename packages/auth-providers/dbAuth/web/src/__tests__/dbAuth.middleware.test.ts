@@ -1,6 +1,9 @@
 import { act, renderHook } from '@testing-library/react'
+import { vi, beforeAll, afterAll, describe, it, expect } from 'vitest'
 
-import type { CustomProviderHooks, DbAuthClientArgs } from '../dbAuth'
+import type { CustomProviderHooks } from '@redwoodjs/auth'
+
+import type { DbAuthClientArgs } from '../dbAuth'
 import { createDbAuthClient, createAuth } from '../dbAuth'
 
 import { fetchMock } from './dbAuth.test'
@@ -30,7 +33,7 @@ export function getMwDbAuth(
 // They test the middleware specific things about the dbAuth client
 
 describe('dbAuth web ~ cookie/middleware auth', () => {
-  let originalEnv
+  let originalEnv: string
 
   // This tells the dbAuth client to setup in middleware mode
   beforeAll(() => {
@@ -50,10 +53,7 @@ describe('dbAuth web ~ cookie/middleware auth', () => {
     // Middleware auth clients should not return tokens
     expect(await dbAuthInstance.getToken()).toBeNull()
 
-    let currentUser
-    await act(async () => {
-      currentUser = await dbAuthInstance.getCurrentUser()
-    })
+    const currentUser = await dbAuthInstance.getCurrentUser()
 
     expect(globalThis.fetch).toHaveBeenCalledWith(
       // Doesn't speak to graphql!
@@ -71,7 +71,7 @@ describe('dbAuth web ~ cookie/middleware auth', () => {
   })
 
   it('can still override getCurrentUser', async () => {
-    const mockedCustomCurrentUser = jest.fn()
+    const mockedCustomCurrentUser = vi.fn()
     const { current: dbAuthInstance } = getMwDbAuth({
       useCurrentUser: mockedCustomCurrentUser,
     })

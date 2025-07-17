@@ -5,7 +5,10 @@ export default function transform(file: FileInfo, api: API) {
   const ast = j(file.source)
 
   const paths = ast.find(j.ObjectProperty, (node) => {
-    return ['redirect_uri', 'audience'].includes(node.key.name)
+    return (
+      'name' in node.key &&
+      (node.key.name === 'redirect_uri' || node.key.name === 'audience')
+    )
   })
 
   let nodes = paths.nodes()

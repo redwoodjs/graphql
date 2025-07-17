@@ -182,7 +182,7 @@ export const realtime: RedwoodRealtimeOptions = {
 By setting up realtime, the GraphQL server adds two helpers on the context:
 
 - pubSub
-- liveQueryStory
+- liveQueryStore
 
 With `context.pubSub` you can subscribe to and publish messages via `context.pubSub.publish('the-topic', id, id2)`.
 

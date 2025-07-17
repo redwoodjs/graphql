@@ -192,7 +192,7 @@ export const handler = async (
     resetPassword: resetPasswordOptions,
     signup: signupOptions,
 
-    // See https://redwoodjs.com/docs/authentication/dbauth#webauthn for options
+    // See https://redwoodjs.com/docs/auth/dbauth#webauthn for options
     webAuthn: {
       enabled: true,
       // How long to allow re-auth via WebAuthn in seconds (default is 10 years).

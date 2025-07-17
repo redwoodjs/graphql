@@ -19,7 +19,7 @@ permissions: {}
 jobs:
   check-git-tags:
     name: 🏷 Check git tags
-    if: github.repository == 'redwoodjs/redwood'
+    if: github.repository == 'redwoodjs/graphql'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4

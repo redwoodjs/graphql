@@ -1,26 +1,36 @@
+import { vi, beforeEach, describe, it, expect } from 'vitest'
+
 import WebAuthnClient from '../webAuthn'
 
 globalThis.RWJS_API_URL = '/.redwood/functions'
 
-jest.mock('@whatwg-node/fetch', () => {
+vi.mock('@simplewebauthn/browser', () => {
+  return {
+    platformAuthenticatorIsAvailable: () => {},
+    startRegistration: () => {},
+    startAuthentication: () => {},
+  }
+})
+
+vi.mock('@whatwg-node/fetch', () => {
   return
 })
 
-const mockOpen = jest.fn()
-const mockSend = jest.fn()
+const mockOpen = vi.fn()
+const mockSend = vi.fn()
 
 const xhrMock: Partial<XMLHttpRequest> = {
   open: mockOpen,
   send: mockSend,
-  setRequestHeader: jest.fn(),
+  setRequestHeader: vi.fn(),
   readyState: 4,
   status: 200,
   responseText: '{}',
 }
 
-jest
-  .spyOn(global, 'XMLHttpRequest')
-  .mockImplementation(() => xhrMock as XMLHttpRequest)
+vi.spyOn(global, 'XMLHttpRequest').mockImplementation(
+  () => xhrMock as XMLHttpRequest,
+)
 
 function clearCookies() {
   document.cookie.split(';').forEach(function (c) {

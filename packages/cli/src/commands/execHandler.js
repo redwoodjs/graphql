@@ -59,6 +59,34 @@ export const handler = async (args) => {
     return
   }
 
+  // The command the user is running is something like this:
+  //
+  // yarn rw exec scriptName arg1 arg2 --positional1=foo --positional2=bar
+  //
+  // Further up in the command chain we've parsed this with yargs. We asked
+  // yargs to parse the command `exec [name]`. So it plucked `scriptName` from
+  // the command and placed that in a named variable called `name`.
+  // And even further up the chain yargs has already eaten the `yarn` part and
+  // assigned 'rw' to `$0`
+  // So what yargs has left in args._ is ['exec', 'arg1', 'arg2'] (and it has
+  // also assigned 'foo' to `args.positional1` and 'bar' to `args.positional2`).
+  // 'exec', 'arg1' and 'arg2' are in `args._` because those are positional
+  // arguments we haven't given a name.
+  // `'exec'` is of no interest to the user, as its not meant to be an argument
+  // to their script. And so we remove it from the array.
+  scriptArgs._ = scriptArgs._.slice(1)
+
+  // 'rw' is not meant for the script's args, so delete that
+  delete scriptArgs.$0
+
+  // Other arguments that yargs adds are `prisma`, `list`, `l`, `silent` and
+  // `s`.
+  // We eat `prisma` and `list` above. So that leaves us with `l`, `s` and
+  // `silent` that we need to delete as well
+  delete scriptArgs.l
+  delete scriptArgs.s
+  delete scriptArgs.silent
+
   const {
     overrides: _overrides,
     plugins: webPlugins,

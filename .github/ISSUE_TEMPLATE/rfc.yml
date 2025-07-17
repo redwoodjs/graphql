@@ -47,8 +47,8 @@ body:
         Lastly, consider reading some great examples:
 
         - [Prerender proposal](https://community.redwoodjs.com/t/prerender-proposal/849)
-        - [Optional path parameters](https://github.com/redwoodjs/redwood/issues/2429)
-        - [Multitenant support](https://github.com/redwoodjs/redwood/issues/5821)
+        - [Optional path parameters](https://github.com/redwoodjs/graphql/issues/2429)
+        - [Multitenant support](https://github.com/redwoodjs/graphql/issues/5821)
     validations:
       required: true
 

@@ -1,25 +1,41 @@
 import path from 'node:path'
 
-import { vol } from 'memfs'
+import { fs as memfs, vol } from 'memfs'
 import prompts from 'prompts'
+import {
+  vi,
+  beforeAll,
+  beforeEach,
+  afterAll,
+  afterEach,
+  describe,
+  it,
+  expect,
+  assert,
+} from 'vitest'
 
 import { type AuthHandlerArgs } from '@redwoodjs/cli-helpers'
 
-jest.mock('fs', () => require('memfs').fs)
+vi.mock('fs', async () => ({ ...memfs, default: memfs }))
+vi.mock('node:fs', async () => ({ ...memfs, default: memfs }))
 
 import { createAuthDecoderFunction, handler } from '../setupHandler'
 
 const RWJS_CWD = process.env.RWJS_CWD
-const redwoodProjectPath = '/redwood-app'
+
+const { redwoodProjectPath } = vi.hoisted(() => {
+  return { redwoodProjectPath: '/redwood-app' }
+})
+
 const mockLoginPagePath = path.join(
   redwoodProjectPath,
   'web/src/pages/LoginPage/LoginPage.tsx',
 )
 
-jest.mock('prompts', () => {
+vi.mock('prompts', () => {
   return {
     __esModule: true,
-    default: jest.fn(async (args: any) => {
+    default: vi.fn(async (args: any) => {
       return {
         [args.name]: false,
       }
@@ -27,16 +43,18 @@ jest.mock('prompts', () => {
   }
 })
 
-jest.mock('../shared', () => ({
+vi.mock('../shared', () => ({
   hasModel: () => false,
   hasAuthPages: () => {
-    return require('fs').existsSync(mockLoginPagePath)
+    return memfs.existsSync(mockLoginPagePath)
   },
   generateAuthPagesTask: () => undefined,
   getModelNames: () => ['ExampleUser'],
+  functionsPath: () => redwoodProjectPath + '/api/src/functions',
+  libPath: () => redwoodProjectPath + '/api/src/lib',
 }))
 
-jest.mock('@redwoodjs/cli-helpers', () => {
+vi.mock('@redwoodjs/cli-helpers', () => {
   return {
     getGraphqlPath: () => {
       return redwoodProjectPath + '/api/src/functions/graphql.ts'
@@ -54,7 +72,7 @@ jest.mock('@redwoodjs/cli-helpers', () => {
       underline: (str: string) => str,
     },
     // I wish I could have used something like
-    // jest.requireActual(@redwoodjs/cli-helpers) here, but I couldn't because
+    // vi.requireActual(@redwoodjs/cli-helpers) here, but I couldn't because
     // jest doesn't support ESM
     standardAuthHandler: async (args: AuthHandlerArgs) => {
       if (args.notes) {
@@ -73,12 +91,12 @@ afterAll(() => {
 })
 
 beforeEach(() => {
-  jest.spyOn(console, 'log').mockImplementation(() => {})
+  vi.spyOn(console, 'log').mockImplementation(() => {})
 })
 
 afterEach(() => {
-  jest.mocked(console).log.mockRestore?.()
-  jest.mocked(prompts).mockClear?.()
+  vi.mocked(console).log.mockRestore?.()
+  vi.mocked(prompts).mockClear?.()
 })
 
 describe('dbAuth setup command', () => {
@@ -147,9 +165,15 @@ export const handler = createGraphQLHandler({
       force: false,
     })
 
-    expect(jest.mocked(prompts).mock.calls[0][0].message).toMatch(
-      /Generate auth pages/,
-    )
+    const promptsArg =
+      vi.mocked<typeof prompts<'answer'>>(prompts).mock.calls[0][0]
+
+    if (Array.isArray(promptsArg)) {
+      assert.isNotArray(promptsArg, 'Expected a single prompt')
+      return
+    }
+
+    expect(promptsArg.message).toMatch(/Generate auth pages/)
   })
 
   it('does not prompt to generate pages when pages already exist', async () => {
@@ -170,7 +194,7 @@ export const handler = createGraphQLHandler({
       force: false,
     })
 
-    expect(jest.mocked(prompts)).not.toHaveBeenCalled()
+    expect(vi.mocked(prompts)).not.toHaveBeenCalled()
   })
 
   describe('One More Thing... message', () => {
@@ -192,7 +216,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw generate dbAuth',
         )
       })
@@ -214,7 +238,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw generate dbAuth',
         )
       })
@@ -236,7 +260,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw generate dbAuth',
         )
       })
@@ -258,7 +282,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw generate dbAuth',
         )
       })
@@ -280,7 +304,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        const logs: string[][] = [...jest.mocked(console).log.mock.calls]
+        const logs: string[][] = [...vi.mocked(console).log.mock.calls]
         const oneMoreThingMessage = logs.find((log) => {
           return log[0].includes('Done! But you have a little more work to do')
         })?.[0]
@@ -308,7 +332,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        const firstLogMessage = jest.mocked(console).log.mock.calls[0][0]
+        const firstLogMessage = vi.mocked(console).log.mock.calls[0][0]
 
         // Included exactly once
         expect(firstLogMessage.match(/and WebAuthn prompts/g)).toHaveLength(1)
@@ -336,7 +360,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw prisma migrate dev',
         )
       })
@@ -358,7 +382,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).not.toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).not.toContain(
           'yarn rw prisma migrate dev',
         )
       })
@@ -380,7 +404,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).toContain(
           'yarn rw prisma migrate dev',
         )
       })
@@ -402,7 +426,7 @@ export const handler = createGraphQLHandler({
           force: false,
         })
 
-        expect(jest.mocked(console).log.mock.calls[0][0]).toContain(
+        expect(vi.mocked(console).log.mock.calls[0][0]).toContain(
           'yarn rw prisma migrate dev',
         )
       })

@@ -54,7 +54,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@babel/core": "^7.22.20",
+    "@babel/core": "^7.26.10",
     "@opentelemetry/api": "1.8.0",
     "@redwoodjs/project-config": "workspace:*",
     "@redwoodjs/telemetry": "workspace:*",
@@ -82,7 +82,7 @@
     "@types/yargs-parser": "21.0.3",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

@@ -22,7 +22,7 @@ body:
         What commands do we need to run?
         Are there any packages that we need to install?
         What does the `schema.prisma` need to look like?
-        Maybe include a link to a GitHub repo or a Gitpod snapshot? ([Instructions here](https://github.com/redwoodjs/redwood/blob/main/CONTRIBUTING.md#Creating-a-reproduction-to-include-with-issues).)
+        Maybe include a link to a GitHub repo or a Gitpod snapshot? ([Instructions here](https://github.com/redwoodjs/graphql/blob/main/CONTRIBUTING.md#Creating-a-reproduction-to-include-with-issues).)
 
 
         While this field is optional,

@@ -1,10 +1,17 @@
 import type { APIGatewayProxyEvent, Context } from 'aws-lambda'
+import { vi, describe, expect, it } from 'vitest'
 
 import { createLogger } from '@redwoodjs/api/logger'
 
 import { createGraphQLHandler } from '../functions/graphql'
 
-jest.mock('../makeMergedSchema', () => {
+interface User {
+  _id: number
+  firstName: string
+  lastName: string
+}
+
+vi.mock('../makeMergedSchema', () => {
   const { makeExecutableSchema } = require('@graphql-tools/schema')
   // Return executable schema
   return {
@@ -27,26 +34,26 @@ jest.mock('../makeMergedSchema', () => {
         `,
         resolvers: {
           Query: {
-            me: () => {
+            me: (): User => {
               return { _id: 1, firstName: 'Ba', lastName: 'Zinga' }
             },
             forbiddenUser: () => {
               throw Error('You are forbidden')
             },
-            getUser: (id) => {
+            getUser: (id: number) => {
               return { id, firstName: 'Ba', lastName: 'Zinga' }
             },
           },
           User: {
-            id: (u) => u._id,
-            name: (u) => `${u.firstName} ${u.lastName}`,
+            id: (u: User) => u._id,
+            name: (u: User) => `${u.firstName} ${u.lastName}`,
           },
         },
       }),
   }
 })
 
-jest.mock('../directives/makeDirectives', () => {
+vi.mock('../directives/makeDirectives', () => {
   return {
     makeDirectivesForPlugin: () => [],
   }

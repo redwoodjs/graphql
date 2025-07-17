@@ -1,12 +1,16 @@
 {
   "extends": "../../tsconfig.compilerOption.json",
   "compilerOptions": {
-    "rootDir": "src",
     "emitDeclarationOnly": false,
     "noEmit": true,
     "module": "Node16",
-    "moduleResolution": "Node16"
+    "moduleResolution": "Node16",
+    "rootDir": "."
   },
   "include": ["src", "./testUtils.d.ts"],
-  "exclude": ["**/__testfixtures__"]
+  "exclude": ["**/__testfixtures__", "**/__tests__"],
+  "references": [
+    { "path": "../framework-tools" },
+    { "path": "../project-config" }
+  ]
 }

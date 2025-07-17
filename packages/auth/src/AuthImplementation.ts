@@ -53,8 +53,14 @@ export interface AuthImplementation<
    */
   loadWhileReauthenticating?: boolean
 
-  // This property is either manually set by the user, or inferred from the experimental.streamingSsr setting in TOML
+  /**
+   * This property is either manually set by the user, or inferred from the
+   * experimental.streamingSsr setting in TOML
+   */
   middlewareAuthEnabled?: boolean
-  // This is the endpoint on the middleware we are going to hit for POST requests
+  /**
+   * This is the endpoint on the middleware we are going to hit for POST
+   * requests
+   */
   getAuthUrl?: () => string
 }

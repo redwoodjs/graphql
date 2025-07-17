@@ -22,19 +22,19 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@babel/core": "^7.22.20",
-    "@babel/parser": "^7.22.16",
-    "@babel/plugin-transform-class-properties": "^7.22.5",
-    "@babel/plugin-transform-private-methods": "^7.22.5",
-    "@babel/plugin-transform-private-property-in-object": "^7.22.11",
-    "@babel/plugin-transform-react-jsx": "^7.22.15",
-    "@babel/plugin-transform-runtime": "7.25.7",
-    "@babel/preset-env": "^7.22.20",
-    "@babel/preset-react": "^7.22.15",
-    "@babel/preset-typescript": "^7.22.15",
-    "@babel/register": "^7.22.15",
-    "@babel/runtime-corejs3": "7.25.7",
-    "@babel/traverse": "^7.22.20",
+    "@babel/core": "^7.26.10",
+    "@babel/parser": "7.26.10",
+    "@babel/plugin-transform-class-properties": "7.25.9",
+    "@babel/plugin-transform-private-methods": "7.25.9",
+    "@babel/plugin-transform-private-property-in-object": "7.25.9",
+    "@babel/plugin-transform-react-jsx": "7.25.9",
+    "@babel/plugin-transform-runtime": "7.26.10",
+    "@babel/preset-env": "7.26.9",
+    "@babel/preset-react": "7.26.3",
+    "@babel/preset-typescript": "7.26.0",
+    "@babel/register": "7.25.9",
+    "@babel/runtime-corejs3": "7.26.10",
+    "@babel/traverse": "7.26.10",
     "@redwoodjs/project-config": "workspace:*",
     "babel-plugin-auto-import": "1.1.0",
     "babel-plugin-graphql-tag": "3.3.0",
@@ -51,7 +51,7 @@
     "@types/node": "20.17.10",
     "babel-plugin-tester": "11.0.4",
     "tsx": "4.19.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

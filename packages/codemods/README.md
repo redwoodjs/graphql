@@ -18,13 +18,13 @@ This package contains codemods that automate upgrading a Redwood project.
 
 Listing available codemods:
 
-```
+```shell
 npx @redwoodjs/codemods list v0.38.x
 ```
 
 Applying a single one:
 
-```
+```shell
 npx @redwoodjs/codemods add-directives
 ```
 
@@ -44,7 +44,7 @@ The parser jscodeshift uses, [recast](https://github.com/benjamn/recast), knows 
 
 ### Generating a new Codemod
 
-```
+```shell
 cd packages/codemods
 yarn generate:codemod
 ```
@@ -172,9 +172,9 @@ But sometimes you'll just have to use one of the more generic methods: `replaceW
 
 Although jscodeshift has a built-in way of doing testing, we have a slightly different way of testing.
 
-There's 3 key test utils you need to be aware of (located in [packages/codemods/testUtils/index.ts](https://github.com/redwoodjs/redwood/blob/main/packages/codemods/testUtils/index.ts)).
+There are 3 key test utils you need to be aware of (located in [packages/codemods/testUtils/index.ts](https://github.com/redwoodjs/redwood/blob/main/packages/codemods/testUtils/index.ts)).
 
-1. `matchTransformSnapshot`—this lets you give it a transformName (i.e. the transform you're writing), and a fixtureName. The fixtures should be located in `__testfixtures__`, and have `{fixtureName}.input.{js,ts}` and `{fixtureName}.output.{js,ts} files.
+1. `matchTransformSnapshot`—this lets you give it a transformName (i.e. the transform you're writing), and a fixtureName. The fixtures should be located in `__testfixtures__`, and have `{fixtureName}.input.{js,ts}` and `{fixtureName}.output.{js,ts}` files.
 
 Note that the fixtureName can be anything you want, and you can have multiple fixtures.
 
@@ -259,15 +259,15 @@ RWJS_CWD=/path/to/rw-project node "./packages/codemods/dist/codemods.js" {your-c
 If you have a node and want to see/confirm what you're working with you can
 pass it to jscodeshift and then call `.toSource()` on it.
 
-** Example **
+**Example**
 
-```
+```js
 const j = api.jscodeshift
 const root = j(file.source)
 
 const graphQLClientConfig = j.jsxAttribute(
   j.jsxIdentifier('graphQLClientConfig'),
-  j.jsxExpressionContainer(j.objectExpression([]))
+  j.jsxExpressionContainer(j.objectExpression([])),
 )
 
 console.log('graphQLClientConfig prop', j(graphQLClientConfig).toSource())
@@ -278,9 +278,9 @@ console.log('graphQLClientConfig prop', j(graphQLClientConfig).toSource())
 If you have a collection of nodes you first need to get just one of the
 collection items, and then get the node out of that.
 
-** Example **
+**Example**
 
-```
+```js
 const j = api.jscodeshift
 const root = j(file.source)
 
@@ -288,7 +288,7 @@ const redwoodApolloProvider = root.findJSXElements('RedwoodApolloProvider')
 
 console.log(
   '<RedwoodApolloProvider>',
-  j(redwoodApolloProvider.get(0).node).toSource()
+  j(redwoodApolloProvider.get(0).node).toSource(),
 )
 // Will log:
 // <RedwoodApolloProvider useAuth={useAuth}>

@@ -24,12 +24,12 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@babel/cli": "7.25.7",
-    "@babel/core": "^7.22.20",
-    "@babel/parser": "^7.22.16",
-    "@babel/plugin-transform-typescript": "^7.22.15",
-    "@babel/runtime-corejs3": "7.25.7",
-    "@babel/traverse": "^7.22.20",
+    "@babel/cli": "7.26.4",
+    "@babel/core": "^7.26.10",
+    "@babel/parser": "7.26.10",
+    "@babel/plugin-transform-typescript": "^7.26.8",
+    "@babel/runtime-corejs3": "7.26.10",
+    "@babel/traverse": "7.26.10",
     "@redwoodjs/project-config": "workspace:*",
     "@svgr/core": "8.1.0",
     "@svgr/plugin-jsx": "8.1.0",
@@ -58,7 +58,7 @@
     "publint": "0.2.12",
     "tempy": "1.0.1",
     "tsx": "4.19.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

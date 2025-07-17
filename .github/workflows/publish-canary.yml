@@ -19,7 +19,7 @@ permissions: {}
 jobs:
   publish-canary:
     name: 🦜 Publish Canary
-    if: github.repository == 'redwoodjs/redwood'
+    if: github.repository == 'redwoodjs/graphql'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-version.outputs.value }}

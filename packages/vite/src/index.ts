@@ -60,6 +60,17 @@ export default function redwoodPluginVite(): PluginOption[] {
   }
 
   return [
+    // Only include the Buffer polyfill for non-rsc dev, for DevFatalErrorPage
+    // Including the polyfill plugin in any form in RSC breaks
+    !rscEnabled && {
+      ...nodePolyfills({
+        include: ['buffer'],
+        globals: {
+          Buffer: true,
+        },
+      }),
+      apply: 'serve',
+    },
     {
       name: 'redwood-plugin-vite-html-env',
 
@@ -173,16 +184,5 @@ export default function redwoodPluginVite(): PluginOption[] {
     react({
       babel: babelConfig,
     }),
-    // Only include the Buffer polyfill for non-rsc dev, for DevFatalErrorPage
-    // Including the polyfill plugin in any form in RSC breaks
-    !rscEnabled && {
-      ...nodePolyfills({
-        include: ['buffer'],
-        globals: {
-          Buffer: true,
-        },
-      }),
-      apply: 'serve',
-    },
   ]
 }

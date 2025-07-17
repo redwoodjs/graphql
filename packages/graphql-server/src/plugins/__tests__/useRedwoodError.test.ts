@@ -1,5 +1,6 @@
 import type { APIGatewayProxyEvent, Context } from 'aws-lambda'
 import { CurrencyDefinition, CurrencyResolver } from 'graphql-scalars'
+import { vi, describe, expect, it } from 'vitest'
 
 import type {
   RedwoodError as RedwoodErrorType,
@@ -9,7 +10,7 @@ import { createLogger } from '@redwoodjs/api/logger'
 
 import { createGraphQLHandler } from '../../functions/graphql'
 
-jest.mock('../../makeMergedSchema', () => {
+vi.mock('../../makeMergedSchema', () => {
   const { createGraphQLError } = require('graphql-yoga')
   const { makeExecutableSchema } = require('@graphql-tools/schema')
   const {
@@ -128,7 +129,7 @@ jest.mock('../../makeMergedSchema', () => {
   }
 })
 
-jest.mock('../../directives/makeDirectives', () => {
+vi.mock('../../directives/makeDirectives', () => {
   return {
     makeDirectivesForPlugin: () => [],
   }

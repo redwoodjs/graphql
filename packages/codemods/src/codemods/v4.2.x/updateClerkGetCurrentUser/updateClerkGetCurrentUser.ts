@@ -1,4 +1,4 @@
-import type { FileInfo, API, ObjectExpression } from 'jscodeshift'
+import type { FileInfo, API } from 'jscodeshift'
 
 const newReturn = `userWithoutPrivateMetadata`
 const destructureStatement = `const { privateMetadata, ...${newReturn} } = decoded`
@@ -54,14 +54,22 @@ export default function transform(file: FileInfo, api: API) {
       },
     })
     .replaceWith((path) => {
-      const properties = (
-        path.value.argument as ObjectExpression
-      ).properties.filter(
-        (property) =>
-          property.type !== 'SpreadElement' && property.name !== 'decoded',
-      )
+      if (path.value.argument?.type !== 'ObjectExpression') {
+        return path.value
+      }
 
-      properties.push(j.spreadElement(j.identifier(newReturn)))
+      // Filter out the spread element with 'decoded'
+      const properties = path.value.argument.properties.filter((property) => {
+        return !(
+          property.type === 'SpreadElement' &&
+          property.argument.type === 'Identifier' &&
+          property.argument.name === 'decoded'
+        )
+      })
+
+      // Create a new spread element with the new name
+      const spreadElement = j.spreadProperty(j.identifier(newReturn))
+      properties.push(spreadElement)
 
       return j.returnStatement(j.objectExpression(properties))
     })

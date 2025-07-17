@@ -36,6 +36,14 @@ const config: Config = {
       searchParameters: {},
       // externalUrlRegex: 'https://learn-redwood.netlify.app',
     },
+    announcementBar: {
+      id: 'sdk_announcement',
+      content:
+        '<a target="_blank" rel="noopener noreferrer" href="https://rwsdk.com" style="font-weight: bold;">RedwoodSDK is now available!</a>',
+      backgroundColor: '#c4f482',
+      textColor: '#000000',
+      isCloseable: false,
+    },
     navbar: {
       title: 'RedwoodJS',
       logo: {

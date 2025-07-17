@@ -371,10 +371,18 @@ describe('api prebuild ', () => {
     })
 
     it('includes source maps', () => {
-      const sourceMaps = code.split('\n').pop() as string
+      const sourceMaps = code.split('\n').pop()
 
+      if (!sourceMaps) {
+        fail('Source maps not found')
+      }
+
+      // We need to break this up like this to not make Vitest match on this in
+      // their own source map regex
+      // https://github.com/vitest-dev/vitest/blob/938da77ee063748cfb12a7f302d2efcef249cf1f/packages/vite-node/src/source-map.ts#L11
       const sourceMapsMatcher =
-        '//# sourceMappingURL=data:application/json;charset=utf-8;base64,'
+        `//# sourceMa${''}ppingURL=` +
+        'data:application/json;charset=utf-8;base64,'
 
       expect(sourceMaps).toMatch(sourceMapsMatcher)
 

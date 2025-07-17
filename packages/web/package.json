@@ -142,7 +142,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.11.1",
-    "@babel/runtime-corejs3": "7.25.7",
+    "@babel/runtime-corejs3": "7.26.10",
     "@redwoodjs/auth": "workspace:*",
     "@redwoodjs/server-store": "workspace:*",
     "@whatwg-node/fetch": "0.9.21",
@@ -160,9 +160,9 @@
   "devDependencies": {
     "@apollo/client-react-streaming": "0.10.0",
     "@arethetypeswrong/cli": "0.16.4",
-    "@babel/cli": "7.25.7",
-    "@babel/core": "^7.22.20",
-    "@babel/plugin-transform-runtime": "7.25.7",
+    "@babel/cli": "7.26.4",
+    "@babel/core": "^7.26.10",
+    "@babel/plugin-transform-runtime": "7.26.10",
     "@babel/runtime": "7.25.7",
     "@redwoodjs/framework-tools": "workspace:*",
     "@redwoodjs/internal": "workspace:*",
@@ -180,7 +180,7 @@
     "tstyche": "3.0.0",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "peerDependencies": {
     "react": "19.0.0-rc-f2df5694-20240916",

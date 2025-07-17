@@ -27,14 +27,16 @@
     "@redwoodjs/telemetry": "workspace:*",
     "chalk": "4.1.2",
     "execa": "5.1.1",
-    "storybook": "7.6.17",
+    "semver": "7.6.3",
+    "storybook": "7.6.20",
     "storybook-framework-redwoodjs-vite": "workspace:*",
     "terminal-link": "2.1.1",
-    "vitest": "2.0.5",
+    "vitest": "2.1.9",
     "yargs": "17.7.2"
   },
   "devDependencies": {
     "@redwoodjs/framework-tools": "workspace:*",
+    "@types/semver": "^7",
     "@types/yargs": "17.0.33",
     "tsx": "4.19.2",
     "typescript": "5.6.2"
