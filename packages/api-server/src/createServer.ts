@@ -67,7 +67,6 @@ export async function createServer(options: CreateServerOptions = {}) {
   const {
     apiRootPath,
     fastifyServerOptions,
-    discoverFunctionsGlob,
     configureApiServer,
     apiPort,
     apiHost,
@@ -120,7 +119,6 @@ export async function createServer(options: CreateServerOptions = {}) {
       fastGlobOptions: {
         ignore: ['**/dist/functions/graphql.js'],
       },
-      discoverFunctionsGlob,
       configureServer: configureApiServer,
     },
   })
