@@ -193,6 +193,11 @@
               "type": "doc",
               "label": "Vercel",
               "id": "deploy/vercel"
+            },
+            {
+              "type": "doc",
+              "label": "CloudRay",
+              "id": "deploy/cloudray"
             }
           ]
         },

@@ -82,4 +82,55 @@ describe('loadFunctionsFromDist', () => {
       'does not have a function called handler defined.',
     )
   })
+
+  describe('when "discoverFunctionsGlob" is set', () => {
+    it('loads the same functions as the default value', async () => {
+      expect(LAMBDA_FUNCTIONS).toEqual({})
+
+      await loadFunctionsFromDist({
+        discoverFunctionsGlob: ['dist/functions/**/*.{ts,js}'],
+      })
+
+      expect(LAMBDA_FUNCTIONS).toEqual({
+        env: expect.any(Function),
+        graphql: expect.any(Function),
+        health: expect.any(Function),
+        hello: expect.any(Function),
+        nested: expect.any(Function),
+      })
+    })
+
+    it('loads functions when discoverFunctionsGlob is an array', async () => {
+      expect(LAMBDA_FUNCTIONS).toEqual({})
+
+      await loadFunctionsFromDist({
+        discoverFunctionsGlob: ['dist/functions/**/*.{ts,js}'],
+      })
+
+      expect(LAMBDA_FUNCTIONS).toEqual({
+        env: expect.any(Function),
+        graphql: expect.any(Function),
+        health: expect.any(Function),
+        hello: expect.any(Function),
+        nested: expect.any(Function),
+      })
+    })
+
+    it('loads functions when discoverFunctionsGlob has include and exclude values', async () => {
+      expect(LAMBDA_FUNCTIONS).toEqual({})
+
+      await loadFunctionsFromDist({
+        discoverFunctionsGlob: [
+          'dist/functions/**/*.{ts,js}',
+          '!dist/functions/**/he*.{ts,js}',
+        ],
+      })
+
+      expect(LAMBDA_FUNCTIONS).toEqual({
+        env: expect.any(Function),
+        graphql: expect.any(Function),
+        nested: expect.any(Function),
+      })
+    })
+  })
 })

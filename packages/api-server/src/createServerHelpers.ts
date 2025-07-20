@@ -71,7 +71,7 @@ export const getDefaultCreateServerOptions: () => DefaultCreateServerOptions =
     apiPort: getAPIPort(),
   })
 
-type ResolvedOptions = Required<
+export type ResolvedOptions = Required<
   Omit<CreateServerOptions, 'logger' | 'fastifyServerOptions' | 'parseArgs'> & {
     fastifyServerOptions: FastifyServerOptions
   }

@@ -16,6 +16,7 @@ import type { MockInstance } from 'vitest'
 import { getConfig } from '@redwoodjs/project-config'
 
 import type { createServer as tCreateServer } from '../createServer.js'
+import type { ResolvedOptions } from '../createServerHelpers'
 import {
   resolveOptions,
   getDefaultCreateServerOptions,
@@ -234,9 +235,11 @@ describe('resolveOptions', () => {
         logger: defaults.logger,
         bodyLimit: defaults.fastifyServerOptions.bodyLimit,
       },
+      discoverFunctionsGlob:
+        DEFAULT_CREATE_SERVER_OPTIONS.discoverFunctionsGlob,
       apiPort: 65501,
       apiHost: '::',
-    })
+    } as ResolvedOptions)
   })
 
   it('ensures `apiRootPath` has slashes', () => {
