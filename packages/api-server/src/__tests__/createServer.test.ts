@@ -18,7 +18,7 @@ import { getConfig } from '@redwoodjs/project-config'
 import type { createServer as tCreateServer } from '../createServer.js'
 import {
   resolveOptions,
-  DEFAULT_CREATE_SERVER_OPTIONS,
+  getDefaultCreateServerOptions,
 } from '../createServerHelpers'
 
 // Set up RWJS_CWD.
@@ -224,15 +224,15 @@ describe('createServer', () => {
 describe('resolveOptions', () => {
   it('nothing passed', () => {
     const resolvedOptions = resolveOptions()
+    const defaults = getDefaultCreateServerOptions()
 
     expect(resolvedOptions).toEqual({
-      apiRootPath: DEFAULT_CREATE_SERVER_OPTIONS.apiRootPath,
-      configureApiServer: DEFAULT_CREATE_SERVER_OPTIONS.configureApiServer,
+      apiRootPath: defaults.apiRootPath,
+      configureApiServer: defaults.configureApiServer,
       fastifyServerOptions: {
-        requestTimeout:
-          DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout,
-        logger: DEFAULT_CREATE_SERVER_OPTIONS.logger,
-        bodyLimit: DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.bodyLimit,
+        requestTimeout: defaults.fastifyServerOptions.requestTimeout,
+        logger: defaults.logger,
+        bodyLimit: defaults.fastifyServerOptions.bodyLimit,
       },
       apiPort: 65501,
       apiHost: '::',
@@ -299,7 +299,7 @@ describe('resolveOptions', () => {
 
     expect(resolvedOptions).toMatchObject({
       fastifyServerOptions: {
-        logger: DEFAULT_CREATE_SERVER_OPTIONS.logger,
+        logger: getDefaultCreateServerOptions().logger,
       },
     })
   })

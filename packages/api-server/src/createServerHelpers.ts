@@ -17,15 +17,14 @@ export interface Server extends FastifyInstance {
 }
 
 export interface CreateServerOptions {
-  /**
-   * The prefix for all routes. Defaults to `/`.
-   */
+  /** The prefix for all routes. Defaults to `/` */
   apiRootPath?: string
 
-  /**
-   * Logger instance or options.
-   */
-  logger?: FastifyServerOptions['logger']
+  // TODO: This should probably be split, to match Fastify's way of doing things
+  /** Logger instance or options */
+  logger?:
+    | FastifyServerOptions['logger']
+    | FastifyServerOptions['loggerInstance']
 
   /**
    * Options for the fastify server instance.
@@ -33,15 +32,17 @@ export interface CreateServerOptions {
    */
   fastifyServerOptions?: Omit<FastifyServerOptions, 'logger'>
 
-  /**
-   * Customise the API server fastify plugin before it is registered
-   */
+  /** Customise the API server fastify plugin before it is registered */
   configureApiServer?: (server: Server) => void | Promise<void>
 
-  /**
-   * Whether to parse args or not. Defaults to `true`.
-   */
+  /** Whether to parse args or not. Defaults to `true` */
   parseArgs?: boolean
+
+  /** The port to listen on. Defaults to what's configured in redwood.toml */
+  apiPort?: number
+
+  /** The host to bind to. Defaults to what's configured in redwood.toml */
+  apiHost?: string
 }
 
 type DefaultCreateServerOptions = Required<
@@ -50,28 +51,39 @@ type DefaultCreateServerOptions = Required<
   }
 >
 
-export const DEFAULT_CREATE_SERVER_OPTIONS: DefaultCreateServerOptions = {
-  apiRootPath: '/',
-  logger: {
-    level:
-      process.env.LOG_LEVEL ??
-      (process.env.NODE_ENV === 'development' ? 'debug' : 'warn'),
-  },
-  fastifyServerOptions: {
-    requestTimeout: 15_000,
-    bodyLimit: 1024 * 1024 * 100, // 100MB
-  },
-  configureApiServer: () => {},
-  parseArgs: true,
-}
+// This is a function instead of just a constant so that we don't execute
+// getAPIHost and getAPIPort just by importing this file.
+export const getDefaultCreateServerOptions: () => DefaultCreateServerOptions =
+  () => ({
+    apiRootPath: '/',
+    logger: {
+      level:
+        process.env.LOG_LEVEL ??
+        (process.env.NODE_ENV === 'development' ? 'debug' : 'warn'),
+    },
+    fastifyServerOptions: {
+      requestTimeout: 15_000,
+      bodyLimit: 1024 * 1024 * 100, // 100MB
+    },
+    configureApiServer: () => {},
+    parseArgs: true,
+    apiHost: getAPIHost(),
+    apiPort: getAPIPort(),
+  })
 
 type ResolvedOptions = Required<
   Omit<CreateServerOptions, 'logger' | 'fastifyServerOptions' | 'parseArgs'> & {
     fastifyServerOptions: FastifyServerOptions
-    apiPort: number
-    apiHost: string
   }
 >
+
+function isCustomLoggerInstance(
+  logger:
+    | FastifyServerOptions['logger']
+    | FastifyServerOptions['loggerInstance'],
+): logger is FastifyServerOptions['loggerInstance'] {
+  return !!logger && typeof logger === 'object' && 'info' in logger
+}
 
 export function resolveOptions(
   options: CreateServerOptions = {},
@@ -79,41 +91,32 @@ export function resolveOptions(
 ) {
   options.parseArgs ??= true
 
-  options.logger ??= DEFAULT_CREATE_SERVER_OPTIONS.logger
+  const defaults = getDefaultCreateServerOptions()
+  const logger = options.logger ?? defaults.logger
 
   // Set defaults.
   const resolvedOptions: ResolvedOptions = {
-    apiRootPath:
-      options.apiRootPath ?? DEFAULT_CREATE_SERVER_OPTIONS.apiRootPath,
+    apiRootPath: options.apiRootPath ?? defaults.apiRootPath,
 
     fastifyServerOptions: options.fastifyServerOptions ?? {
-      requestTimeout:
-        DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout,
-      bodyLimit: DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.bodyLimit,
+      requestTimeout: defaults.fastifyServerOptions.requestTimeout,
+      bodyLimit: defaults.fastifyServerOptions.bodyLimit,
     },
     configureApiServer:
-      options.configureApiServer ??
-      DEFAULT_CREATE_SERVER_OPTIONS.configureApiServer,
-    apiHost: getAPIHost(),
-    apiPort: getAPIPort(),
+      options.configureApiServer ?? defaults.configureApiServer,
+    apiHost: options.apiHost ?? defaults.apiHost,
+    apiPort: options.apiPort ?? defaults.apiPort,
   }
 
   // Merge fastifyServerOptions.
+
   resolvedOptions.fastifyServerOptions.requestTimeout ??=
-    DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout
+    defaults.fastifyServerOptions.requestTimeout
 
-  // Fastify v5: Custom logger instances use 'loggerInstance', config uses 'logger'
-  const isCustomLoggerInstance =
-    options.logger &&
-    typeof options.logger === 'object' &&
-    'info' in options.logger
-
-  if (isCustomLoggerInstance) {
-    ;(resolvedOptions.fastifyServerOptions as any).loggerInstance =
-      options.logger
+  if (isCustomLoggerInstance(logger)) {
+    resolvedOptions.fastifyServerOptions.loggerInstance = logger
   } else {
-    resolvedOptions.fastifyServerOptions.logger =
-      options.logger ?? DEFAULT_CREATE_SERVER_OPTIONS.logger
+    resolvedOptions.fastifyServerOptions.logger = logger
   }
 
   if (options.parseArgs) {
