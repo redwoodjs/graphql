@@ -27326,7 +27326,8 @@ __metadata:
   linkType: hard
 
 "set-function-length@npm:^1.2.1":
-  version: 1.2.1
+  version: 1.2.2
+  resolution: "set-function-length@npm:1.2.1"
   dependencies:
     define-data-property: "npm:^1.1.4"
     es-errors: "npm:^1.3.0"
