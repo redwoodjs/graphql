@@ -1,0 +1,330 @@
+{
+  "main": [
+    "introduction",
+    "quick-start",
+    {
+      "type": "category",
+      "label": "Tutorial",
+      "items": [
+        {
+          "type": "doc",
+          "label": "Foreword",
+          "id": "tutorial/foreword"
+        },
+        {
+          "Chapter 0": [
+            "tutorial/chapter0/what-is-redwood"
+          ]
+        },
+        {
+          "Chapter 1": [
+            "tutorial/chapter1/prerequisites",
+            "tutorial/chapter1/installation",
+            "tutorial/chapter1/file-structure",
+            "tutorial/chapter1/first-page",
+            "tutorial/chapter1/second-page",
+            "tutorial/chapter1/layouts"
+          ]
+        },
+        {
+          "Chapter 2": [
+            "tutorial/chapter2/getting-dynamic",
+            "tutorial/chapter2/cells",
+            "tutorial/chapter2/side-quest",
+            "tutorial/chapter2/routing-params"
+          ]
+        },
+        {
+          "Chapter 3": [
+            "tutorial/chapter3/forms",
+            "tutorial/chapter3/saving-data"
+          ]
+        },
+        {
+          "Chapter 4": [
+            "tutorial/chapter4/authentication",
+            "tutorial/chapter4/deployment"
+          ]
+        },
+        "tutorial/intermission",
+        {
+          "Chapter 5": [
+            "tutorial/chapter5/storybook",
+            "tutorial/chapter5/first-story",
+            "tutorial/chapter5/testing",
+            "tutorial/chapter5/first-test"
+          ]
+        },
+        {
+          "Chapter 6": [
+            "tutorial/chapter6/the-redwood-way",
+            "tutorial/chapter6/multiple-comments",
+            "tutorial/chapter6/comments-schema",
+            "tutorial/chapter6/comment-form"
+          ]
+        },
+        {
+          "Chapter 7": [
+            "tutorial/chapter7/rbac",
+            "tutorial/chapter7/api-side-currentuser"
+          ]
+        },
+        "tutorial/afterword"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Reference",
+      "link": {
+        "type": "generated-index",
+        "title": "Reference",
+        "slug": "/index"
+      },
+      "items": [
+        "a11y",
+        "app-configuration-redwood-toml",
+        "assets-and-files",
+        {
+          "type": "category",
+          "label": "Authentication",
+          "link": {
+            "type": "doc",
+            "id": "authentication"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "id": "auth/dbauth"
+            },
+            {
+              "type": "doc",
+              "id": "auth/auth0"
+            },
+            {
+              "type": "doc",
+              "id": "auth/azure"
+            },
+            {
+              "type": "doc",
+              "id": "auth/clerk"
+            },
+            {
+              "type": "doc",
+              "id": "auth/custom"
+            },
+            {
+              "type": "doc",
+              "id": "auth/firebase"
+            },
+            {
+              "type": "doc",
+              "id": "auth/netlify"
+            },
+            {
+              "type": "doc",
+              "id": "auth/supabase"
+            },
+            {
+              "type": "doc",
+              "id": "auth/supertokens"
+            }
+          ]
+        },
+        "background-jobs",
+        "builds",
+        "cells",
+        "cli-commands",
+        "connection-pooling",
+        "contributing-overview",
+        "contributing-walkthrough",
+        "cors",
+        "create-redwood-app",
+        "data-migrations",
+        {
+          "type": "category",
+          "label": "Deployment",
+          "link": {
+            "type": "generated-index",
+            "title": "Deployment",
+            "slug": "deployment/index"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "label": "Introduction",
+              "id": "deploy/introduction"
+            },
+            {
+              "type": "doc",
+              "label": "Baremetal",
+              "id": "deploy/baremetal"
+            },
+            {
+              "type": "doc",
+              "label": "GCP or AWS via Coherence",
+              "id": "deploy/coherence"
+            },
+            {
+              "type": "doc",
+              "label": "AWS via Flightcontrol",
+              "id": "deploy/flightcontrol"
+            },
+            {
+              "type": "doc",
+              "label": "Edgio",
+              "id": "deploy/edgio"
+            },
+            {
+              "type": "doc",
+              "label": "Netlify",
+              "id": "deploy/netlify"
+            },
+            {
+              "type": "doc",
+              "label": "Render",
+              "id": "deploy/render"
+            },
+            {
+              "type": "doc",
+              "label": "Serverless Framework",
+              "id": "deploy/serverless"
+            },
+            {
+              "type": "doc",
+              "label": "Vercel",
+              "id": "deploy/vercel"
+            }
+          ]
+        },
+        "database-seeds",
+        "directives",
+        "docker",
+        "environment-variables",
+        "forms",
+        {
+          "type": "category",
+          "label": "GraphQL",
+          "link": {
+            "type": "generated-index",
+            "title": "GraphQL",
+            "slug": "graphql/index"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "label": "About",
+              "id": "graphql"
+            },
+            {
+              "type": "doc",
+              "label": "Caching",
+              "id": "graphql/caching"
+            },
+            {
+              "type": "doc",
+              "label": "Fragments",
+              "id": "graphql/fragments"
+            },
+            {
+              "type": "doc",
+              "label": "Trusted Documents",
+              "id": "graphql/trusted-documents"
+            },
+            {
+              "type": "doc",
+              "label": "Mocking GraphQL Requests",
+              "id": "graphql/mocking-graphql-requests"
+            },
+            {
+              "type": "doc",
+              "label": "Realtime",
+              "id": "graphql/realtime"
+            }
+          ]
+        },
+        "local-postgres-setup",
+        "logger",
+        "mailer",
+        {
+          "type": "category",
+          "label": "Monitoring",
+          "link": {
+            "type": "generated-index",
+            "title": "Monitoring",
+            "slug": "monitoring/index"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "label": "Sentry",
+              "id": "monitoring/sentry"
+            }
+          ]
+        },
+        "prerender",
+        "project-configuration-dev-test-build",
+        "redwoodrecord",
+        "realtime",
+        "router",
+        "schema-relations",
+        "security",
+        "seo-head",
+        "server-file",
+        "serverless-functions",
+        "services",
+        "storybook",
+        "studio",
+        "testing",
+        "toast-notifications",
+        {
+          "type": "category",
+          "label": "TypeScript",
+          "link": {
+            "type": "generated-index",
+            "title": "TypeScript",
+            "slug": "typescript/index"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "label": "Introduction",
+              "id": "typescript/introduction"
+            },
+            {
+              "type": "doc",
+              "id": "typescript/generated-types"
+            },
+            {
+              "type": "doc",
+              "label": "Utility Types",
+              "id": "typescript/utility-types"
+            },
+            {
+              "type": "doc",
+              "label": "Strict Mode",
+              "id": "typescript/strict-mode"
+            }
+          ]
+        },
+        "webhooks",
+        "uploads",
+        "vite-configuration"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "How To",
+      "link": {
+        "type": "generated-index",
+        "title": "How To",
+        "slug": "/how-to/index"
+      },
+      "items": [
+        {
+          "type": "autogenerated",
+          "dirName": "how-to"
+        }
+      ]
+    }
+  ]
+}
