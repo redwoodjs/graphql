@@ -1,6 +1,6 @@
 import path from 'path'
 
-import pino from 'pino'
+import pino from 'pino/pino'
 import build from 'pino-abstract-transport'
 import {
   vi,
@@ -19,7 +19,7 @@ import type { createServer as tCreateServer } from '../createServer.js'
 import type { ResolvedOptions } from '../createServerHelpers'
 import {
   resolveOptions,
-  DEFAULT_CREATE_SERVER_OPTIONS,
+  getDefaultCreateServerOptions,
 } from '../createServerHelpers'
 
 // Set up RWJS_CWD.
@@ -161,7 +161,6 @@ describe('createServer', () => {
       level: 30,
       msg: 'incoming request',
       req: {
-        hostname: 'localhost:80',
         method: 'GET',
         remoteAddress: '127.0.0.1',
         url: '/hello',
@@ -226,18 +225,16 @@ describe('createServer', () => {
 describe('resolveOptions', () => {
   it('nothing passed', () => {
     const resolvedOptions = resolveOptions()
+    const defaults = getDefaultCreateServerOptions()
 
     expect(resolvedOptions).toEqual({
-      apiRootPath: DEFAULT_CREATE_SERVER_OPTIONS.apiRootPath,
-      configureApiServer: DEFAULT_CREATE_SERVER_OPTIONS.configureApiServer,
+      apiRootPath: defaults.apiRootPath,
+      configureApiServer: defaults.configureApiServer,
       fastifyServerOptions: {
-        requestTimeout:
-          DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.requestTimeout,
-        logger: DEFAULT_CREATE_SERVER_OPTIONS.logger,
-        bodyLimit: DEFAULT_CREATE_SERVER_OPTIONS.fastifyServerOptions.bodyLimit,
+        requestTimeout: defaults.fastifyServerOptions.requestTimeout,
+        logger: defaults.logger,
+        bodyLimit: defaults.fastifyServerOptions.bodyLimit,
       },
-      discoverFunctionsGlob:
-        DEFAULT_CREATE_SERVER_OPTIONS.discoverFunctionsGlob,
       apiPort: 65501,
       apiHost: '::',
     } as ResolvedOptions)
@@ -303,7 +300,7 @@ describe('resolveOptions', () => {
 
     expect(resolvedOptions).toMatchObject({
       fastifyServerOptions: {
-        logger: DEFAULT_CREATE_SERVER_OPTIONS.logger,
+        logger: getDefaultCreateServerOptions().logger,
       },
     })
   })
