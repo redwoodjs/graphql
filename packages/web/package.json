@@ -141,7 +141,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@apollo/client": "3.11.1",
+    "@apollo/client": "3.13.9",
     "@babel/runtime-corejs3": "7.26.10",
     "@redwoodjs/auth": "workspace:*",
     "@redwoodjs/server-store": "workspace:*",
@@ -158,7 +158,7 @@
     "ts-toolbelt": "9.6.0"
   },
   "devDependencies": {
-    "@apollo/client-react-streaming": "0.10.0",
+    "@apollo/client-react-streaming": "0.12.3",
     "@arethetypeswrong/cli": "0.16.4",
     "@babel/cli": "7.26.4",
     "@babel/core": "^7.26.10",
