@@ -63,7 +63,7 @@
     "prettier-plugin-curly": "^0.3.0",
     "prettier-plugin-packagejson": "^2.5.1",
     "prettier-plugin-sh": "^0.14.0",
-    "publint": "^0.2.9",
+    "publint": "^0.3.0",
     "rimraf": "^6.0.1",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",

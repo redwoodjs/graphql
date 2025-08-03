@@ -38,7 +38,7 @@
     "@prisma/internals": "5.20.0",
     "@redwoodjs/framework-tools": "workspace:*",
     "esbuild": "0.24.2",
-    "publint": "0.2.12",
+    "publint": "0.3.12",
     "tsx": "4.19.2",
     "vitest": "2.1.9"
   },

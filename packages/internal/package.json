@@ -120,7 +120,7 @@
     "@types/fs-extra": "11.0.4",
     "concurrently": "8.2.2",
     "graphql-tag": "2.12.6",
-    "publint": "0.2.12",
+    "publint": "0.3.12",
     "tsx": "4.19.2",
     "vitest": "2.1.9"
   },
