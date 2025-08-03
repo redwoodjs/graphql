@@ -88,7 +88,7 @@
   },
   "dependencies": {
     "core-js": "3.38.1",
-    "react": "19.0.0-rc-f2df5694-20240916"
+    "react": "19.1.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",

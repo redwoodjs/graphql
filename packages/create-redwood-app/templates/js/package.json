@@ -23,6 +23,6 @@
   "packageManager": "yarn@4.6.0",
   "resolutions": {
     "@storybook/react-dom-shim@npm:7.6.20": "https://verdaccio.tobbe.dev/@storybook/react-dom-shim/-/react-dom-shim-8.0.8.tgz",
-    "react-is": "19.0.0-rc-f2df5694-20240916"
+    "react-is": "19.1.1"
   }
 }
