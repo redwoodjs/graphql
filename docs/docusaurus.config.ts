@@ -150,6 +150,10 @@ const config: Config = {
     'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;900&display=swap',
   ],
+  future: {
+    v4: true, // opt-in for Docusaurus v4 planned changes
+    experimental_faster: true, // turns Docusaurus Faster on globally
+  },
 }
 
 export default config
