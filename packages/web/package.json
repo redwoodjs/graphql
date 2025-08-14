@@ -141,7 +141,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@apollo/client": "3.11.1",
+    "@apollo/client": "3.13.9",
     "@babel/runtime-corejs3": "7.26.10",
     "@redwoodjs/auth": "workspace:*",
     "@redwoodjs/server-store": "workspace:*",
@@ -158,7 +158,7 @@
     "ts-toolbelt": "9.6.0"
   },
   "devDependencies": {
-    "@apollo/client-react-streaming": "0.10.0",
+    "@apollo/client-react-streaming": "0.12.3",
     "@arethetypeswrong/cli": "0.16.4",
     "@babel/cli": "7.26.4",
     "@babel/core": "^7.26.10",
@@ -174,7 +174,7 @@
     "@types/react-dom": "^18.2.19",
     "concurrently": "8.2.2",
     "nodemon": "3.1.9",
-    "publint": "0.2.12",
+    "publint": "0.3.12",
     "react": "19.0.0-rc-f2df5694-20240916",
     "react-dom": "19.0.0-rc-f2df5694-20240916",
     "tstyche": "3.0.0",
