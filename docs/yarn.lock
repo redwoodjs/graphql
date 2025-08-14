@@ -2156,7 +2156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/faster@npm:^3.8.1":
+"@docusaurus/faster@npm:3.8.1":
   version: 3.8.1
   resolution: "@docusaurus/faster@npm:3.8.1"
   dependencies:
@@ -4673,21 +4673,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.0.0, browserslist@npm:^4.23.0, browserslist@npm:^4.24.0, browserslist@npm:^4.24.4, browserslist@npm:^4.25.0, browserslist@npm:^4.25.1":
-  version: 4.25.1
-  resolution: "browserslist@npm:4.25.1"
-  dependencies:
-    caniuse-lite: "npm:^1.0.30001726"
-    electron-to-chromium: "npm:^1.5.173"
-    node-releases: "npm:^2.0.19"
-    update-browserslist-db: "npm:^1.1.3"
-  bin:
-    browserslist: cli.js
-  checksum: 10c0/acba5f0bdbd5e72dafae1e6ec79235b7bad305ed104e082ed07c34c38c7cb8ea1bc0f6be1496958c40482e40166084458fc3aee15111f15faa79212ad9081b2a
-  languageName: node
-  linkType: hard
-
-"browserslist@npm:^4.24.2":
+"browserslist@npm:^4.0.0, browserslist@npm:^4.23.0, browserslist@npm:^4.24.0, browserslist@npm:^4.24.2, browserslist@npm:^4.24.4, browserslist@npm:^4.25.0, browserslist@npm:^4.25.1":
   version: 4.25.2
   resolution: "browserslist@npm:4.25.2"
   dependencies:
@@ -4839,14 +4825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001702, caniuse-lite@npm:^1.0.30001726":
-  version: 1.0.30001727
-  resolution: "caniuse-lite@npm:1.0.30001727"
-  checksum: 10c0/f0a441c05d8925d728c2d02ce23b001935f52183a3bf669556f302568fe258d1657940c7ac0b998f92bc41383e185b390279a7d779e6d96a2b47881f56400221
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001733":
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001702, caniuse-lite@npm:^1.0.30001733":
   version: 1.0.30001735
   resolution: "caniuse-lite@npm:1.0.30001735"
   checksum: 10c0/1cb74221f16f8835c903770c1cf88fb73a07298b8398396a2b97570136e8f691053ee5840eb589fe34b4ede14ab828c9421d893a67e43c26ef91ab052813cb8c
@@ -5780,7 +5759,7 @@ __metadata:
   resolution: "docs@workspace:."
   dependencies:
     "@docusaurus/core": "npm:3.8.1"
-    "@docusaurus/faster": "npm:^3.8.1"
+    "@docusaurus/faster": "npm:3.8.1"
     "@docusaurus/module-type-aliases": "npm:3.8.1"
     "@docusaurus/plugin-content-docs": "npm:3.8.1"
     "@docusaurus/preset-classic": "npm:3.8.1"
@@ -5923,13 +5902,6 @@ __metadata:
   version: 1.1.1
   resolution: "ee-first@npm:1.1.1"
   checksum: 10c0/b5bb125ee93161bc16bfe6e56c6b04de5ad2aa44234d8f644813cc95d861a6910903132b05093706de2b706599367c4130eb6d170f6b46895686b95f87d017b7
-  languageName: node
-  linkType: hard
-
-"electron-to-chromium@npm:^1.5.173":
-  version: 1.5.187
-  resolution: "electron-to-chromium@npm:1.5.187"
-  checksum: 10c0/c83153010b786deac926fb128e0e0a68202312a25b4896892bcf166acb2ccb6357ec918ba38d44e16294cd85bf7e345198e1809e1848295221a8753beb658241
   languageName: node
   linkType: hard
 
@@ -9074,7 +9046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:2.1.18, mime-types@npm:~2.1.17":
+"mime-types@npm:2.1.18":
   version: 2.1.18
   resolution: "mime-types@npm:2.1.18"
   dependencies:
@@ -9083,7 +9055,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.27, mime-types@npm:^2.1.31, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.27, mime-types@npm:^2.1.31, mime-types@npm:~2.1.17, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
