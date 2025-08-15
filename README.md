@@ -8,7 +8,7 @@ _by Tom Preston-Werner, Peter Pistorius, Rob Cameron, David Price, and more than
 
 **NOTE**
 
-> ⚡ **Big News** — We’ve launched **[RedwoodSDK](https://github.com/redwoodjs/sdk)**, a modern React framework for building server-side web apps on Cloudflare.
+> ⚡ **Big News** — We’ve launched **[RedwoodSDK](https://github.com/redwoodjs/sdk)**, a modern React framework for building full-stack web apps on Cloudflare.
 
 ---
 
