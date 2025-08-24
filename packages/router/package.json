@@ -98,9 +98,9 @@
     "@redwoodjs/auth": "workspace:*",
     "@redwoodjs/server-store": "workspace:*",
     "core-js": "3.38.1",
-    "react": "19.0.0-rc-f2df5694-20240916",
-    "react-dom": "19.0.0-rc-f2df5694-20240916",
-    "react-server-dom-webpack": "19.0.0-rc-f2df5694-20240916"
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-server-dom-webpack": "19.1.1"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",
@@ -118,8 +118,8 @@
     "vitest": "2.1.9"
   },
   "peerDependencies": {
-    "react": "19.0.0-rc-f2df5694-20240916",
-    "react-dom": "19.0.0-rc-f2df5694-20240916"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }

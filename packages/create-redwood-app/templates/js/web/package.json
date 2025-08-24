@@ -14,8 +14,8 @@
     "@redwoodjs/forms": "8.0.0",
     "@redwoodjs/router": "8.0.0",
     "@redwoodjs/web": "8.0.0",
-    "react": "19.0.0-rc-f2df5694-20240916",
-    "react-dom": "19.0.0-rc-f2df5694-20240916"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "devDependencies": {
     "@redwoodjs/vite": "8.0.0",
