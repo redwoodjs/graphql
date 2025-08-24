@@ -29,7 +29,7 @@
     "@redwoodjs/project-config": "workspace:*",
     "chalk": "4.1.2",
     "dotenv-defaults": "5.0.2",
-    "fastify": "4.28.1",
+    "fastify": "5.3.3",
     "fs-extra": "11.2.0",
     "yargs": "17.7.2"
   },

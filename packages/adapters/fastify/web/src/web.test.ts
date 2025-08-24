@@ -51,7 +51,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/html; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/html; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(path.join(getPaths().web.dist, `${url}.html`), 'utf-8'),
       )
@@ -66,7 +66,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/html; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/html; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(path.join(getPaths().web.dist, `${url}.html`), 'utf-8'),
       )
@@ -83,7 +83,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/html; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/html; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(path.join(getPaths().web.dist, `${url}.html`), 'utf-8'),
       )
@@ -122,7 +122,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/html; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/html; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(path.join(getPaths().web.dist, url), 'utf-8'),
       )
@@ -135,7 +135,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/html; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/html; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(path.join(getPaths().web.dist, '200.html'), 'utf-8'),
       )
@@ -153,7 +153,7 @@ describe('redwoodFastifyWeb', () => {
 
       expect(res.statusCode).toBe(200)
       expect(res.headers['content-type']).toBe(
-        'application/javascript; charset=UTF-8',
+        'application/javascript; charset=utf-8',
       )
       expect(res.body).toBe(
         fs.readFileSync(
@@ -172,7 +172,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/css; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/css; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(
           path.join(getPaths().web.dist, relativeFilePath),
@@ -191,7 +191,7 @@ describe('redwoodFastifyWeb', () => {
 
       expect(res.statusCode).toBe(200)
       expect(res.headers['content-type']).toBe(
-        'application/json; charset=UTF-8',
+        'application/json; charset=utf-8',
       )
       expect(res.body).toBe(
         fs.readFileSync(
@@ -220,7 +220,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/markdown; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/markdown; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(
           path.join(getPaths().web.dist, relativeFilePath),
@@ -238,7 +238,7 @@ describe('redwoodFastifyWeb', () => {
       })
 
       expect(res.statusCode).toBe(200)
-      expect(res.headers['content-type']).toBe('text/plain; charset=UTF-8')
+      expect(res.headers['content-type']).toBe('text/plain; charset=utf-8')
       expect(res.body).toBe(
         fs.readFileSync(
           path.join(getPaths().web.dist, relativeFilePath),
