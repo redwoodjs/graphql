@@ -26,6 +26,47 @@ brew install postgresql@14
 
 If you're using another platform, see Prisma's [Data Guide](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database) for detailed instructions on how to get up and running.
 
+## Alternatives to Local PostgreSQL Installation
+
+### Local Prisma Postgres
+
+For local development, you can use [local Prisma Postgres](https://www.prisma.io/docs/postgres/database/local-development) which runs a PostgreSQL-compatible database locally using PGlite. This eliminates the need to install and manage PostgreSQL locally while maintaining full compatibility with production PostgreSQL databases.
+
+First, update your Prisma schema to use PostgreSQL as the provider:
+
+```graphql title="api/db/schema.prisma"
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+```
+
+Start the local Prisma Postgres server:
+
+```bash
+npx prisma dev
+```
+
+The server will start and display connection options. Press `t` to get the TCP connection URL for standard PostgreSQL connections, or press `h` if you're planning to use Prisma Postgres in production (which requires the [Prisma Client extension](https://www.prisma.io/docs/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required)).
+
+If you're using any other provider for PostgreSQL, use the TCP connection URL in your `.env` file:
+
+```env
+DATABASE_URL="postgresql://localhost:54322/main"
+```
+
+Keep the server running while performing migrations and using the database for local development.
+
+### Temporary Prisma Postgres database
+
+For quick testing or prototyping, [Prisma Postgres](https://www.prisma.io/postgres) offers temporary production-ready databases that require no setup or accounts. Use [`npx create-db`](https://www.prisma.io/docs/postgres/introduction/npx-create-db) to create a database that's automatically deleted after 24 hours:
+
+```bash
+npx create-db@latest
+```
+
+This provides both Prisma ORM-optimized and standard PostgreSQL connection strings. You can also claim the database to make it permanent if needed.
+
 ## Creating a database
 
 If everything went well, then Postgres should be running and you should have a few commands at your disposal (namely, `psql`, `createdb`, and `dropdb`).
