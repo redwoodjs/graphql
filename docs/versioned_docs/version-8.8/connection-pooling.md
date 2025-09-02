@@ -14,13 +14,63 @@ description: Scale your serverless functions
 
 Production Redwood apps should enable connection pooling in order to properly scale with your Serverless functions.
 
-## Prisma Data Proxy
+## Prisma Postgres
 
-The [Prisma Data Proxy](https://www.prisma.io/docs/data-platform/data-proxy) provides database connection management and pooling for Redwood apps using Prisma. It supports MySQL and Postgres databases in either the U.S. or EU regions.
+[Prisma Postgres](https://www.prisma.io/docs/postgres/introduction/overview?utm_source=redwoodjs_docs&utm_medium=docs) is a managed PostgreSQL database service that includes:
 
-To set up a Prisma Data Proxy, sign up for the [Prisma Data Platform](https://www.prisma.io/data-platform) for free. In your onboarding workflow, plug in the connection URL for your database and choose your region. This will generate a connection string for your app. Then follow the instructions in [Prisma's documentation](https://www.prisma.io/docs/concepts/data-platform/data-proxy).
+- **Built-in connection pooling**: No need to configure external pooling services
+- **Global caching**: Query-level caching with TTL and Stale-While-Revalidate strategies
+- **Serverless optimization**: Designed specifically for serverless and edge applications
+- **Easy setup**: Get started in minutes with minimal configuration
 
-> Note that the example uses npm. Rather than using npm, you can access the Prisma CLI using `yarn redwood prisma` inside a Redwood app.
+Prisma Postgres supports schema migrations and queries via Prisma ORM, and automatically handles connection pooling and caching.
+
+To get started with Prisma Postgres, visit the [Prisma Postgres documentation](https://www.prisma.io/docs/postgres/introduction/overview?utm_source=redwoodjs_docs&utm_medium=docs).
+
+### Local Prisma Postgres
+
+For local development, you can use [local Prisma Postgres](https://www.prisma.io/docs/postgres/database/local-development?utm_source=redwoodjs_docs&utm_medium=docs) which runs a PostgreSQL-compatible database locally. This eliminates the need to install and manage PostgreSQL locally while maintaining full compatibility with production PostgreSQL databases.
+
+:::note
+
+To use Local Prisma Postgres, you do not need to create an account or install PostgreSQL locally.
+
+:::
+
+First, update your Prisma schema to use PostgreSQL as the provider:
+
+```graphql title="api/db/schema.prisma"
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+```
+
+Start the local Prisma Postgres server:
+
+```bash
+npx prisma dev
+```
+
+The server will start and display connection options. Press `t` to get the TCP connection URL for standard PostgreSQL connections, or press `h` if you're planning to use Prisma Postgres in production (which requires the [Prisma Client extension](https://www.prisma.io/docs/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required)).
+
+If you're using any other provider for PostgreSQL, use the TCP connection URL in your `.env` file:
+
+```env
+DATABASE_URL="postgresql://localhost:54322/main"
+```
+
+Keep the server running while performing migrations and using the database for local development.
+
+### Temporary Prisma Postgres database
+
+For quick testing or prototyping, [Prisma Postgres](https://www.prisma.io/postgres) offers temporary production-ready databases that also requires no setup or accounts. Use [`npx create-db`](https://www.prisma.io/docs/postgres/introduction/npx-create-db?utm_source=redwoodjs_docs&utm_medium=docs) to create a database that's automatically deleted after 24 hours:
+
+```bash
+npx create-db@latest
+```
+
+This provides both Prisma ORM-optimized and standard PostgreSQL connection strings. You can also claim the database to make it permanent if needed.
 
 ## Prisma & PgBouncer
 
