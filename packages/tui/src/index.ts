@@ -1,5 +1,3 @@
-//
-
 import stream from 'stream'
 
 import boxen from 'boxen'
@@ -197,6 +195,16 @@ export class ReactiveTUIContent {
   getFrameInterval() {
     return this.frameInterval
   }
+}
+
+/**
+ * Configuration for the TUI
+ *
+ * Accepts an out and err stream which the TUI will write to.
+ */
+export interface RedwoodTUIConfig {
+  out?: NodeJS.WriteStream
+  err?: NodeJS.WriteStream
 }
 
 /**
@@ -399,14 +407,4 @@ export class RedwoodTUI {
       }),
     )
   }
-}
-
-/**
- * Configuration for the TUI
- *
- * Accepts an out and err stream which the TUI will write to.
- */
-export interface RedwoodTUIConfig {
-  out?: NodeJS.WriteStream
-  err?: NodeJS.WriteStream
 }

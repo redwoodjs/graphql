@@ -1,5 +1,3 @@
-/// <reference types="@types/jest" />
-
 import { ReactiveTUIContent } from './index'
 
 describe('ReactiveTUIContent validation', () => {
