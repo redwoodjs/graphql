@@ -26,6 +26,10 @@ export type RedwoodTrustedDocumentOptions = Omit<
 
 const REDWOOD__AUTH_GET_CURRENT_USER_QUERY =
   '{"query":"query __REDWOOD__AUTH_GET_CURRENT_USER { redwood { currentUser } }"}'
+const REDWOOD__STUDIO_RESYNC_MAIL_RENDERERS_MUTATION =
+  '{"query":"mutation { resyncMailRenderers }"}'
+const REDWOOD__STUDIO_TEMPLATE_MUTATION =
+  '{"query":"mutation { resyncMailTemplate }"}'
 
 /**
  * When using Redwood Auth, we want to allow the known, trusted `redwood.currentUser` query to be
@@ -54,6 +58,32 @@ const allowRedwoodAuthCurrentUserQuery = async (request: Request) => {
   return hasAllowedHeaders && hasAllowedQuery
 }
 
+/**
+ * When using RedwoodJS Studio, we want to allow the `resyncMailRenderers` and `resyncMailTemplate` mutations to be
+ * executed without a persisted operation. This is only allowed in local development.
+ *
+ * This is because the `resyncMailRenderers` mutation is a special case that is used by
+ * RedwoodJS Studio to sync mail renderers from the mailer configuration.
+ *
+ * This function checks if the request is for the `resyncMailRenderers` or `resyncMailTemplate` mutations and has the correct headers.
+ */
+const allowRedwoodStudioResyncMailMutations = async (request: Request) => {
+  const isLocalDevelopment = process.env.NODE_ENV === 'development'
+  if (!isLocalDevelopment) {
+    return false
+  }
+
+  const headers = request.headers
+  const hasContentType = headers.get('content-type') === 'application/json'
+
+  const query = await request.text()
+  const hasAllowedQuery =
+    query === REDWOOD__STUDIO_RESYNC_MAIL_RENDERERS_MUTATION ||
+    query === REDWOOD__STUDIO_TEMPLATE_MUTATION
+
+  return hasContentType && hasAllowedQuery && isLocalDevelopment
+}
+
 export const useRedwoodTrustedDocuments = (
   options: RedwoodTrustedDocumentOptions,
 ): Plugin<RedwoodGraphQLContext> => {
@@ -80,7 +110,10 @@ export const useRedwoodTrustedDocuments = (
           }
         }
       }
-      return allowRedwoodAuthCurrentUserQuery(request)
+      return (
+        allowRedwoodAuthCurrentUserQuery(request) ||
+        allowRedwoodStudioResyncMailMutations(request)
+      )
     },
   })
 }
