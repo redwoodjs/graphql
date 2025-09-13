@@ -21,15 +21,15 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@fastify/http-proxy": "9.5.0",
-    "@fastify/static": "6.12.0",
-    "@fastify/url-data": "5.4.0",
+    "@fastify/http-proxy": "11.1.2",
+    "@fastify/static": "8.2.0",
+    "@fastify/url-data": "6.0.3",
     "@redwoodjs/project-config": "workspace:*",
     "fast-glob": "3.3.2"
   },
   "devDependencies": {
     "@redwoodjs/framework-tools": "workspace:*",
-    "fastify": "4.28.1",
+    "fastify": "5.3.3",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
     "vitest": "2.1.9"

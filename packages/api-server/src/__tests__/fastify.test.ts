@@ -1,4 +1,4 @@
-import fastify from 'fastify'
+import fastify from 'fastify/fastify'
 import { vol } from 'memfs'
 import {
   vi,
