@@ -24,7 +24,48 @@ brew install postgresql@14
 
 ### Windows and Other Platforms
 
-If you're using another platform, see Prisma's [Data Guide](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database) for detailed instructions on how to get up and running.
+If you're using another platform, see Prisma's [Data Guide](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database?utm_source=redwoodjs_docs&utm_medium=docs) for detailed instructions on how to get up and running.
+
+## Alternatives to local PostgreSQL Installation
+
+### Local Prisma Postgres
+
+For local development, you can use [local Prisma Postgres](https://www.prisma.io/docs/postgres/database/local-development?utm_source=redwoodjs_docs&utm_medium=docs) which runs a PostgreSQL-compatible database locally. This eliminates the need to install and manage PostgreSQL locally while maintaining full compatibility with production PostgreSQL databases.
+
+First, update your Prisma schema to use PostgreSQL as the provider:
+
+```graphql title="api/db/schema.prisma"
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+```
+
+Start the local Prisma Postgres server:
+
+```bash
+npx prisma dev
+```
+
+The server will start and display connection options. Press `t` to get the TCP connection URL for standard PostgreSQL connections, or press `h` if you're planning to use Prisma Postgres in production (which requires the [Prisma Client extension](https://www.prisma.io/docs/postgres/introduction/overview#using-the-client-extension-for-prisma-accelerate-required)).
+
+If you're using any other provider for PostgreSQL, use the TCP connection URL in your `.env` file:
+
+```env
+DATABASE_URL="postgresql://localhost:54322/main"
+```
+
+Keep the server running while performing migrations and using the database for local development.
+
+### Temporary Prisma Postgres database
+
+For quick testing or prototyping, [Prisma Postgres](https://www.prisma.io/postgres?utm_source=redwoodjs_docs&utm_medium=docs) offers temporary production-ready databases that require no setup or accounts. Use [`npx create-db`](https://www.prisma.io/docs/postgres/introduction/npx-create-db?utm_source=redwoodjs_docs&utm_medium=docs) to create a database that's automatically deleted after 24 hours:
+
+```bash
+npx create-db@latest
+```
+
+This provides both Prisma ORM-optimized and standard PostgreSQL connection strings. You can also claim the database to make it permanent if needed.
 
 ## Creating a database
 
