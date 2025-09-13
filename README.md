@@ -48,6 +48,7 @@ We’d love for the Redwood community to be part of this from day one:
 2. **Give feedback** — Tell us what works, what’s confusing, and what could be better.
 3. **Spread the word** — Share RedwoodSDK with your friends, coworkers, and followers.
 4. **Star the repo** — Stars help more developers discover RedwoodSDK.
+
 ---
 
 ## 📌 Links
@@ -62,7 +63,9 @@ We’d love for the Redwood community to be part of this from day one:
 Thank you for being part of the Redwood journey — we can’t wait to see what you build with **RedwoodSDK**! ❤️
 
 ---
+
 # RedwoodJS GraphQL
+
 ## Bighorn Epoch (current development epoch)
 
 > **NOTE:** This section of the Readme is aspirational for the current development

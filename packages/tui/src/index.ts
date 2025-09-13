@@ -1,5 +1,3 @@
-//
-
 import stream from 'stream'
 
 import boxen from 'boxen'
@@ -66,9 +64,33 @@ export class ReactiveTUIContent {
         RedwoodStyling.redwood(c),
       ),
     }
+
+    // Validate spinner.characters if provided
+    if (
+      options.spinner?.characters !== undefined &&
+      (!Array.isArray(options.spinner.characters) ||
+        options.spinner.characters.length < 2)
+    ) {
+      throw new Error(
+        'tui: `spinner.characters` must be an array with at least 2 entries',
+      )
+    }
+
     this.spinner = { ...defaultSpinner, ...options.spinner }
     this.boxen = { ...options.boxen }
-    this.frameInterval = options.frameInterval || 80
+
+    // Validate frameInterval if provided
+    if (options.frameInterval !== undefined) {
+      if (
+        typeof options.frameInterval !== 'number' ||
+        options.frameInterval <= 0
+      ) {
+        throw new Error('tui: `frameInterval` must be a number > 0')
+      }
+      this.frameInterval = options.frameInterval
+    } else {
+      this.frameInterval = 80
+    }
 
     if (options.outStream) {
       this.setOutStream(options.outStream)
@@ -97,7 +119,16 @@ export class ReactiveTUIContent {
       this.content = options.content
     }
     if (options.spinner) {
-      // TODO: Validate characters array has at least two characters
+      // Validate characters array has at least two characters (if provided)
+      if (
+        options.spinner.characters !== undefined &&
+        (!Array.isArray(options.spinner.characters) ||
+          options.spinner.characters.length < 2)
+      ) {
+        throw new Error(
+          'tui: `spinner.characters` must be an array with at least 2 entries',
+        )
+      }
       this.spinner = { ...this.spinner, ...options.spinner }
     }
     if (options.boxen) {
@@ -106,8 +137,14 @@ export class ReactiveTUIContent {
     if (options.outStream) {
       this.setOutStream(options.outStream)
     }
-    if (options.frameInterval) {
-      // TODO: Validate > 0
+    if (options.frameInterval !== undefined) {
+      // Validate > 0
+      if (
+        typeof options.frameInterval !== 'number' ||
+        options.frameInterval <= 0
+      ) {
+        throw new Error('tui: `frameInterval` must be a number > 0')
+      }
       this.frameInterval = options.frameInterval
     }
   }
@@ -171,7 +208,19 @@ export interface RedwoodTUIConfig {
 }
 
 /**
- * TODO: Documentation for this
+ * RedwoodTUI
+ *
+ * A thin wrapper around stdout/stderr that renders static text and
+ * "reactive" content (e.g., spinners) to the terminal. It coordinates a
+ * shared UpdateManager, handles TTY/non-TTY output, and provides helpers
+ * for prompting and boxed messages.
+ *
+ * Typical usage:
+ *   const tui = new RedwoodTUI()
+ *   const content = new ReactiveTUIContent({ spinner: { enabled: true } })
+ *   tui.startReactive(content)
+ *   // ...work...
+ *   tui.stopReactive(true)
  */
 export class RedwoodTUI {
   private manager: UpdateManager
