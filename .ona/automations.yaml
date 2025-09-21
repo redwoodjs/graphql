@@ -1,0 +1,130 @@
+services:
+    dev-server:
+        name: RedwoodJS Development Server
+        description: Runs the RedwoodJS development server for both web and api sides
+        commands:
+            start: |
+                # Ensure corepack is enabled in service environment
+                corepack enable
+                cd /workspaces/rw-test-app
+                NODE_ENV=development corepack yarn rw dev
+
+tasks:
+    setup-environment:
+        name: Setup RedwoodJS Environment
+        description: Setup RedwoodJS development environment (runs automatically after devcontainer starts)
+        triggeredBy:
+            - postDevcontainerStart
+        command: |
+            export RWFW_PATH="/workspaces/RedwoodGraphQL"
+            export REDWOOD_DISABLE_TELEMETRY=1
+            echo "Setting up RedwoodJS development environment..."
+            mkdir -p /workspaces/rw-test-app
+            cd /workspaces/RedwoodGraphQL
+            echo "Cleaning up existing symlinks and cache..."
+            rm -rf node_modules/@redwoodjs
+            rm -rf node_modules/.cache
+            rm -f yarn.lock
+            corepack yarn cache clean --all 2>/dev/null || true
+            echo "Installing framework dependencies..."
+            corepack yarn install
+            echo "Building test project..."
+            corepack yarn run build:test-project ../rw-test-app --typescript --link --verbose
+            cd /workspaces/rw-test-app
+            sed -i "s/\(open *= *\).*/\1false/" redwood.toml
+            echo -e "\n\n\033[94m ======================================================\n\033[33m ⌛ RedwoodJS development environment is ready!\n Test app \"rw-test-app\" has been generated & linked with framework code.\n\n If you make changes to the framework:\n 1. \033[33mEnsure env vars are set \033[92mexport RWFW_PATH=\"/workspaces/RedwoodGraphQL\"\033[33m\n 2. \033[33mRun \033[92mcorepack yarn rwfw project:sync\033[33m to sync changes\n 3. \033[33mOr use the \033[92mSync Framework Changes\033[33m task from Ona dashboard\n\033[94m ======================================================\n\n"
+            # Open ports for RedwoodJS development servers
+            echo "Opening ports for development servers..."
+            gitpod environment port open 8910 --name "RedwoodJS Web Server" --protocol https
+            gitpod environment port open 8911 --name "RedwoodJS API Server" --protocol https
+            echo "✅ Ports 8910 (Web) and 8911 (API) are now open with HTTPS"
+            # Signal completion
+            touch /tmp/redwood-setup-complete
+            echo "✅ Setup task completed successfully"
+
+    start-dev-after-setup:
+        name: Start Development Server After Setup
+        description: Automatically start the development server after setup completes
+        triggeredBy:
+            - postDevcontainerStart
+        command: |
+            # Wait for setup to complete
+            echo "Waiting for setup to complete..."
+            while [ ! -f /tmp/redwood-setup-complete ]; do
+                sleep 2
+            done
+            echo "Setup completed, starting development server..."
+            # Ensure ports are open before starting service
+            gitpod environment port open 8910 --name "RedwoodJS Web Server" --protocol https 2>/dev/null || true
+            gitpod environment port open 8911 --name "RedwoodJS API Server" --protocol https 2>/dev/null || true
+            gitpod automations service start dev-server
+            echo "✅ Development server started"
+
+    sync-framework-changes:
+        name: Sync Framework Changes
+        description: Manually sync framework changes to test project
+        triggeredBy:
+            - manual
+        command: |
+            export RWFW_PATH="/workspaces/RedwoodGraphQL"
+            cd /workspaces/rw-test-app
+            corepack yarn rwfw project:sync
+            echo "Framework changes synced to test project"
+
+    start-dev-server:
+        name: Start Development Server
+        description: Start the RedwoodJS development server
+        triggeredBy:
+            - manual
+        command: |
+            gitpod automations service start dev-server
+
+    stop-dev-server:
+        name: Stop Development Server
+        description: Stop the RedwoodJS development server
+        triggeredBy:
+            - manual
+        command: |
+            gitpod automations service stop dev-server
+
+    restart-dev-server:
+        name: Restart Development Server
+        description: Restart the RedwoodJS development server
+        triggeredBy:
+            - manual
+        command: |
+            gitpod automations service stop dev-server
+            sleep 2
+            gitpod automations service start dev-server
+
+    open-ports:
+        name: Open Development Ports
+        description: Open ports 8910 (Web) and 8911 (API) for external access with HTTPS
+        triggeredBy:
+            - manual
+        command: |
+            echo "Opening RedwoodJS development ports with HTTPS..."
+            gitpod environment port open 8910 --name "RedwoodJS Web Server" --protocol https
+            gitpod environment port open 8911 --name "RedwoodJS API Server" --protocol https
+            echo "✅ Ports opened successfully with HTTPS protocol"
+            gitpod environment port list
+
+    close-ports:
+        name: Close Development Ports
+        description: Close ports 8910 (Web) and 8911 (API)
+        triggeredBy:
+            - manual
+        command: |
+            echo "Closing RedwoodJS development ports..."
+            gitpod environment port close 8910
+            gitpod environment port close 8911
+            echo "✅ Ports closed successfully"
+
+    list-ports:
+        name: List Port Status
+        description: Show current status of all ports
+        triggeredBy:
+            - manual
+        command: |
+            echo "Current port status:"
+            gitpod environment port list

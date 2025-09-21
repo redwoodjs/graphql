@@ -183,9 +183,11 @@ You can use the button below to start a developer environment in the cloud and a
 
 This generates a functional test project and links it with the Redwood Framework code in `main`, giving you an easy playground to try out your fixes and contributions.
 
-> Note: if you make changes to the framework, you will need to run `yarn rwfw project:sync` in the terminal, so that your changes are watched and reflected in the test project
+> Note: if you make changes to the framework, you will need to sync your changes to the test project. You can either:
+> - Run `yarn rwfw project:sync` in the terminal, or  
+> - Use the **"Sync Framework Changes"** task directly from the Ona dashboard
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/redwood)
+[![Open in Ona](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/redwood)
 
 ## Local QA and Integration Tests
 
@@ -307,17 +309,17 @@ If needed, there's more information in [this PR #3154 comment](https://github.co
 
 # Creating a Reproduction to Include with Issues
 
-Are you about to open an issue? Including a reproduction, either as a series of steps, as a public GitHub repo, or as a Gitpod snapshot, will definitely let us help you faster!
+Are you about to open an issue? Including a reproduction, either as a series of steps, as a public GitHub repo, or as an Ona snapshot, will definitely let us help you faster!
 
-## Option 1: Create a Gitpod Snapshot
+## Option 1: Create an Ona Snapshot
 
-This is a great option when the issue you're reporting is cross-platform. I.e., it isn't a Windows-specific issue. Here's a video walkthrough on how to create a snapshot of the [Redwood-Gitpod starter repo](https://github.com/redwoodjs/starter):
+This is a great option when the issue you're reporting is cross-platform. I.e., it isn't a Windows-specific issue. You can create a snapshot of the [Redwood starter repo](https://github.com/redwoodjs/starter) using Ona's cloud development environment.
 
 https://user-images.githubusercontent.com/1521877/176033049-d3c57b92-3ee6-4c60-918b-fdbcfa83fd0f.mp4
 
 ## Option 2: Fork the Starter Repo
 
-You can always fork the [Redwood-Gitpod starter repo](https://github.com/redwoodjs/starter) which is a brand new project with the latest stable version of Redwood.
+You can always fork the [Redwood starter repo](https://github.com/redwoodjs/starter) which is a brand new project with the latest stable version of Redwood.
 Once you make your changes in your fork, include the link to your repo in your issue. This'll make it much easier for us to understand what's going on.
 
 # Release Publishing
