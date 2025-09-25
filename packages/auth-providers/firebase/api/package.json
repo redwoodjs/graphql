@@ -39,7 +39,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "firebase-admin": "12.6.0"
+    "firebase-admin": "12.7.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.16.4",
