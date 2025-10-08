@@ -1,9 +1,9 @@
 [build]
   base = "docs"
   publish = "build"
-  command = "echo 'hello'; exit 0;"
+  command = "yarn build"
   ignore = "node ignore_build.mjs"
-
+  
  [[redirects]]
       from = "/*"
       to = "https://docs.rwsdk.com"
