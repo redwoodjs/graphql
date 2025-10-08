@@ -1,7 +1,7 @@
 [build]
   base = "docs"
   publish = "build"
-  command = "echo 1;"
+  command = "echo 'hello'"
   ignore = "node ignore_build.mjs"
 
 [[redirects]]
