@@ -1,10 +1,10 @@
 [build]
   base = "docs"
   publish = "build"
-  command = "echo 'hello'"
+  command = "echo 'hello'; exit 0;"
   ignore = "node ignore_build.mjs"
 
-[[redirects]]
-  from = "/*"
-  to = "https://docs.rwsdk.com"
-  status = 301
+ [[redirects]]
+      from = "/*"
+      to = "https://docs.rwsdk.com"
+      status = 301
