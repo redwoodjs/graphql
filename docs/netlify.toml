@@ -5,7 +5,7 @@
   ignore = "node ignore_build.mjs"
 
 [[redirects]]
-  from = "/"
+  from = "/*"
   to = "https://docs.rwsdk.com"
   status = 301
 
