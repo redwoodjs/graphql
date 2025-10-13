@@ -284,16 +284,35 @@ function createAuthImplementation({
           }
         }
 
-        // Modify URL state only if there is a session.
-        // Prevents resetting URL state (like query params) for all other cases.
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname,
-        )
+        // Clean up OAuth callback parameters while preserving other search params
+        const currentUrl = new URL(window.location.href)
+        const authParams = [
+          'access_token',
+          'refresh_token',
+          'token_type',
+          'expires_in',
+          'expires_at',
+        ]
+
+        let hasAuthParams = false
+
+        // Remove only Supabase auth-related parameters
+        authParams.forEach((param) => {
+          if (currentUrl.searchParams.has(param)) {
+            currentUrl.searchParams.delete(param)
+            hasAuthParams = true
+          }
+        })
+
+        // Only modify URL if we actually removed auth parameters
+        if (hasAuthParams) {
+          const cleanUrl = currentUrl.pathname + (currentUrl.search || '')
+          window.history.replaceState({}, document.title, cleanUrl)
+        }
       } catch (error) {
         console.error(error)
       }
+
       return
     },
     // This is important, so we can skip fetching getCurrentUser
