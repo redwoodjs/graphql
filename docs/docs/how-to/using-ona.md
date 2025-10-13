@@ -1,26 +1,27 @@
-# Using GitPod
+# Using Ona
 
-## What is GitPod?
+## What is Ona?
 
-GitPod is a cloud development environment with all the necessary tools and dependencies, allowing you to focus on building your RedwoodJS application without worrying about the setup. Get started quickly and efficiently by launching RedwoodJS inside GitPod!
+Ona is a cloud development environment with all the necessary tools and dependencies, allowing you to focus on building your RedwoodJS application without worrying about the setup. Get started quickly and efficiently by launching RedwoodJS inside Ona!
 
-## Getting Started
+## Getting started
 
-Click on the Open in GitPod button:
+Click on the Run in Ona button:
 
-[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/starter)
+[![Run in Ona](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/starter)
 
-<iframe width="100%" height="315" src="https://www.youtube.com/embed/guz67aa_1Wk?si=p1uc2EK6o8HJGBax" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+This will launch Ona and ask you to configure a new workspace. Click continue.
 
-This will launch GitPod and ask you to configure a new workspace. Click continue.
+Ona will then begin to build your workspace using Dev Containers and Automations. This may take several minutes as it:
 
-![GitPod Onboarding Screen](https://github.com/redwoodjs/starter/raw/main/images/gitpod-new-workspace.png)
-
-GitPod will then begin to build your workspace. This may take several minutes.
+1. Sets up the development environment
+2. Installs dependencies
+3. Creates a test project linked to the framework
+4. Starts the development server automatically
 
 What's going on behind the scenes:
 
-- GitPod is setting up the workspace
+- Ona is setting up the environment
 - It installs our recommended VS Code plugins:
   - [ESLint](https://github.com/redwoodjs/starter/blob/main)
   - [Git Lens](https://github.com/redwoodjs/starter/blob/main)
@@ -48,11 +49,11 @@ You can click on the address or the globe icon to open that particular port in a
 - Port 8911 is your backend and will show you a list of all available functions. If you add `/graphql` to the end of the URL, you should see the GraphQL Playground
   ![Port 8911 GraphQL Playground](https://github.com/redwoodjs/starter/raw/main/images/gitpod-graphql.png)
 
-## How to Use GitPod
+## How to use Gitpod (Ona)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5pNHaqJWKL4?si=OmkQvmPL_Cc3djLg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-If you have an existing project, you can still use GitPod:
+If you have an existing project, you can still use Gitpod:
 
-1. Take any repository within GitHub and append `gitpod.io/#` to the URL. This will quickly launch a GitPod workspace.
+1. Take any repository within GitHub and append `gitpod.io/#` to the URL. This will quickly launch a Ona environment.
 2. Within the Terminal, run `yarn install` to install all the dependencies

@@ -51,11 +51,11 @@ yarn redwood --help
 
 For all the details, see the [CLI reference](cli-commands.md).
 
-### GitPod
+### Ona
 
-The fastest way to start a new Redwood project is to use GitPod ([additional documentation for working with GitPod](./how-to/using-gitpod)).
+The fastest way to start a new Redwood project is to use Ona's (formerly Gitpod) cloud development environment ([additional documentation for working with Ona](./how-to/using-ona)).
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/starter)
+[![Run in Ona](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/starter)
 
 ## Prisma and the database
 

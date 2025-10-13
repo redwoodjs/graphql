@@ -1,0 +1,20 @@
+{
+  "name": "RedwoodGraphQL",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "workspaceFolder": "/workspaces/RedwoodGraphQL",
+  "forwardPorts": [8910, 8911],
+  "portsAttributes": {
+    "8910": {
+      "label": "RedwoodJS Web",
+      "onAutoForward": "notify"
+    },
+    "8911": {
+      "label": "RedwoodJS API",
+      "onAutoForward": "ignore"
+    }
+  },
+  "postCreateCommand": "npm i -g corepack --force && corepack enable"
+}
