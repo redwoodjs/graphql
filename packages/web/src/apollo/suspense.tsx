@@ -10,7 +10,6 @@
 import React, { useContext } from 'react'
 
 import type {
-  ApolloCache,
   ApolloClientOptions,
   ApolloLink,
   HttpOptions,
@@ -72,7 +71,7 @@ export type GraphQLClientConfigProp = Omit<
   ApolloClientOptions<unknown>,
   'cache' | 'link'
 > & {
-  cache?: ApolloCache<unknown>
+  cache?: InMemoryCache
   /**
    * Configuration for Apollo Client's `InMemoryCache`.
    * See https://www.apollographql.com/docs/react/caching/cache-configuration/.
@@ -129,7 +128,7 @@ const WrappedApolloProvider = WrapApolloProvider(
 
 const ApolloProviderWithFetchConfig: React.FunctionComponent<{
   config: Omit<GraphQLClientConfigProp, 'cacheConfig' | 'cache'> & {
-    cache: ApolloCache<unknown>
+    cache: InMemoryCache
   }
   useAuth?: UseAuth
   logLevel: ReturnType<typeof setLogVerbosity>

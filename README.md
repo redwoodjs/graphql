@@ -6,6 +6,66 @@
 _by Tom Preston-Werner, Peter Pistorius, Rob Cameron, David Price, and more than
 250 amazing contributors (see end of file for a full list)._
 
+**NOTE**
+
+> ⚡ **Big News** — We’ve launched **[RedwoodSDK](https://github.com/redwoodjs/sdk)**, a modern React framework for building full-stack web apps on Cloudflare.
+
+---
+
+## 🌲 RedwoodSDK — React on Cloudflare
+
+RedwoodSDK starts as a **Vite plugin** and unlocks:
+
+- **SSR** (Server-Side Rendering)
+- **React Server Components**
+- **Server Functions**
+- **Streaming + Realtime**
+- Local dev parity with **Miniflare**
+- First-class Cloudflare services: **Workers**, **D1**, **Durable Objects**, **R2**, **Queues**, and more
+
+All while keeping to **web standards** — you write with native `Request`/`Response` and the modern Web APIs you already know.
+
+---
+
+### 🚀 Try it in seconds
+
+```bash
+npx create-rwsdk my-project-name
+cd my-project-name
+npm run dev
+```
+
+📚 [Read the docs](https://docs.rwsdk.com)  
+⚡ [Quick Start Guide](https://docs.rwsdk.com/getting-started/quick-start)
+
+---
+
+## 🙌 How You Can Help
+
+We’d love for the Redwood community to be part of this from day one:
+
+1. **Try it out** — Follow the Quick Start and build something small.
+2. **Give feedback** — Tell us what works, what’s confusing, and what could be better.
+3. **Spread the word** — Share RedwoodSDK with your friends, coworkers, and followers.
+4. **Star the repo** — Stars help more developers discover RedwoodSDK.
+
+---
+
+## 📌 Links
+
+- ⭐ **Star RedwoodSDK**: [https://github.com/redwoodjs/sdk](https://github.com/redwoodjs/sdk)
+- 📚 Docs: [https://docs.rwsdk.com](https://docs.rwsdk.com)
+- 💬 Discord: [https://discord.gg/redwoodjs](https://discord.gg/redwoodjs)
+- 🌐 Website: [https://rwsdk.com](https://rwsdk.com)
+
+---
+
+Thank you for being part of the Redwood journey — we can’t wait to see what you build with **RedwoodSDK**! ❤️
+
+---
+
+# RedwoodJS GraphQL
+
 ## Bighorn Epoch (current development epoch)
 
 > **NOTE:** This section of the Readme is aspirational for the current development
