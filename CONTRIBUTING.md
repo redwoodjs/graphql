@@ -184,7 +184,8 @@ You can use the button below to start a developer environment in the cloud and a
 This generates a functional test project and links it with the Redwood Framework code in `main`, giving you an easy playground to try out your fixes and contributions.
 
 > Note: if you make changes to the framework, you will need to sync your changes to the test project. You can either:
-> - Run `yarn rwfw project:sync` in the terminal, or  
+>
+> - Run `yarn rwfw project:sync` in the terminal, or
 > - Use the **"Sync Framework Changes"** task directly from the Ona dashboard
 
 [![Open in Ona](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/redwoodjs/redwood)
