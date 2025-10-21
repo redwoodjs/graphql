@@ -1,6 +1,6 @@
 {
   "name": "@redwoodjs/core",
-  "version": "8.8.1",
+  "version": "8.9.0",
   "description": "Foundational packages and config required to build RedwoodJS.",
   "repository": {
     "type": "git",

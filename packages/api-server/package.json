@@ -1,6 +1,6 @@
 {
   "name": "@redwoodjs/api-server",
-  "version": "8.8.1",
+  "version": "8.9.0",
   "description": "Redwood's HTTP server for Serverless Functions",
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
   "dependencies": {
     "@fastify/multipart": "8.3.1",
     "@fastify/url-data": "5.4.0",
-    "@redwoodjs/context": "8.8.1",
-    "@redwoodjs/fastify-web": "8.8.1",
-    "@redwoodjs/internal": "8.8.1",
-    "@redwoodjs/project-config": "8.8.1",
-    "@redwoodjs/web-server": "8.8.1",
+    "@redwoodjs/context": "8.9.0",
+    "@redwoodjs/fastify-web": "8.9.0",
+    "@redwoodjs/internal": "8.9.0",
+    "@redwoodjs/project-config": "8.9.0",
+    "@redwoodjs/web-server": "8.9.0",
     "chalk": "4.1.2",
     "chokidar": "3.6.0",
     "dotenv-defaults": "5.0.2",
@@ -51,7 +51,7 @@
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "@redwoodjs/framework-tools": "8.8.1",
+    "@redwoodjs/framework-tools": "8.9.0",
     "@types/aws-lambda": "8.10.145",
     "@types/lodash": "4.17.15",
     "@types/qs": "6.9.16",
@@ -63,7 +63,7 @@
     "vitest": "2.1.9"
   },
   "peerDependencies": {
-    "@redwoodjs/graphql-server": "8.8.1"
+    "@redwoodjs/graphql-server": "8.9.0"
   },
   "peerDependenciesMeta": {
     "@redwoodjs/graphql-server": {

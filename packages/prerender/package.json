@@ -1,6 +1,6 @@
 {
   "name": "@redwoodjs/prerender",
-  "version": "8.8.1",
+  "version": "8.9.0",
   "description": "RedwoodJS prerender",
   "repository": {
     "type": "git",

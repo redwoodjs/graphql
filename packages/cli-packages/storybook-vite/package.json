@@ -1,6 +1,6 @@
 {
   "name": "@redwoodjs/cli-storybook-vite",
-  "version": "8.8.1",
+  "version": "8.9.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redwoodjs/redwood.git",
@@ -22,20 +22,20 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
-    "@redwoodjs/cli-helpers": "8.8.1",
-    "@redwoodjs/project-config": "8.8.1",
-    "@redwoodjs/telemetry": "8.8.1",
+    "@redwoodjs/cli-helpers": "8.9.0",
+    "@redwoodjs/project-config": "8.9.0",
+    "@redwoodjs/telemetry": "8.9.0",
     "chalk": "4.1.2",
     "execa": "5.1.1",
     "semver": "7.6.3",
     "storybook": "7.6.20",
-    "storybook-framework-redwoodjs-vite": "8.8.1",
+    "storybook-framework-redwoodjs-vite": "8.9.0",
     "terminal-link": "2.1.1",
     "vitest": "2.1.9",
     "yargs": "17.7.2"
   },
   "devDependencies": {
-    "@redwoodjs/framework-tools": "8.8.1",
+    "@redwoodjs/framework-tools": "8.9.0",
     "@types/semver": "^7",
     "@types/yargs": "17.0.33",
     "tsx": "4.19.2",
