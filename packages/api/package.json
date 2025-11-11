@@ -25,6 +25,10 @@
     "./webhooks": {
       "types": "./dist/webhooks/index.d.ts",
       "default": "./dist/webhooks/index.js"
+    },
+    "./fluid": {
+      "types": "./dist/fluid.d.ts",
+      "default": "./dist/fluid.js"
     }
   },
   "main": "./dist/index.js",

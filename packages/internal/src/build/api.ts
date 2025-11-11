@@ -1,10 +1,11 @@
+import { transformAsync } from '@babel/core'
 import type { BuildContext, BuildOptions, PluginBuild } from 'esbuild'
 import { build, context } from 'esbuild'
 import fs from 'fs-extra'
 
 import {
   getApiSideBabelPlugins,
-  transformWithBabel,
+  getApiSideDefaultBabelConfig,
 } from '@redwoodjs/babel-config'
 import {
   isVercelFluidDeploy,
@@ -15,7 +16,7 @@ import {
 
 import { findApiFiles } from '../files'
 
-import { wrapVercelHandler } from './vercel'
+import { validateFluidHandler } from './vercel'
 
 let BUILD_CTX: BuildContext | null = null
 
@@ -49,26 +50,32 @@ const runRwBabelTransformsPlugin = {
     const rwjsConfig = getConfig()
 
     build.onLoad({ filter: /\.(js|ts|tsx|jsx)$/ }, async (args) => {
-      const isVercel = isVercelFluidDeploy()
-      let code = fs.readFileSync(args.path, 'utf-8')
+      const isFluid = isVercelFluidDeploy()
+      const code = fs.readFileSync(args.path, 'utf-8')
 
-      if (isVercel) {
-        code = wrapVercelHandler(code)
+      if (isFluid) {
+        validateFluidHandler(code, args.path)
       }
 
       // @TODO Implement LRU cache? Unsure how much of a performance benefit its going to be
       // Generate a CRC of file contents, then save it to LRU cache with a limit
       // without LRU cache, the memory usage can become unbound
-      const transformedCode = await transformWithBabel(
-        args.path,
-        getApiSideBabelPlugins({
+      const defaultOptions = getApiSideDefaultBabelConfig({
+        projectIsEsm: projectSideIsEsm('api'),
+      })
+
+      const transformedCode = await transformAsync(code, {
+        ...defaultOptions,
+        cwd: getPaths().api.base,
+        filename: args.path,
+        sourceMaps: 'inline',
+        plugins: getApiSideBabelPlugins({
           openTelemetry:
             rwjsConfig.experimental.opentelemetry.enabled &&
             rwjsConfig.experimental.opentelemetry.wrapApi,
           projectIsEsm: projectSideIsEsm('api'),
         }),
-        code,
-      )
+      })
 
       if (transformedCode?.code) {
         return {

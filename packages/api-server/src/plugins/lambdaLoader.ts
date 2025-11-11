@@ -11,50 +11,93 @@ import type {
 } from 'fastify'
 import { escape } from 'lodash'
 
-import { getPaths } from '@redwoodjs/project-config'
+import type { FluidHandler } from '@redwoodjs/api/fluid'
+import { getPaths, getConfig } from '@redwoodjs/project-config'
 
 import { requestHandler } from '../requestHandlers/awsLambdaFastify'
+import { fluidRequestHandler } from '../requestHandlers/fluidFastify'
 
 export type Lambdas = Record<string, Handler>
+export type FluidHandlers = Record<string, Record<string, FluidHandler>>
 export const LAMBDA_FUNCTIONS: Lambdas = {}
+export const FLUID_FUNCTIONS: FluidHandlers = {}
 
-// Import the API functions and add them to the LAMBDA_FUNCTIONS object
+// Import the API functions and add them to the LAMBDA_FUNCTIONS or FLUID_FUNCTIONS object
+
+const isFluidMode = () => {
+  const config = getConfig()
+  return config.deploy?.target === 'vercel' && config.deploy?.vercel?.fluid
+}
 
 export const setLambdaFunctions = async (foundFunctions: string[]) => {
   const tsImport = Date.now()
   console.log(chalk.dim.italic('Importing Server Functions... '))
+  const fluidMode = isFluidMode()
 
   const imports = foundFunctions.map(async (fnPath) => {
     const ts = Date.now()
     const routeName = path.basename(fnPath).replace('.js', '')
 
     const fnImport = await import(`file://${fnPath}`)
-    const handler: Handler = (() => {
-      if ('handler' in fnImport) {
-        // ESModule export of handler - when using `export const handler = ...` - most common case
-        return fnImport.handler
-      }
-      if ('default' in fnImport) {
-        if ('handler' in fnImport.default) {
-          // CommonJS export of handler - when using `module.exports.handler = ...` or `export default { handler: ... }`
-          // This is less common, but required for bundling tools that export a default object, like esbuild or rollup
-          return fnImport.default.handler
-        }
-        // Default export is not expected, so skip it
-      }
-      // If no handler is found, return undefined - we do not want to throw an error
-    })()
 
-    LAMBDA_FUNCTIONS[routeName] = handler
-    if (!handler) {
-      console.warn(
-        routeName,
-        'at',
-        fnPath,
-        'does not have a function called handler defined.',
-      )
+    if (fluidMode) {
+      const httpMethods = [
+        'GET',
+        'POST',
+        'PUT',
+        'PATCH',
+        'DELETE',
+        'OPTIONS',
+        'HEAD',
+      ]
+      const handlers: Record<string, FluidHandler> = {}
+      let hasHandlers = false
+
+      for (const method of httpMethods) {
+        if (method in fnImport) {
+          handlers[method] = fnImport[method]
+          hasHandlers = true
+        }
+      }
+
+      if ('default' in fnImport && typeof fnImport.default === 'function') {
+        handlers.default = fnImport.default
+        hasHandlers = true
+      }
+
+      if (hasHandlers) {
+        FLUID_FUNCTIONS[routeName] = handlers
+      } else {
+        console.warn(
+          routeName,
+          'at',
+          fnPath,
+          'does not have HTTP method handlers (GET, POST, etc.) or a default handler.',
+        )
+      }
+    } else {
+      const handler: Handler = (() => {
+        if ('handler' in fnImport) {
+          return fnImport.handler
+        }
+        if ('default' in fnImport) {
+          if ('handler' in fnImport.default) {
+            return fnImport.default.handler
+          }
+        }
+      })()
+
+      LAMBDA_FUNCTIONS[routeName] = handler
+      if (!handler) {
+        console.warn(
+          routeName,
+          'at',
+          fnPath,
+          'does not have a function called handler defined.',
+        )
+      }
     }
-    // TODO: Use terminal link.
+
     console.log(
       chalk.magenta('/' + routeName),
       chalk.dim.italic(Date.now() - ts + ' ms'),
@@ -121,31 +164,76 @@ interface LambdaHandlerRequest extends RequestGenericInterface {
 
 /**
  This will take a fastify request
- Then convert it to a lambdaEvent, and pass it to the the appropriate handler for the routeName
- The LAMBDA_FUNCTIONS lookup has been populated already by this point
+ Then convert it to a lambdaEvent or Request object, and pass it to the appropriate handler for the routeName
+ The LAMBDA_FUNCTIONS or FLUID_FUNCTIONS lookup has been populated already by this point
  **/
 export const lambdaRequestHandler = async (
   req: FastifyRequest<LambdaHandlerRequest>,
   reply: FastifyReply,
 ) => {
   const { routeName } = req.params
+  const fluidMode = isFluidMode()
 
-  if (!LAMBDA_FUNCTIONS[routeName]) {
-    const errorMessage = `Function "${routeName}" was not found.`
-    req.log.error(errorMessage)
-    reply.status(404)
+  if (fluidMode) {
+    const handlers = FLUID_FUNCTIONS[routeName]
+    if (!handlers) {
+      const errorMessage = `Function "${routeName}" was not found.`
+      req.log.error(errorMessage)
+      reply.status(404)
 
-    if (process.env.NODE_ENV === 'development') {
-      const devError = {
-        error: errorMessage,
-        availableFunctions: Object.keys(LAMBDA_FUNCTIONS),
+      if (process.env.NODE_ENV === 'development') {
+        const devError = {
+          error: errorMessage,
+          availableFunctions: Object.keys(FLUID_FUNCTIONS),
+        }
+        reply.send(devError)
+      } else {
+        reply.send(escape(errorMessage))
       }
-      reply.send(devError)
-    } else {
-      reply.send(escape(errorMessage))
+
+      return
     }
 
-    return
+    const method = req.method.toUpperCase()
+    const handler = handlers[method] || handlers.default
+
+    if (!handler) {
+      const errorMessage = `Method "${method}" not supported for function "${routeName}".`
+      req.log.error(errorMessage)
+      reply.status(405)
+
+      if (process.env.NODE_ENV === 'development') {
+        const devError = {
+          error: errorMessage,
+          availableMethods: Object.keys(handlers),
+        }
+        reply.send(devError)
+      } else {
+        reply.send(escape(errorMessage))
+      }
+
+      return
+    }
+
+    return fluidRequestHandler(req, reply, handler)
+  } else {
+    if (!LAMBDA_FUNCTIONS[routeName]) {
+      const errorMessage = `Function "${routeName}" was not found.`
+      req.log.error(errorMessage)
+      reply.status(404)
+
+      if (process.env.NODE_ENV === 'development') {
+        const devError = {
+          error: errorMessage,
+          availableFunctions: Object.keys(LAMBDA_FUNCTIONS),
+        }
+        reply.send(devError)
+      } else {
+        reply.send(escape(errorMessage))
+      }
+
+      return
+    }
+    return requestHandler(req, reply, LAMBDA_FUNCTIONS[routeName])
   }
-  return requestHandler(req, reply, LAMBDA_FUNCTIONS[routeName])
 }

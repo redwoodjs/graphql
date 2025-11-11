@@ -73,6 +73,15 @@ interface StudioConfig {
   graphiql?: GraphiQLStudioConfig
 }
 
+interface VercelDeployConfig {
+  fluid?: boolean
+}
+
+interface DeployConfig {
+  target?: string
+  vercel?: VercelDeployConfig
+}
+
 export interface Config {
   web: BrowserTargetConfig
   api: NodeTargetConfig
@@ -95,6 +104,7 @@ export interface Config {
     versionUpdates: string[]
   }
   studio: StudioConfig
+  deploy?: DeployConfig
   experimental: {
     opentelemetry: {
       enabled: boolean
