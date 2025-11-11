@@ -233,3 +233,8 @@ export function getRawConfig(configPath = getConfigPath()) {
     throw new Error(`Could not parse "${configPath}": ${e}`)
   }
 }
+
+export const isVercelFluidDeploy = () => {
+  const config = getConfig()
+  return config.deploy?.target === 'vercel' && config.deploy?.vercel?.fluid
+}

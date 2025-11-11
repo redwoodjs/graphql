@@ -7,12 +7,15 @@ import {
   transformWithBabel,
 } from '@redwoodjs/babel-config'
 import {
+  isVercelFluidDeploy,
   getConfig,
   getPaths,
   projectSideIsEsm,
 } from '@redwoodjs/project-config'
 
 import { findApiFiles } from '../files'
+
+import { wrapVercelHandler } from './vercel'
 
 let BUILD_CTX: BuildContext | null = null
 
@@ -46,6 +49,13 @@ const runRwBabelTransformsPlugin = {
     const rwjsConfig = getConfig()
 
     build.onLoad({ filter: /\.(js|ts|tsx|jsx)$/ }, async (args) => {
+      const isVercel = isVercelFluidDeploy()
+      let code = fs.readFileSync(args.path, 'utf-8')
+
+      if (isVercel) {
+        code = wrapVercelHandler(code)
+      }
+
       // @TODO Implement LRU cache? Unsure how much of a performance benefit its going to be
       // Generate a CRC of file contents, then save it to LRU cache with a limit
       // without LRU cache, the memory usage can become unbound
@@ -57,6 +67,7 @@ const runRwBabelTransformsPlugin = {
             rwjsConfig.experimental.opentelemetry.wrapApi,
           projectIsEsm: projectSideIsEsm('api'),
         }),
+        code,
       )
 
       if (transformedCode?.code) {
