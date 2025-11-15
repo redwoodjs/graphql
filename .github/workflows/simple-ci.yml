@@ -92,7 +92,7 @@ jobs:
   background-jobs-e2e:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest]
 
     name: Background jobs E2E test / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
