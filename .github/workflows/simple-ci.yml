@@ -1,0 +1,121 @@
+name: ⚙️ CI
+
+on:
+  pull_request:
+  push:
+    branches: ['next', 'release/**']
+
+# Cancel in-progress runs of this workflow.
+# See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#example-only-cancel-in-progress-jobs-or-runs-for-the-current-workflow.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: read
+
+env:
+  NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  YARN_ENABLE_HARDENED_MODE: 0
+
+jobs:
+  test:
+    name: 🧪 Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Set up job
+        uses: ./.github/actions/set-up-job
+
+      - name: Get number of CPU cores
+        id: cpu-cores
+        uses: SimenB/github-actions-cpu-cores@97ba232459a8e02ff6121db9362b09661c875ab8 # v2
+
+      - name: 🧪 Test
+        run: yarn test-ci --minWorkers=1 --maxWorkers=${{ steps.cpu-cores.outputs.count }}
+
+  tutorial-e2e:
+    name: 🌲 Tutorial E2E / node 20 latest
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Set up job
+        uses: ./.github/actions/set-up-job
+
+      - name: 🌲 Install Cypress
+        run: yarn cypress install
+
+      - name: 🌲 Create a Redwood App
+        id: crwa
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+        run: |
+          project_path=$(mktemp -d -t redwood.XXXXXX)
+          echo "project-path=$project_path" >> $GITHUB_OUTPUT
+
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+
+          ./tasks/run-e2e "$project_path" \
+            --no-build-framework \
+            --no-start
+
+      - name: Start the dev server in the background
+        run: |
+          yarn rw dev --no-generate --fwd="--no-open" 2>&1 | tee dev_server.log &
+        working-directory: ${{ steps.crwa.outputs.project-path }}
+
+      - name: 🌲 Run Cypress
+        uses: cypress-io/github-action@df7484c5ba85def7eef30db301afa688187bc378 # v6
+        env:
+          CYPRESS_RW_PATH: ${{ steps.crwa.outputs.project-path }}
+        with:
+          browser: chrome
+          env: true
+          install: false
+          wait-on: 'http://[::1]:8910'
+          working-directory: ./tasks/e2e
+          spec: |
+            cypress/e2e/01-tutorial/*.cy.js
+
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4
+        if: always()
+        with:
+          name: logs
+          path: |
+            ${{ steps.crwa.outputs.project-path }}/dev_server.log
+            ${{ steps.crwa.outputs.project-path }}/e2e.log
+
+  background-jobs-e2e:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    name: Background jobs E2E test / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    env:
+      REDWOOD_CI: 1
+      REDWOOD_VERBOSE_TELEMETRY: 1
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: Set up job
+        uses: ./.github/actions/set-up-job
+
+      - name: 🌲 Set up test project
+        id: set-up-test-project
+        uses: ./.github/actions/set-up-test-project
+        with:
+          canary: true
+        env:
+          REDWOOD_DISABLE_TELEMETRY: 1
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+
+      - name: Run E2E test script
+        run: yarn e2e:background-jobs ${{ steps.set-up-test-project.outputs.test-project-path }}
+        env:
+          REDWOOD_VERBOSE_TELEMETRY: ''

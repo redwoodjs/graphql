@@ -47,7 +47,7 @@ TEST_DATABASE_URL=<the same url as DATABASE_URL>
 
 Note that the summary on the bottom indicates that there was 1 test that failed. If you feel curious, you can scroll up in your terminal and see more details on the test that failed. We'll also take a look at that failed test shortly.
 
-If you continued with your own repo from chapters 1-4, you may see some other failures here or none at all: we made a lot of changes to the pages, components and cells we generated, but didn't update the tests to reflect the changes we made. (Another reason to start with the [example repo](../intermission.md#using-the-example-repo-recommended)!)
+If you continued with your own repo from chapters 1-4, you may see some other failures here or none at all: we made a lot of changes to the pages, components and cells we generated, but didn't update the tests to reflect the changes we made.
 
 To switch back to the default mode where test are **only** run for changed files, press `o` now (or quit and restart `yarn rw test`).
 
