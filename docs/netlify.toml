@@ -3,8 +3,3 @@
   publish = "build"
   command = "yarn build"
   ignore = "node ignore_build.mjs"
-  
- [[redirects]]
-      from = "/*"
-      to = "https://docs.rwsdk.com"
-      status = 301
