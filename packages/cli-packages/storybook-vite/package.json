@@ -28,7 +28,7 @@
     "chalk": "4.1.2",
     "execa": "5.1.1",
     "semver": "7.6.3",
-    "storybook": "7.6.20",
+    "storybook": "7.6.21",
     "storybook-framework-redwoodjs-vite": "workspace:*",
     "terminal-link": "2.1.1",
     "vitest": "2.1.9",
