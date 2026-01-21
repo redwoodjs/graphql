@@ -66,7 +66,7 @@
     "jscodeshift": "17.0.0",
     "latest-version": "5.1.0",
     "listr2": "7.0.2",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "pascalcase": "1.0.0",
     "pluralize": "8.0.0",
     "portfinder": "1.0.32",
