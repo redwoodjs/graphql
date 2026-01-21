@@ -63,7 +63,7 @@
     "dotenv-defaults": "5.0.2",
     "execa": "5.1.1",
     "listr2": "7.0.2",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "pascalcase": "1.0.0",
     "prettier": "3.4.2",
     "prompts": "2.4.2",
