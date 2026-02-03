@@ -41,7 +41,7 @@
     "dotenv-defaults": "5.0.2",
     "fast-glob": "3.3.2",
     "fast-json-parse": "1.0.3",
-    "fastify": "4.28.1",
+    "fastify": "5.7.3",
     "fastify-raw-body": "4.3.0",
     "lodash": "4.17.21",
     "pretty-bytes": "5.6.0",
