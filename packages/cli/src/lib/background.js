@@ -61,4 +61,10 @@ export function spawnBackgroundProcess(name, cmd, args) {
   // Spawn and detach the process
   const child = spawn(cmd, args, spawnOptions)
   child.unref()
+
+  // Close the parent's copies of the stdio file descriptors.
+  // The child process inherited its own copies via spawn(), so
+  // leaving these open in the parent leaks fds until process exit.
+  fs.closeSync(stdout)
+  fs.closeSync(stderr)
 }
