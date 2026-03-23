@@ -65,6 +65,14 @@ export function spawnBackgroundProcess(name, cmd, args) {
   // Close the parent's copies of the stdio file descriptors.
   // The child process inherited its own copies via spawn(), so
   // leaving these open in the parent leaks fds until process exit.
-  fs.closeSync(stdout)
-  fs.closeSync(stderr)
+  try {
+    fs.closeSync(stdout)
+  } catch {
+    // fd may already be closed or invalid — ignore
+  }
+  try {
+    fs.closeSync(stderr)
+  } catch {
+    // fd may already be closed or invalid — ignore
+  }
 }
