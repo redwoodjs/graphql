@@ -89,7 +89,6 @@ describe('yarn rw dev', () => {
       },
       api: {
         port: 8911,
-        debugPort: 18911,
       },
       experimental: {
         streamingSsr: {
@@ -136,7 +135,6 @@ describe('yarn rw dev', () => {
       },
       api: {
         port: 8911,
-        debugPort: 18911,
       },
       experimental: {
         streamingSsr: {
@@ -231,5 +229,34 @@ describe('yarn rw dev', () => {
     const apiCommand = find(concurrentlyArgs, { name: 'api' })
 
     expect(apiCommand.command).not.toContain('--debug-port')
+  })
+
+  it('Derives debug port from api port when not explicitly configured', async () => {
+    getConfig.mockReturnValue({
+      web: {
+        port: 8912,
+      },
+      api: {
+        port: 8913,
+        // debugPort intentionally omitted — should be derived
+      },
+      experimental: {
+        streamingSsr: {
+          enabled: false,
+        },
+      },
+    })
+
+    await handler({
+      side: ['api'],
+    })
+
+    const concurrentlyArgs = concurrently.mock.lastCall[0]
+    const apiCommand = find(concurrentlyArgs, { name: 'api' })
+
+    // 8913 → 18913 (prepend "1")
+    expect(apiCommand.command.replace(/\s+/g, ' ')).toContain(
+      'yarn rw-api-server-watch --port 8913 --debug-port 18913',
+    )
   })
 })

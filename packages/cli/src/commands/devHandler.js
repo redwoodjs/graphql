@@ -15,8 +15,6 @@ import { generatePrismaClient } from '../lib/generatePrismaClient'
 import { getFreePort } from '../lib/ports'
 import { serverFileExists } from '../lib/project'
 
-const defaultApiDebugPort = 18911
-
 export const handler = async ({
   side = ['api', 'web'],
   forward = '',
@@ -143,16 +141,24 @@ export const handler = async ({
     if (apiDebugPort) {
       return `--debug-port ${apiDebugPort}`
     } else if (argv.includes('--apiDebugPort')) {
-      return `--debug-port ${defaultApiDebugPort}`
+      // No value supplied — derive from api port to avoid collisions when
+      // running multiple RW apps simultaneously (issue #10937)
+      return `--debug-port ${parseInt('1' + String(apiAvailablePort))}`
     }
 
     const apiDebugPortInToml = getConfig().api.debugPort
-    if (apiDebugPortInToml) {
+    if (apiDebugPortInToml !== undefined && apiDebugPortInToml !== false) {
       return `--debug-port ${apiDebugPortInToml}`
     }
+    if (apiDebugPortInToml === false) {
+      // Explicitly disabled in TOML
+      return ''
+    }
 
-    // Don't pass in debug port flag, unless configured
-    return ''
+    // Default: derive debug port from api port (e.g. 8911 → 18911, 8913 → 18913)
+    // This ensures multiple RW apps running on different ports don't share the
+    // same debug port.
+    return `--debug-port ${parseInt('1' + String(apiAvailablePort))}`
   }
 
   const redwoodConfigPath = getConfigPath()

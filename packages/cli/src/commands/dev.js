@@ -32,7 +32,7 @@ export const builder = (yargs) => {
     .option('apiDebugPort', {
       type: 'number',
       description:
-        'Port on which to expose API server debugger. If you supply the flag with no value it defaults to 18911.',
+        'Port on which to expose API server debugger. If you supply the flag with no value it defaults to 1 prepended to the api port (e.g. api port 8913 → debug port 18913).',
     })
     .middleware(() => {
       const check = checkNodeVersion()

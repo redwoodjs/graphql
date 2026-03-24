@@ -32,7 +32,6 @@ describe('getConfig', () => {
     expect(config).toMatchInlineSnapshot(`
       {
         "api": {
-          "debugPort": 18911,
           "path": "./api",
           "port": 8911,
           "schemaPath": "./api/db/schema.prisma",
