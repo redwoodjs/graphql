@@ -936,7 +936,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-extra@npm:>=11, @types/fs-extra@npm:^11":
+"@types/fs-extra@npm:^11":
   version: 11.0.4
   resolution: "@types/fs-extra@npm:11.0.4"
   dependencies:
@@ -971,7 +971,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=20, @types/node@npm:^22.10.2":
+"@types/node@npm:*, @types/node@npm:^22.10.2":
   version: 22.10.2
   resolution: "@types/node@npm:22.10.2"
   dependencies:
@@ -4266,18 +4266,10 @@ __metadata:
   linkType: hard
 
 "zx@npm:^8.1.4":
-  version: 8.1.9
-  resolution: "zx@npm:8.1.9"
-  dependencies:
-    "@types/fs-extra": "npm:>=11"
-    "@types/node": "npm:>=20"
-  dependenciesMeta:
-    "@types/fs-extra":
-      optional: true
-    "@types/node":
-      optional: true
+  version: 8.8.5
+  resolution: "zx@npm:8.8.5"
   bin:
     zx: build/cli.js
-  checksum: 10c0/b11f0e75b8ed618ededc88ecba1d01bc1415bb6966bd68539f8b47bb13d7bf43bf7b64a80798b0cafb308742a19c14df2b08a09ca60703f227bc1a6122547556
+  checksum: 10c0/1273e4f72cfe35a59041aef5a56fd87318bc4e11947d101810b67e5c486ab30574042938728e8a15e085de985e762b8585fcdaab4cf87fd113153b63a5846611
   languageName: node
   linkType: hard
