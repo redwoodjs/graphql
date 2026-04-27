@@ -70,7 +70,7 @@
     "@redwoodjs/router": "workspace:*",
     "react": "19.0.0-rc-f2df5694-20240916",
     "react-dom": "19.0.0-rc-f2df5694-20240916",
-    "storybook": "7.6.20"
+    "storybook": "7.6.21"
   },
   "engines": {
     "node": "=20.x"
