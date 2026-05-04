@@ -42,7 +42,7 @@
     "graphql-tag": "2.12.6",
     "graphql-yoga": "5.7.0",
     "lodash": "4.17.21",
-    "uuid": "10.0.0"
+    "uuid": "14.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.26.4",
