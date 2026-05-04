@@ -27,7 +27,7 @@
     "ci-info": "4.0.0",
     "envinfo": "7.14.0",
     "systeminformation": "5.23.8",
-    "uuid": "10.0.0",
+    "uuid": "14.0.0",
     "yargs": "17.7.2"
   },
   "devDependencies": {
