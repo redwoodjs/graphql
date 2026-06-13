@@ -37,7 +37,7 @@
   "devDependencies": {
     "@prisma/internals": "5.20.0",
     "@redwoodjs/framework-tools": "workspace:*",
-    "esbuild": "0.24.2",
+    "esbuild": "0.28.1",
     "publint": "0.3.12",
     "tsx": "4.19.2",
     "vitest": "2.1.9"
