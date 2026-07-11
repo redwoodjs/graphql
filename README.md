@@ -100,8 +100,7 @@ redwoodGQL/
 │   ├── pgserve-dev/  # @rwgql/pgserve-dev — local Postgres dev workflow
 │   ├── prisma-dev/   # @rwgql/prisma-dev — Prisma migrate/generate tasks
 │   ├── log-formatter/# @rwgql/log-formatter — GraphQL operation logging
-│   ├── graphql-typegen/ # @rwgql/graphql-typegen — server resolver typegen + Yoga helpers
-│   └── utils/        # @rwgql/utils — shared utilities (stub)
+│   └── graphql-typegen/ # @rwgql/graphql-typegen — server resolver typegen + Yoga helpers
 └── scripts/          # Render build/start helpers and repo utilities
 ```
 
