@@ -61,13 +61,21 @@ After the Blueprint is created, set these on the **rwgql-api** service (they are
 `DB_AUTH_SECRET` is auto-generated on first Blueprint apply. Copy it from the Render service env tab — you need
 the same value on Cloudflare.
 
-### Migrations and seed
+### Build and start (Vite+ tasks)
 
-`scripts/render-start.sh` runs `prisma generate`, `migrate deploy`, and demo seed (`FORCE_DEMO_SEED=1`) on each start, then
-launches Nitro with `DATABASE_URL` pinned. No Render shell required.
+[`render.yaml`](render.yaml) runs Vite+ tasks — no custom shell scripts:
 
-The build uses `scripts/render-build.sh` and Nitro inlines `@rwgql/*` and `db` so runtime does not depend on
-`node_modules` dist paths.
+| Phase | Command                                                    |
+| ----- | ---------------------------------------------------------- |
+| Build | `pnpm install && pnpm exec vp run --no-cache deploy:build` |
+| Start | `pnpm exec vp run deploy:start`                            |
+
+- **`deploy:build`** — `bootstrap` + `graphql#build` (Nitro), then asserts key `packages/*/dist` and `.output` artifacts exist.
+- **`deploy:start`** — runs `seed` (which depends on `db#migrate-deploy` → `db#dev:prepare`), then starts Nitro.
+
+With `NODE_ENV=production`, `@rwgql/pgserve-dev` skips starting pgserve and does not write localhost `test-apps/db/.env`. Prisma tasks map `DATABASE_URL` → `PRISMA_DATABASE_URL` when needed.
+
+`FORCE_DEMO_SEED=1` is set in the Blueprint so each start resets demo data. Remove that env var for a durable database.
 
 Optional manual seed (only if you disable `FORCE_DEMO_SEED` on the API service):
 
@@ -145,7 +153,8 @@ Attach `app.example.com` to the Worker in the Cloudflare dashboard or via wrangl
 | `DB_AUTH_COOKIE_DOMAIN`   | —              | env          | e.g. `.example.com`                           |
 | `DB_AUTH_COOKIE_SAMESITE` | —              | env          | `Lax` (default) or `None` if truly cross-site |
 | `DATABASE_URL`            | —              | from DB link | Prisma + migrations                           |
-| `NODE_ENV`                | —              | `production` | API                                           |
+| `FORCE_DEMO_SEED`         | —              | `1` (PoC)    | Truncate + reseed on each API start           |
+| `NODE_ENV`                | —              | `production` | API (also disables local pgserve)             |
 
 Local dev uses pgserve URLs in `test-apps/db/.env` (generated); do not point local dev at production unless intentional.
 
@@ -169,12 +178,12 @@ After both services are live:
 
 ## Troubleshooting
 
-| Symptom                                    | Check                                                                                                          |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| CORS errors                                | `WEB_ORIGIN` matches exact web URL (scheme + host, no trailing slash)                                          |
-| SSR always logged out                      | `DB_AUTH_COOKIE_DOMAIN`, `DB_AUTH_SECRET` match on both sides                                                  |
-| Prisma engine error on Render              | `binaryTargets` includes `debian-openssl-3.0.x` in schema                                                      |
-| Build fails on Render                      | Node ≥ 22, `bash scripts/render-build.sh` logs, workspace `packages/*/dist` present                            |
-| Empty posts but seed says "already seeded" | API was using `test-apps/db/.env` from build (localhost pgserve); redeploy after fix; seed targets `rwgql-db`  |
-| `getToken` 401 on `/auth`                  | Normal when logged out; cross-origin cookies need `DB_AUTH_COOKIE_SAMESITE=None` + custom domains for SSR auth |
-| MCP unauthorized                           | Personal Render API key in `~/.cursor/mcp.json`, restart Cursor                                                |
+| Symptom                       | Check                                                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| CORS errors                   | `WEB_ORIGIN` matches exact web URL (scheme + host, no trailing slash)                                          |
+| SSR always logged out         | `DB_AUTH_COOKIE_DOMAIN`, `DB_AUTH_SECRET` match on both sides                                                  |
+| Prisma engine error on Render | `binaryTargets` includes `debian-openssl-3.0.x` in schema                                                      |
+| Build fails on Render         | Node ≥ 22, `vp run --no-cache deploy:build` logs, workspace `packages/*/dist` present                          |
+| Empty posts / wrong DB        | Confirm `NODE_ENV=production` so setup-env does not write localhost `.env`; seed targets `rwgql-db`            |
+| `getToken` 401 on `/auth`     | Normal when logged out; cross-origin cookies need `DB_AUTH_COOKIE_SAMESITE=None` + custom domains for SSR auth |
+| MCP unauthorized              | Personal Render API key in `~/.cursor/mcp.json`, restart Cursor                                                |

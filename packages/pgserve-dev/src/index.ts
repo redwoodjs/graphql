@@ -7,7 +7,12 @@ export {
 } from "./config/defineDbDevConfig.ts";
 export { loadPgserveConfigFromModule, loadResolvedConfigFromArgv } from "./config/loadConfig.ts";
 export { buildPgserveConfigArg, resolvePgserveConfig } from "./config/resolveConfig.ts";
-export { setupAppEnvFallback, syncAppEnvFromConnection } from "./env/index.ts";
+export {
+  hasExternalDatabaseUrl,
+  setupAppEnvFallback,
+  shouldSkipLocalPgserve,
+  syncAppEnvFromConnection,
+} from "./env/index.ts";
 export {
   getConnectionEnvPath,
   printConnectionInfo,

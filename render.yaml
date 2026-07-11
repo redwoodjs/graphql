@@ -21,8 +21,8 @@ services:
     plan: free
     repo: https://github.com/simoncrypta/redwoodGQL
     branch: main
-    buildCommand: bash scripts/render-build.sh
-    startCommand: bash scripts/render-start.sh
+    buildCommand: pnpm install && pnpm exec vp run --no-cache deploy:build
+    startCommand: pnpm exec vp run deploy:start
     healthCheckPath: /graphql/health
     envVars:
       - key: NODE_ENV
@@ -33,6 +33,8 @@ services:
           property: connectionString
       - key: DB_AUTH_SECRET
         generateValue: true
+      - key: FORCE_DEMO_SEED
+        value: "1"
       - key: WEB_ORIGIN
         sync: false
       - key: DB_AUTH_COOKIE_DOMAIN

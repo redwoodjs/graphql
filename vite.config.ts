@@ -28,6 +28,20 @@ export default defineConfig({
         // parallel tsgo spawns racing on the native binary (spawn EBUSY on first clone).
         command: 'vp run --filter "./packages/*" --concurrency-limit 2 build',
       },
+      "deploy:build": {
+        // Fresh clones need real dist artifacts; callers should use --no-cache.
+        dependsOn: ["bootstrap", "graphql#build"],
+        command:
+          "test -f packages/auth/dist/graphql.mjs && test -f packages/dbauth/dist/server.mjs && test -f packages/graphql-typegen/dist/index.mjs && test -f packages/log-formatter/dist/index.mjs && test -f test-apps/graphql/.output/server/index.mjs",
+        cache: false,
+      },
+      "deploy:start": {
+        // migrate + seed run via seed → db#migrate-deploy → db#dev:prepare (pgserve no-ops in production).
+        dependsOn: ["seed"],
+        command:
+          'PRISMA_DATABASE_URL="${PRISMA_DATABASE_URL:-$DATABASE_URL}" node test-apps/graphql/.output/server/index.mjs',
+        cache: false,
+      },
       dev: {
         command: "vp run --parallel --filter rwsdk --filter graphql --filter db dev",
         dependsOn: ["bootstrap", "db#generate", "db#dev:prepare", "seed", "graphql#codegen"],

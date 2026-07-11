@@ -5,6 +5,7 @@ import { getStringArg, parseCliArgs } from "../cli/parseArgs.ts";
 import { freeTcpPort } from "../process/freePorts.ts";
 import { parseStrictPort } from "../port/parsePort.ts";
 
+import { shouldSkipLocalPgserve } from "../env/shouldSkipLocalPgserve.ts";
 import { syncAppEnvFromConnection } from "../env/syncAppEnv.ts";
 import { canQueryDatabase } from "../postgres/client.ts";
 import { buildPostgresSocketUrl, getSocketDir } from "../postgres/urls.ts";
@@ -158,6 +159,30 @@ export async function startLocalDevPgserve(
   const databaseName = getStringArg(args, PgserveCliArgKey.Database) ?? config.databaseName;
   const portArg = getStringArg(args, PgserveCliArgKey.Port);
   const port = parseStrictPort(portArg, `Invalid --port value: ${portArg}`);
+
+  if (shouldSkipLocalPgserve()) {
+    const databaseUrl = process.env.DATABASE_URL ?? process.env.PRISMA_DATABASE_URL;
+    if (!databaseUrl) {
+      throw new Error(
+        "DATABASE_URL is required when NODE_ENV=production (local pgserve is disabled)",
+      );
+    }
+
+    console.log("Skipping local pgserve; using external DATABASE_URL.");
+    if (emitReadyMarker) {
+      printPgserveReadyMarker();
+    }
+
+    return {
+      connectionEnvPath: "",
+      databaseUrl,
+      dataDir,
+      env: process.env,
+      postgresPort: 0,
+      provider: null,
+      routerPort: 0,
+    };
+  }
 
   const existingConnection = await waitForReuseablePgserve({
     config,
