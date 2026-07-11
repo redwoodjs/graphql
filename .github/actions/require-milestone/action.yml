@@ -1,6 +1,0 @@
-name: Require milestone
-description: Ensures that a PR has a valid milestone
-
-runs:
-  using: node20
-  main: requireMilestone.mjs

@@ -1,9 +1,0 @@
-{
-  "name": "detect-changes",
-  "private": true,
-  "dependencies": {
-    "@actions/core": "1.11.1",
-    "@actions/exec": "1.1.1"
-  },
-  "packageManager": "yarn@4.6.0"
-}
