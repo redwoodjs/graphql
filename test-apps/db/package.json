@@ -1,0 +1,25 @@
+{
+  "name": "db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "@rwgql/prisma-dev": "workspace:*"
+  },
+  "devDependencies": {
+    "@rwgql/pgserve-dev": "workspace:*",
+    "@types/node": "^25.6.2",
+    "pgserve": "^2.6.10",
+    "prisma": "^6.19.0",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  }
+}

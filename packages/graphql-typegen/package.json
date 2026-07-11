@@ -1,0 +1,78 @@
+{
+  "name": "@rwgql/graphql-typegen",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./yoga": {
+      "types": "./dist/yoga.d.mts",
+      "default": "./dist/yoga.mjs"
+    },
+    "./codegen": {
+      "types": "./dist/codegen/index.d.mts",
+      "default": "./dist/codegen/index.mjs"
+    },
+    "./codegen-plugin": {
+      "default": "./dist/omit-relation-resolvers-plugin.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepare": "vp pack",
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@graphql-tools/merge": "^9.1.9",
+    "@graphql-tools/schema": "^10.0.33"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/plugin-helpers": "^5.1.1",
+    "@graphql-codegen/schema-ast": "^4.1.0",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-resolvers": "^4.5.2",
+    "@types/node": "^25.6.2",
+    "graphql": "^16.14.2",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@graphql-codegen/cli": "^5.0.0 || ^6.0.0 || ^7.0.0",
+    "@graphql-codegen/plugin-helpers": "^5.0.0 || ^6.0.0 || ^7.0.0",
+    "@graphql-codegen/schema-ast": "^4.0.0 || ^5.0.0 || ^6.0.0",
+    "@graphql-codegen/typescript": "^4.0.0 || ^5.0.0 || ^6.0.0",
+    "@graphql-codegen/typescript-resolvers": "^4.0.0 || ^5.0.0 || ^6.0.0",
+    "graphql": "^16.0.0 || ^17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@graphql-codegen/cli": {
+      "optional": true
+    },
+    "@graphql-codegen/plugin-helpers": {
+      "optional": true
+    },
+    "@graphql-codegen/schema-ast": {
+      "optional": true
+    },
+    "@graphql-codegen/typescript": {
+      "optional": true
+    },
+    "@graphql-codegen/typescript-resolvers": {
+      "optional": true
+    }
+  }
+}

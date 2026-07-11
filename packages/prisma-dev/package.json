@@ -1,0 +1,39 @@
+{
+  "name": "@rwgql/prisma-dev",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./tasks": {
+      "types": "./src/tasks.ts",
+      "default": "./src/tasks.ts"
+    },
+    "./test": {
+      "types": "./src/testDatabase.ts",
+      "default": "./src/testDatabase.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@rwgql/pgserve-dev": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

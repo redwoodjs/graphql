@@ -1,0 +1,46 @@
+{
+  "name": "@rwgql/dbauth",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    "./web": {
+      "types": "./dist/web.d.mts",
+      "default": "./dist/web.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.mts",
+      "default": "./dist/server.mjs"
+    },
+    "./decoder": {
+      "types": "./dist/decoder.d.mts",
+      "default": "./dist/decoder.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@rwgql/auth": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "fastify": "^5.8.5",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "fastify": "^5.0.0"
+  }
+}

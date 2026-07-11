@@ -1,0 +1,53 @@
+{
+  "name": "@rwgql/auth",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./graphql": {
+      "types": "./dist/graphql.d.mts",
+      "default": "./dist/graphql.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@graphql-tools/utils": "^10.11.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^25.6.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "graphql": "^16.14.2",
+    "graphql-yoga": "^5.21.2",
+    "jsdom": "^27.3.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "graphql": "^16.0.0 || ^17.0.0",
+    "graphql-yoga": "^5.0.0",
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}

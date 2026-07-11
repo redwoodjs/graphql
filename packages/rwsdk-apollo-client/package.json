@@ -1,0 +1,63 @@
+{
+  "name": "@rwgql/rwsdk-apollo-client",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/client.d.mts",
+      "default": "./dist/client.mjs"
+    },
+    "./rsc": {
+      "types": "./dist/rsc.d.mts",
+      "default": "./dist/rsc.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.mts",
+      "default": "./dist/server.mjs"
+    },
+    "./worker": {
+      "types": "./dist/worker.d.mts",
+      "default": "./dist/worker.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@apollo/client": "^4.2.3",
+    "@apollo/client-react-streaming": "0.14.5",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "graphql": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-server-dom-webpack": "19.2.6",
+    "rwsdk": "1.5.0",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "@apollo/client": "^4.0.0",
+    "@apollo/client-react-streaming": "0.14.5",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-server-dom-webpack": "^19",
+    "rwsdk": "^1.5.0"
+  }
+}

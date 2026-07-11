@@ -1,0 +1,28 @@
+{
+  "name": "rwgql",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "@rwgql/dbauth": "workspace:*",
+    "@rwgql/pgserve-dev": "workspace:*",
+    "@rwgql/prisma-dev": "workspace:*",
+    "db": "workspace:*",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.8.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

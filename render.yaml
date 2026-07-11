@@ -1,0 +1,43 @@
+# Render Blueprint: GraphQL API + Managed PostgreSQL
+# https://render.com/docs/blueprint-spec
+#
+# Apply from the Render Dashboard (New > Blueprint) after pushing to GitHub,
+# or sync automatically when Blueprint sync is enabled on the repo.
+#
+# Before first deploy, set sync: false env vars in the Dashboard (see deployment.md).
+
+databases:
+  - name: rwgql-db
+    plan: free
+    region: oregon
+    databaseName: rwgql
+    postgresMajorVersion: "16"
+
+services:
+  - type: web
+    name: rwgql-api
+    runtime: node
+    region: oregon
+    plan: free
+    repo: https://github.com/simoncrypta/redwoodGQL
+    branch: main
+    buildCommand: pnpm install && pnpm exec vp run --no-cache deploy:build
+    startCommand: pnpm exec vp run deploy:start
+    healthCheckPath: /graphql/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rwgql-db
+          property: connectionString
+      - key: DB_AUTH_SECRET
+        generateValue: true
+      - key: FORCE_DEMO_SEED
+        value: "1"
+      - key: WEB_ORIGIN
+        sync: false
+      - key: DB_AUTH_COOKIE_DOMAIN
+        sync: false
+      - key: DB_AUTH_COOKIE_SAMESITE
+        value: Lax

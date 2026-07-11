@@ -1,0 +1,36 @@
+{
+  "name": "@rwgql/log-formatter",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "pino-abstract-transport": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "pino": "^10.3.1",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

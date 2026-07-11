@@ -1,33 +1,54 @@
-*.icloud
-.cosine
-.idea
-.DS_Store
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
 node_modules
 dist
-lerna-debug.log
-yarn-error.log
+dist-ssr
+*.local
 **/*.tsbuildinfo
-tasks/.verdaccio
-tasks/e2e/cypress/fixtures/example.json
-tmp/
-blog-test-project/*
-.yarn/*
-**/.yarn/install-state.gz
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.icloud
 *.code-workspace
 .nova
-packages/**/redwoodjs-*.tgz
-packages/**/storybook-*.tgz
-packages/create-redwood-app/create-redwood-app.tgz
+.cosine
+.cursor/
 
-# For esbuild.
-**/meta.json
-**/meta.*.json
+# AI agent worktrees
+.claude/worktrees/
 
-.nx/cache
-.nx/workspace-data
+.qmd/
+
+# Local PostgreSQL (pgserve)
+test-apps/db/.pgserve/
+test-apps/db/.env
+test-apps/db/connection.env
+test-apps/db/scripts/.env
+
+# GraphQL codegen
+test-apps/web/src/gql/
+
+# Archived monorepo / local leftovers
+tmp/
+tasks/.verdaccio
+tasks/e2e/cypress/fixtures/example.json
+blog-test-project/*
+.yarn/
+.pnp.*
+**/.yarn/install-state.gz

@@ -1,0 +1,35 @@
+{
+  "name": "graphql",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node .output/server/index.mjs",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.0.1",
+    "@graphql-tools/merge": "^9.1.9",
+    "@graphql-tools/schema": "^10.0.33",
+    "@rwgql/auth": "workspace:*",
+    "@rwgql/dbauth": "workspace:*",
+    "@rwgql/graphql-typegen": "workspace:*",
+    "@rwgql/log-formatter": "workspace:*",
+    "db": "workspace:*",
+    "fastify": "^5.8.5",
+    "graphql": "^16.14.2",
+    "graphql-yoga": "^5.21.2"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/client-preset": "^4.8.3",
+    "@graphql-codegen/typescript-resolvers": "^4.5.2",
+    "@parcel/watcher": "^2.5.1",
+    "@rwgql/prisma-dev": "workspace:*",
+    "@types/node": "^25.6.2",
+    "nitro": "3.0.260610-beta",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

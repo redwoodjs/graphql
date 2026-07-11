@@ -1,0 +1,64 @@
+{
+  "name": "rwsdk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A RedwoodSDK app managed by Vite+",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev:init": "rw-scripts dev-init",
+    "preview": "vp preview",
+    "worker:run": "rw-scripts worker-run",
+    "clean": "vp run clean:vite",
+    "clean:vite": "rm -rf ./node_modules/.vite",
+    "test": "vp test",
+    "release": "rw-scripts ensure-deploy-env && vp run clean && vp run build && wrangler deploy"
+  },
+  "dependencies": {
+    "@apollo/client": "^4.2.3",
+    "@apollo/client-react-streaming": "0.14.5",
+    "@graphql-typed-document-node/core": "^3.2.0",
+    "@rwgql/auth": "workspace:*",
+    "@rwgql/cell": "workspace:*",
+    "@rwgql/dbauth": "workspace:*",
+    "@rwgql/router": "workspace:*",
+    "@rwgql/rwsdk-apollo-client": "workspace:*",
+    "graphql": "^17.0.1",
+    "humanize-string": "2.1.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "react-hook-form": "^7.66.0",
+    "react-hot-toast": "^2.6.0",
+    "react-server-dom-webpack": "19.2.6",
+    "rwsdk": "1.5.0"
+  },
+  "devDependencies": {
+    "@0no-co/graphqlsp": "^1.15.0",
+    "@cloudflare/vite-plugin": "1.33.2",
+    "@cloudflare/workers-types": "4.20260426.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "~25.6.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitest/browser-playwright": "catalog:",
+    "autoprefixer": "^10.4.21",
+    "playwright": "^1.55.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "wrangler": "4.85.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
+  }
+}

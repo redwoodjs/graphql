@@ -1,0 +1,39 @@
+packages:
+  - test-apps/*
+  - packages/*
+  - tools/*
+
+catalogMode: prefer
+
+catalog:
+  "@types/node": ^24
+  tsx: ^4.20.5
+  typescript: 7.0.1-rc
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vitest: 4.1.9
+  "@vitest/browser-playwright": 4.1.9
+  vite-plus: latest
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    typescript: "7.0.1-rc"
+    vite: "*"
+    vitest: "*"
+allowBuilds:
+  "@embedded-postgres/linux-x64": true
+  "@parcel/watcher": true
+  "@prisma/client": true
+  "@prisma/engines": true
+  bun: true
+  esbuild: true
+  pgserve: true
+  prisma: true
+  sharp: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - rwsdk@1.5.0

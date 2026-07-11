@@ -1,0 +1,29 @@
+{
+  // Schema reference for wrangler configuration
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Name of your worker
+  "name": "rwgql-rwsdk",
+
+  // Entry point for your worker
+  "main": "src/worker.tsx",
+
+  // Compatibility settings
+  "compatibility_date": "2025-08-21",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Assets configuration
+  "assets": {
+    "binding": "ASSETS",
+  },
+
+  // Observability settings
+  "observability": {
+    "enabled": true,
+  },
+
+  // Environment variables
+  "vars": {
+    // Add your environment variables here
+  },
+}

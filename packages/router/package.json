@@ -1,0 +1,63 @@
+{
+  "name": "@rwgql/router",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "rwgql-router-generate-routes": "./dist/cli/generate-routes.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./routes": {
+      "types": "./dist/routes.d.mts",
+      "default": "./dist/routes.mjs"
+    },
+    "./worker": {
+      "types": "./dist/worker.d.mts",
+      "default": "./dist/worker.mjs"
+    },
+    "./codegen": {
+      "types": "./dist/codegen/index.d.mts",
+      "default": "./dist/codegen/index.mjs"
+    },
+    "./tasks": {
+      "types": "./dist/tasks.d.mts",
+      "default": "./dist/tasks.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prepare": "vp pack",
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "prepublishOnly": "vp run build"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^25.6.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "jsdom": "^27.3.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "rwsdk": "1.5.0",
+    "vite-plus": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "rwsdk": "^1.5.0"
+  }
+}
