@@ -12,7 +12,7 @@ import { routeNamesFromTree, Private, Route, Router, Set } from "../routeTree.js
 const HomePage = () => null;
 
 const findRoutesFile = () => {
-  const relativePath = path.join("apps", "web", "src", "Routes.tsx");
+  const relativePath = path.join("test-apps", "web", "src", "Routes.tsx");
   const candidates = [
     path.resolve(process.cwd(), relativePath),
     path.resolve(process.cwd(), "..", "..", relativePath),
@@ -62,7 +62,7 @@ describe("extractRouteNamesFromSource", () => {
     );
   });
 
-  it("matches routeNamesFromTree for apps/web Routes.tsx", () => {
+  it("matches routeNamesFromTree for test-apps/web Routes.tsx", () => {
     const routesFile = findRoutesFile();
     const source = readFileSync(routesFile, "utf8");
 

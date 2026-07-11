@@ -73,7 +73,7 @@ const { workerRoutes } = withWorkerCompile({
 });
 ```
 
-See `apps/web/src/worker.tsx` for a full example with Apollo streaming.
+See `test-apps/web/src/worker.tsx` for a full example with Apollo streaming.
 
 ## Package exports
 
@@ -89,4 +89,4 @@ See `apps/web/src/worker.tsx` for a full example with Apollo streaming.
 
 Classic Redwood `prerender` and `*.routeHooks.ts` / `routeParameters()` are intentionally **not**
 replicated here. They target build-time SSG, which does not match the RedwoodSDK Worker model. Use
-`cache` on public routes instead; see `test-project/` for the legacy Cedar reference.
+`cache` on public routes instead; see classic Cedar apps for the legacy prerender model.

@@ -4,7 +4,7 @@
 # Apply from the Render Dashboard (New > Blueprint) after pushing to GitHub,
 # or sync automatically when Blueprint sync is enabled on the repo.
 #
-# Before first deploy, set sync: false env vars in the Dashboard (see docs/deployment.md).
+# Before first deploy, set sync: false env vars in the Dashboard (see deployment.md).
 
 databases:
   - name: rwgql-db

@@ -11,7 +11,6 @@
     "@rwgql/pgserve-dev": "workspace:*",
     "@rwgql/prisma-dev": "workspace:*",
     "db": "workspace:*",
-    "markdownlint-cli2": "^0.22.1",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "vite-plus": "catalog:"

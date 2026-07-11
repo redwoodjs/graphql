@@ -17,7 +17,7 @@ export interface PgserveConnectionEnv {
 }
 
 export interface PgserveDevConfig {
-  /** Workspace-relative path to this config module (e.g. apps/db/pgserve.config.ts). */
+  /** Workspace-relative path to this config module (e.g. test-apps/db/pgserve.config.ts). */
   configModule: string;
   workspaceRoot: string;
   databaseName: string;

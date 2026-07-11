@@ -3,19 +3,19 @@ RedwoodSDK (@rwsdk/ packages) online at https://docs.rwsdk.com/
 
 ## RedwoodGQL Direction
 
-RedwoodGQL is an early proof of concept for a new RedwoodJS GraphQL path that can migrate block by block from the
-classic RedwoodJS app in `test-project/`.
+RedwoodGQL is an early proof of concept for a new RedwoodJS GraphQL path that can migrate block by block from a classic
+RedwoodJS (Cedar) app.
 
 - Use `README.md` as the source of truth for product direction, architecture, package intent, and parity goals.
-- Treat `apps/` as demo / PoC applications that prove the packages working together end-to-end.
+- Treat `test-apps/` as demo / PoC applications that prove the packages working together end-to-end.
 - Treat `packages/` as the WIP "framework" / SDK surface. Each package should keep dependencies minimal, expose focused
   primitives, and work in isolation when its direct peer requirements are present.
 - Prefer package boundaries that let users adopt one block at a time. For example, `@rwgql/cell` should work with
   Apollo Client, `@rwgql/rwsdk-apollo-client` should require only RedwoodSDK plus Apollo GraphQL pieces,
   `@rwgql/pgserve-dev` should work anywhere Vite Task is available, and `@rwgql/prisma-dev` should require Vite Task
   plus Prisma.
-- Keep `test-project/` as the legacy RedwoodJS reference app and migration target tracker; do not refactor it as part of
-  normal package or demo-app work unless the task is explicitly about parity comparison.
+- Use [migrating-from-redwoodjs.md](migrating-from-redwoodjs.md) and GitHub parity issues for Cedar → RedwoodGQL
+  migration guidance; do not recreate a full classic Redwood app in-tree unless the task is explicitly about parity.
 
 <!--VITE PLUS START-->
 

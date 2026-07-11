@@ -8,7 +8,7 @@ import { buildPostgresSocketUrl, PgserveTestProvider } from "@rwgql/pgserve-dev"
 const DEFAULT_TEST_DATABASE_NAME = "template_test";
 
 export interface EphemeralTestDatabaseOptions {
-  /** Module URL of the db workspace package (for example apps/db/index.ts). */
+  /** Module URL of the db workspace package (for example test-apps/db/index.ts). */
   dbModuleUrl: string;
   databaseName?: string;
 }

@@ -3,7 +3,7 @@ import { glob } from "node:fs/promises";
 import { basename, dirname, join, relative } from "node:path";
 
 export type SchemaRegistryConfig = {
-  /** Absolute path to the GraphQL app root (e.g. apps/graphql). */
+  /** Absolute path to the GraphQL app root (e.g. test-apps/graphql). */
   projectRoot: string;
   /** Absolute path for generated registry modules (a directory). */
   outputDir: string;

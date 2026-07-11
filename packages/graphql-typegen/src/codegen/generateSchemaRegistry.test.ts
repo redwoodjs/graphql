@@ -15,7 +15,10 @@ import {
   writeSchemaRegistry,
 } from "./generateSchemaRegistry.ts";
 
-const graphqlAppRoot = join(dirname(fileURLToPath(import.meta.url)), "../../../../apps/graphql");
+const graphqlAppRoot = join(
+  dirname(fileURLToPath(import.meta.url)),
+  "../../../../test-apps/graphql",
+);
 
 const graphqlAppRegistryConfig = {
   outputDir: join(graphqlAppRoot, "src"),
@@ -93,7 +96,7 @@ describe("generateSchemaRegistry", () => {
   });
 
   it("generates explicit ESM imports and exports", () => {
-    const root = "/workspace/apps/graphql";
+    const root = "/workspace/test-apps/graphql";
     const outputDir = join(root, "src");
 
     const source = generateSchemaRegistrySource(

@@ -1,5 +1,5 @@
 packages:
-  - apps/*
+  - test-apps/*
   - packages/*
   - tools/*
 

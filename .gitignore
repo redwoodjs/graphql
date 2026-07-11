@@ -30,10 +30,10 @@ dist-ssr
 .qmd/
 
 # Local PostgreSQL (pgserve)
-apps/db/.pgserve/
-apps/db/.env
-apps/db/connection.env
-apps/db/scripts/.env
+test-apps/db/.pgserve/
+test-apps/db/.env
+test-apps/db/connection.env
+test-apps/db/scripts/.env
 
 # GraphQL codegen
-apps/web/src/gql/
+test-apps/web/src/gql/

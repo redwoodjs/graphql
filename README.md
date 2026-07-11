@@ -86,7 +86,7 @@ writing.
 
 ```text
 redwoodGQL/
-├── apps/
+├── test-apps/
 │   ├── web/          # RedwoodSDK React app with Apollo Client
 │   ├── graphql/      # GraphQL Yoga server on Fastify (Nitro)
 │   ├── db/           # Prisma schema, migrations, and database layer
@@ -102,7 +102,7 @@ redwoodGQL/
 │   ├── log-formatter/# @rwgql/log-formatter — GraphQL operation logging
 │   ├── graphql-typegen/ # @rwgql/graphql-typegen — server resolver typegen + Yoga helpers
 │   └── utils/        # @rwgql/utils — shared utilities (stub)
-└── test-project/     # Legacy RedwoodJS reference app for comparison
+└── scripts/          # Render build/start helpers and repo utilities
 ```
 
 The data flow follows a familiar Redwood shape, rebuilt on modern primitives:
@@ -120,7 +120,7 @@ Domain services
 Prisma → PostgreSQL
 ```
 
-Services and resolvers currently live under `apps/graphql`; `apps/domain` is reserved for a
+Services and resolvers currently live under `test-apps/graphql`; `test-apps/domain` is reserved for a
 future extraction layer.
 
 ## Packages
@@ -207,20 +207,19 @@ may still change.
   and generated resolver types via `@rwgql/graphql-typegen`
 - **Auth** — `@rwgql/dbauth` (login, signup, logout, forgot/reset password), session cookies,
   web route guards, and `requireAuth`/`skipAuth` on the schema
-- **Data layer** — Prisma schema, migrations, and seed data in `apps/db`
+- **Data layer** — Prisma schema, migrations, and seed data in `test-apps/db`
 - **Tooling packages** — `@rwgql/pgserve-dev`, `@rwgql/prisma-dev`,
   `@rwgql/log-formatter`, `@rwgql/graphql-typegen`
 
-### Parity vs `test-project/`
+### Parity vs classic RedwoodJS (Cedar)
 
-The legacy Cedar app in `test-project/` still uses Cells for blog pages (`BlogPostsCell`,
-`BlogPostCell`, etc.). In `apps/web`, **cached public blog routes** (`/`, `/blog-post/:id`,
-`/waterfall/:id`, `/about`, …) intentionally use **Worker SSR + `renderGraphqlPage`** with colocated
-queries and `@rwgql/router` `cache` headers — not client Cells. Auth and scaffold routes (Posts,
-Contacts) still use Cells. See `test-project/` for the Cedar reference and `packages/router/README.md`
-for edge caching.
+Classic Cedar apps use Cells for blog pages (`BlogPostsCell`, `BlogPostCell`, etc.). In
+`test-apps/web`, **cached public blog routes** (`/`, `/blog-post/:id`, `/waterfall/:id`, `/about`, …)
+intentionally use **Worker SSR + `renderGraphqlPage`** with colocated queries and `@rwgql/router`
+`cache` headers — not client Cells. Auth and scaffold routes (Posts, Contacts) still use Cells. See
+`packages/router/README.md` for edge caching.
 
-Compared to the classic RedwoodJS GraphQL scaffold in `test-project/`, remaining work is tracked on GitHub:
+Compared to a classic RedwoodJS GraphQL scaffold, remaining work is tracked on GitHub:
 
 - [Parity roadmap (Project)](https://github.com/users/simoncrypta/projects/3)
 - [Parity issues](https://github.com/simoncrypta/redwoodGQL/issues?q=is%3Aissue+is%3Aopen+label%3Aparity)
@@ -229,13 +228,13 @@ Compared to the classic RedwoodJS GraphQL scaffold in `test-project/`, remaining
 ## Migrating from RedwoodJS
 
 Coming from a classic RedwoodJS (Cedar) app? The step-by-step guide in
-[docs/migrating-from-redwoodjs.md](docs/migrating-from-redwoodjs.md) walks through replacing every `@redwoodjs/*`
-package with `@rwgql/*`, RedwoodSDK, and Vite+ — using `test-project/` (before) and `apps/` (after) as the working
-reference for each step.
+[migrating-from-redwoodjs.md](migrating-from-redwoodjs.md) walks through replacing every `@redwoodjs/*`
+package with `@rwgql/*`, RedwoodSDK, and Vite+ — using a classic Cedar layout as the "before" and
+`test-apps/` as the migrated reference for each step.
 
 ## Production deployment
 
-Web on **Cloudflare Workers**, API and PostgreSQL on **Render**. See [docs/deployment.md](docs/deployment.md) for
+Web on **Cloudflare Workers**, API and PostgreSQL on **Render**. See [deployment.md](deployment.md) for
 env vars, Blueprint setup, and smoke tests.
 
 ## Further Reading

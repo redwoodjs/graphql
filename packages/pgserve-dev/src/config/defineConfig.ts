@@ -22,7 +22,7 @@ export interface DefinePgserveConfigOptions extends Omit<
   "workspaceRoot" | "configModule"
 > {
   workspaceRoot?: string;
-  /** Levels up from the config file directory to the workspace root. Defaults to 2 (apps/db). */
+  /** Levels up from the config file directory to the workspace root. Defaults to 2 (test-apps/db). */
   workspaceLevelsUp?: number;
 }
 

@@ -66,7 +66,7 @@ export async function loadResolvedConfigFromArgv(argv = process.argv.slice(2)): 
 
   if (!configModule) {
     throw new Error(
-      "Missing required --config argument (e.g. --config=/abs/path/to/apps/db/pgserve.config.ts)",
+      "Missing required --config argument (e.g. --config=/abs/path/to/test-apps/db/pgserve.config.ts)",
     );
   }
 
