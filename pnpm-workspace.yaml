@@ -7,6 +7,7 @@ catalogMode: prefer
 
 catalog:
   "@types/node": ^24
+  "@typescript/native-preview": 7.0.0-dev.20260707.2
   tsx: ^4.20.5
   typescript: 7.0.1-rc
   vite: npm:@voidzero-dev/vite-plus-core@latest
@@ -24,6 +25,11 @@ peerDependencyRules:
     typescript: "7.0.1-rc"
     vite: "*"
     vitest: "*"
+packageExtensions:
+  # tsdown (via vp pack) resolves tsgo from @typescript/native-preview
+  "@voidzero-dev/vite-plus-core":
+    dependencies:
+      "@typescript/native-preview": 7.0.0-dev.20260707.2
 allowBuilds:
   "@embedded-postgres/linux-x64": true
   "@parcel/watcher": true

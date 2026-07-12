@@ -10,6 +10,7 @@
     "@rwgql/dbauth": "workspace:*",
     "@rwgql/pgserve-dev": "workspace:*",
     "@rwgql/prisma-dev": "workspace:*",
+    "@typescript/native-preview": "catalog:",
     "db": "workspace:*",
     "tsx": "catalog:",
     "typescript": "catalog:",

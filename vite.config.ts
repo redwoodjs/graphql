@@ -39,7 +39,7 @@ export default defineConfig({
         // migrate + seed run via seed → db#migrate-deploy → db#dev:prepare (pgserve no-ops in production).
         dependsOn: ["seed"],
         command:
-          'PRISMA_DATABASE_URL="${PRISMA_DATABASE_URL:-$DATABASE_URL}" node test-apps/graphql/.output/server/index.mjs',
+          'sh -c \'u="${PRISMA_DATABASE_URL:-$DATABASE_URL}"; if [ -n "$u" ]; then export PRISMA_DATABASE_URL="$u"; else unset PRISMA_DATABASE_URL; fi; exec "$@"\' sh node test-apps/graphql/.output/server/index.mjs',
         cache: false,
       },
       dev: {

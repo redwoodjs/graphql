@@ -6,9 +6,13 @@ export interface CreatePrismaTasksOptions {
   dependsOnPrepare?: string;
 }
 
-/** Prefer existing PRISMA_DATABASE_URL; otherwise use DATABASE_URL (e.g. Render). */
+/**
+ * Prefer existing PRISMA_DATABASE_URL, else DATABASE_URL (e.g. Render).
+ * If both are unset/empty, leave the var unset so Prisma can load `.env`
+ * written by setup-env / dev:prepare (a forced empty override would shadow it).
+ */
 const withPrismaDatabaseUrl = (command: string) =>
-  `PRISMA_DATABASE_URL="\${PRISMA_DATABASE_URL:-$DATABASE_URL}" ${command}`;
+  `sh -c 'u="\${PRISMA_DATABASE_URL:-$DATABASE_URL}"; if [ -n "$u" ]; then export PRISMA_DATABASE_URL="$u"; else unset PRISMA_DATABASE_URL; fi; exec "$@"' sh ${command}`;
 
 export function createPrismaTasks(
   options: CreatePrismaTasksOptions = {},

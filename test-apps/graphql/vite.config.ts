@@ -16,13 +16,7 @@ export default defineConfig({
     setupFiles: ["testUtils/setup.ts"],
   },
   fmt: {
-    ignorePatterns: [
-      ".nitro/**",
-      ".output/**",
-      "schema.graphql",
-      "src/**/*.gen.ts",
-      "types/graphql.d.ts",
-    ],
+    ignorePatterns: [".nitro/**", ".output/**", "schema.graphql", "types/graphql.d.ts"],
   },
   lint: {
     ignorePatterns: [

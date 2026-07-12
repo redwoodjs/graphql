@@ -2,8 +2,7 @@ import type { AddressInfo } from "node:net";
 import fs from "node:fs";
 import { spawn } from "node:child_process";
 
-import { ensureDatabaseExists } from "../postgres/client.ts";
-import { canConnectTcp } from "../postgres/tcp.ts";
+import { canQueryDatabase, ensureDatabaseExists } from "../postgres/client.ts";
 import { buildPostgresSocketUrl } from "../postgres/urls.ts";
 
 const log = {
@@ -129,14 +128,6 @@ export class PgserveProvider {
     return port;
   }
 
-  private getReadinessUrl(): string {
-    return buildDatabaseUrl({
-      host: this.options.host,
-      port: this.getEffectivePort(),
-      databaseName: "postgres",
-    });
-  }
-
   private buildDatabaseUrl(databaseName = this.options.databaseName): string {
     return buildDatabaseUrl({
       host: this.options.host,
@@ -162,26 +153,26 @@ export class PgserveProvider {
       throw new Error("Pgserve database URL not initialized");
     }
 
-    const maxAttempts = 30;
-    const { host, port } = (() => {
-      const url = new URL(this.getReadinessUrl());
-      return {
-        host: url.hostname,
-        port: Number(url.port || 5432),
-      };
-    })();
+    // Cold starts can take a while after the listener binds while Postgres is
+    // still initializing (FATAL 57P03 "the database system is starting up").
+    // Prefer the unix-socket URL — TCP auth can fail even when the socket is ready.
+    const maxAttempts = 150;
 
     for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
-      const connected = await canConnectTcp(host, port);
-      if (connected) {
-        log.info(`pgserve ready at ${host}:${port}`);
-        return this.databaseUrl;
+      const postgresPort = this.actualPostgresPort ?? this.requestedPort;
+      if (postgresPort) {
+        const socketUrl = buildPostgresSocketUrl(postgresPort, "postgres");
+        if (await canQueryDatabase(socketUrl)) {
+          log.info(`pgserve ready on postgres port ${postgresPort}`);
+          return this.databaseUrl;
+        }
       }
 
       await new Promise((resolve) => setTimeout(resolve, 200));
     }
 
-    throw new Error(`pgserve failed to start at ${host}:${port}`);
+    const port = this.actualPostgresPort ?? this.requestedPort ?? "unknown";
+    throw new Error(`pgserve failed to become query-ready (postgres port ${port})`);
   }
 
   async ensureDatabaseExists(databaseName = this.options.databaseName): Promise<string> {
@@ -228,8 +219,10 @@ export class PgserveProvider {
     this.databaseUrl = this.buildRouterDatabaseUrl();
 
     return new Promise((resolve, reject) => {
+      // Keep stdout/stderr piped even when detached so we can detect the
+      // Postgres listen port from pgserve logs before unref settles.
       this.server = spawn(process.execPath, [this.options.pgserveBinPath, ...args], {
-        stdio: this.options.detach ? "ignore" : ["ignore", "pipe", "pipe"],
+        stdio: ["ignore", "pipe", "pipe"],
         env: { ...this.options.env },
         detached: this.options.detach,
       });
@@ -240,12 +233,24 @@ export class PgserveProvider {
 
       let settled = false;
 
+      const detachStdio = () => {
+        if (!this.options.detach || !this.server) {
+          return;
+        }
+
+        this.server.stdout?.removeAllListeners("data");
+        this.server.stderr?.removeAllListeners("data");
+        this.server.stdout?.destroy();
+        this.server.stderr?.destroy();
+      };
+
       const rejectIfPending = (error: Error) => {
         if (settled) {
           return;
         }
 
         settled = true;
+        detachStdio();
         reject(error);
       };
 
@@ -255,6 +260,7 @@ export class PgserveProvider {
         }
 
         settled = true;
+        detachStdio();
         resolve(databaseUrl);
       };
 

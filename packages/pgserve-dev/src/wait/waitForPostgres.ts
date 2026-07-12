@@ -1,4 +1,5 @@
-import { canConnectTcp } from "../postgres/tcp.ts";
+import { canQueryDatabase } from "../postgres/client.ts";
+import { buildPostgresSocketUrl } from "../postgres/urls.ts";
 
 const DEFAULT_TIMEOUT_MS = 30_000;
 const POLL_INTERVAL_MS = 250;
@@ -23,9 +24,11 @@ export async function waitForPostgres(
   timeoutMs = DEFAULT_TIMEOUT_MS,
 ): Promise<void> {
   const deadline = Date.now() + timeoutMs;
+  const socketUrl = buildPostgresSocketUrl(port, "postgres");
+  const tcpUrl = `postgresql://postgres@${host}:${port}/postgres`;
 
   while (Date.now() < deadline) {
-    if (await canConnectTcp(host, port, POLL_INTERVAL_MS)) {
+    if ((await canQueryDatabase(socketUrl)) || (await canQueryDatabase(tcpUrl))) {
       return;
     }
 
