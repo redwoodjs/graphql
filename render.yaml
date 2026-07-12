@@ -19,7 +19,7 @@ services:
     runtime: node
     region: oregon
     plan: free
-    repo: https://github.com/simoncrypta/redwoodGQL
+    repo: https://github.com/redwoodjs/graphql
     branch: main
     buildCommand: pnpm install && pnpm exec vp run --no-cache deploy:build
     startCommand: pnpm exec vp run deploy:start

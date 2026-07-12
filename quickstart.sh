@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_URL="${REPO_URL:-https://github.com/simoncrypta/redwoodGQL.git}"
-REPO_DIR="${REPO_DIR:-redwoodGQL}"
+REPO_URL="${REPO_URL:-https://github.com/redwoodjs/graphql.git}"
+REPO_DIR="${REPO_DIR:-graphql}"
 
 ensure_vp() {
   if command -v vp >/dev/null 2>&1; then

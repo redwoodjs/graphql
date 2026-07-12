@@ -26,16 +26,15 @@ Local development is unchanged: `vp run dev` uses pgserve and does not touch pro
    on your **personal** account.
 2. Set the bearer token in `~/.cursor/mcp.json` under the `Render` server `Authorization` header.
 3. Restart Cursor.
-4. Ask the agent to run `list_workspaces()` and `select_workspace(ownerID)` for **Simon Gagnon's Workspace**
-   (`tea-csptbf0gph6c73b7b12g`).
+4. Ask the agent to run `list_workspaces()` and `select_workspace(ownerID)` for your Render workspace.
 
-**PoC resources (Simon Gagnon's Workspace):**
+**Example resources (after Blueprint apply):**
 
-| Resource            | URL / ID                                                               |
-| ------------------- | ---------------------------------------------------------------------- |
-| Postgres `rwgql-db` | [Dashboard](https://dashboard.render.com/d/dpg-d92sm04vikkc73b2tkag-a) |
-| API `rwgql-api`     | <https://rwgql-api.simoncrypta.dev>                                    |
-| Web Worker          | <https://rwgql.simoncrypta.dev>                                        |
+| Resource            | Example URL / ID                          |
+| ------------------- | ----------------------------------------- |
+| Postgres `rwgql-db` | Render Dashboard → your Postgres instance |
+| API `rwgql-api`     | <https://rwgql-api.example.com>           |
+| Web Worker          | <https://rwgql.example.com>               |
 
 Without a valid API key, use the Render Dashboard and [`render.yaml`](render.yaml) Blueprint instead.
 
@@ -51,10 +50,10 @@ Without a valid API key, use the Render Dashboard and [`render.yaml`](render.yam
 
 After the Blueprint is created, set these on the **rwgql-api** service (they are `sync: false` in the Blueprint):
 
-| Variable                | Example                         | Purpose                                             |
-| ----------------------- | ------------------------------- | --------------------------------------------------- |
-| `WEB_ORIGIN`            | `https://rwgql.simoncrypta.dev` | CORS allowlist for the Cloudflare web app           |
-| `DB_AUTH_COOKIE_DOMAIN` | `.simoncrypta.dev`              | Shared session cookie across web and API subdomains |
+| Variable                | Example                     | Purpose                                             |
+| ----------------------- | --------------------------- | --------------------------------------------------- |
+| `WEB_ORIGIN`            | `https://rwgql.example.com` | CORS allowlist for the Cloudflare web app           |
+| `DB_AUTH_COOKIE_DOMAIN` | `.example.com`              | Shared session cookie across web and API subdomains |
 
 `DATABASE_URL` is wired automatically from the linked Postgres instance (internal URL).
 

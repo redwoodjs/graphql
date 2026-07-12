@@ -30,7 +30,7 @@ curl -fsSL https://vite.plus | bash
 Then:
 
 ```bash
-git clone https://github.com/simoncrypta/redwoodGQL.git && cd redwoodGQL && ./quickstart.sh
+git clone https://github.com/redwoodjs/graphql.git && cd graphql && ./quickstart.sh
 ```
 
 Requires macOS/Linux. Validates Node.js (>= 22.18.0), installs dependencies, and starts dev. See
@@ -220,9 +220,8 @@ intentionally use **Worker SSR + `renderGraphqlPage`** with colocated queries an
 
 Compared to a classic RedwoodJS GraphQL scaffold, remaining work is tracked on GitHub:
 
-- [Parity roadmap (Project)](https://github.com/users/simoncrypta/projects/3)
-- [Parity issues](https://github.com/simoncrypta/redwoodGQL/issues?q=is%3Aissue+is%3Aopen+label%3Aparity)
-- [Roadmap milestones](https://github.com/simoncrypta/redwoodGQL/milestones) — High, Medium, and Lower priority / by design
+- [Parity issues](https://github.com/redwoodjs/graphql/issues?q=is%3Aissue+is%3Aopen+label%3Aparity)
+- [Roadmap milestones](https://github.com/redwoodjs/graphql/milestones) — High, Medium, and Lower priority / by design
 
 ## Migrating from RedwoodJS
 
