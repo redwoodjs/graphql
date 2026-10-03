@@ -7588,7 +7588,7 @@ __metadata:
     publint: "npm:0.3.12"
     tsx: "npm:4.19.2"
     typescript: "npm:5.6.2"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.1.1"
     vitest: "npm:2.1.9"
   languageName: unknown
   linkType: soft
@@ -8090,7 +8090,7 @@ __metadata:
     tsx: "npm:4.19.2"
     typescript: "npm:5.6.2"
     unionfs: "npm:4.5.4"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.1.1"
     vitest: "npm:2.1.9"
     yargs: "npm:17.7.2"
   bin:
@@ -8361,7 +8361,7 @@ __metadata:
     lodash: "npm:4.17.21"
     tsx: "npm:4.19.2"
     typescript: "npm:5.6.2"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.1.1"
     vitest: "npm:2.1.9"
   languageName: unknown
   linkType: soft
@@ -8768,7 +8768,7 @@ __metadata:
     systeminformation: "npm:5.23.8"
     tsx: "npm:4.19.2"
     typescript: "npm:5.6.2"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.1.1"
     vitest: "npm:2.1.9"
     yargs: "npm:17.7.2"
   languageName: unknown
@@ -14918,7 +14918,7 @@ __metadata:
     terminal-link: "npm:2.1.1"
     tsx: "npm:4.19.2"
     untildify: "npm:4.0.0"
-    uuid: "npm:10.0.0"
+    uuid: "npm:11.1.1"
     vitest: "npm:2.1.9"
     yargs: "npm:17.7.2"
   bin:
@@ -29759,7 +29759,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:10.0.0, uuid@npm:^10.0.0":
+"uuid@npm:11.1.1":
+  version: 11.1.1
+  resolution: "uuid@npm:11.1.1"
+  bin:
+    uuid: dist/esm/bin/uuid
+  checksum: 10c0/9e3af58eba872ece5a5e76f4773a94fc78a0ef2c2444c38dbe6b42f41dadf76c01850fd783604f27986f6195e6286aef064d45987d401b2a33127b98ddf7c0c5
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^10.0.0":
   version: 10.0.0
   resolution: "uuid@npm:10.0.0"
   bin:
