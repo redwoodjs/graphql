@@ -78,7 +78,7 @@
     "dotenv-defaults": "5.0.2",
     "execa": "5.1.1",
     "express": "4.21.2",
-    "find-my-way": "8.2.2",
+    "find-my-way": "9.7.0",
     "fs-extra": "11.2.0",
     "http-proxy-middleware": "3.0.5",
     "isbot": "5.1.21",
