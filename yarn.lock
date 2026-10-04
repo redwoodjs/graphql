@@ -8473,7 +8473,7 @@ __metadata:
     "@redwoodjs/framework-tools": "workspace:*"
     "@redwoodjs/mailer-core": "workspace:*"
     "@types/nodemailer": "npm:^6"
-    nodemailer: "npm:6.9.16"
+    nodemailer: "npm:10.0.6"
     tsx: "npm:4.19.2"
     typescript: "npm:5.6.2"
   languageName: unknown
@@ -23759,10 +23759,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemailer@npm:6.9.16":
-  version: 6.9.16
-  resolution: "nodemailer@npm:6.9.16"
-  checksum: 10c0/9fd73ab4ab5b81544c3c9820afbe386369aba442f997b2f58d171222a898a7aed580fc100bfe6eebc194f18ba6e169d67ee40ca64d32d69022d89e575cef97a4
+"nodemailer@npm:10.0.6":
+  version: 10.0.6
+  resolution: "nodemailer@npm:10.0.6"
+  checksum: 10c0/aa012348c79a58b05ff513de8d0f788956e210bd50e6e40dc8970d4ee559d3243c6880e19ea510043157f220f2fcde37171b06d99c5d5d9aa78bd69aa4bae22a
   languageName: node
   linkType: hard
 
