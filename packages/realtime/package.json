@@ -42,7 +42,7 @@
     "nodemon": "3.1.9",
     "tsx": "4.19.2",
     "typescript": "5.6.2",
-    "vitest": "2.1.9"
+    "vitest": "4.1.11"
   },
   "peerDependencies": {
     "ioredis": "^5.3.2"
