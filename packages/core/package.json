@@ -47,7 +47,7 @@
     "@redwoodjs/testing": "workspace:*",
     "@redwoodjs/web-server": "workspace:*",
     "graphql-tag": "2.12.6",
-    "lodash": "4.17.21",
+    "lodash": "4.18.1",
     "nodemon": "3.1.9",
     "react-refresh": "0.14.0",
     "rimraf": "6.0.1",
