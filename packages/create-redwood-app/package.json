@@ -42,7 +42,7 @@
     "fs-extra": "11.2.0",
     "klaw-sync": "6.0.0",
     "semver": "7.6.3",
-    "systeminformation": "5.23.8",
+    "systeminformation": "5.31.7",
     "terminal-link": "2.1.1",
     "tsx": "4.19.2",
     "untildify": "4.0.0",
