@@ -21,7 +21,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@fastify/http-proxy": "9.5.0",
+    "@fastify/http-proxy": "11.4.4",
     "@fastify/static": "6.12.0",
     "@fastify/url-data": "5.4.0",
     "@redwoodjs/project-config": "workspace:*",
