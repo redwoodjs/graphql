@@ -31,7 +31,7 @@
     "@escape.tech/graphql-armor": "3.0.1",
     "@graphql-tools/merge": "9.0.7",
     "@graphql-tools/schema": "10.0.6",
-    "@graphql-tools/utils": "10.5.4",
+    "@graphql-tools/utils": "12.0.1",
     "@graphql-yoga/plugin-persisted-operations": "3.7.0",
     "@opentelemetry/api": "1.8.0",
     "@redwoodjs/api": "workspace:*",
