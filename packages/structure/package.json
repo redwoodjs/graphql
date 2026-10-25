@@ -39,7 +39,7 @@
     "graphql": "16.9.0",
     "lazy-get-decorator": "2.2.1",
     "line-column": "1.0.2",
-    "lodash": "4.17.21",
+    "lodash": "4.18.1",
     "lodash-decorators": "6.0.1",
     "lru-cache": "11.0.1",
     "proxyquire": "2.1.3",
