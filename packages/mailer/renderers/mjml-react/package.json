@@ -22,7 +22,7 @@
   "dependencies": {
     "@faire/mjml-react": "3.4.0",
     "@redwoodjs/mailer-core": "workspace:*",
-    "mjml": "4.15.3"
+    "mjml": "5.0.0"
   },
   "devDependencies": {
     "@redwoodjs/framework-tools": "workspace:*",
