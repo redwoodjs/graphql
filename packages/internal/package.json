@@ -122,7 +122,7 @@
     "graphql-tag": "2.12.6",
     "publint": "0.3.12",
     "tsx": "4.19.2",
-    "vitest": "2.1.9"
+    "vitest": "4.1.11"
   },
   "gitHead": "3905ed045508b861b495f8d5630d76c7a157d8f1"
 }
